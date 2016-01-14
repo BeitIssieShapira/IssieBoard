@@ -19,7 +19,7 @@
 		159F1A261B0C6D4900386B51 /* IssieBoard.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = B1B037651A9CD9BC0057C221 /* IssieBoard.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		15D854FC1AF56C02003703F1 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 15D854FB1AF56858003703F1 /* Main.storyboard */; };
 		15EF560A1B2E2A7100AB0C38 /* KeyboardTemplates.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15EF56091B2E2A7100AB0C38 /* KeyboardTemplates.swift */; };
-		15FE01231C19AB3B00F0C24B /* SAPIssieBoardSmall.png in Resources */ = {isa = PBXBuildFile; fileRef = 15FE01221C19AB3B00F0C24B /* SAPIssieBoardSmall.png */; settings = {ASSET_TAGS = (); }; };
+		15FE01231C19AB3B00F0C24B /* SAPIssieBoardSmall.png in Resources */ = {isa = PBXBuildFile; fileRef = 15FE01221C19AB3B00F0C24B /* SAPIssieBoardSmall.png */; };
 		B19C950B1AA10B86002C8089 /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = B19C950A1AA10B86002C8089 /* Settings.swift */; };
 		B1AF36AD1A9FE0D1001C5675 /* StandardKeyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1AF36AC1A9FE0D1001C5675 /* StandardKeyboard.swift */; };
 		B1AF36B01A9FF595001C5675 /* StandardKeyboardLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1AF36AF1A9FF595001C5675 /* StandardKeyboardLayout.swift */; };
