@@ -74,11 +74,11 @@
 		158DFAA11B2EBED0002E17F1 /* ColorUtility.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorUtility.swift; sourceTree = "<group>"; };
 		158DFAA21B2EBED0002E17F1 /* ConfigItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConfigItem.swift; sourceTree = "<group>"; };
 		158DFAA31B2EBED0002E17F1 /* ConfigSection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConfigSection.swift; sourceTree = "<group>"; };
-		159F1A2B1B0C96D800386B51 /* EasyBoard.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = EasyBoard.entitlements; sourceTree = "<group>"; };
-		159F1A2C1B0C96E000386B51 /* EasyBoard.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = EasyBoard.entitlements; sourceTree = "<group>"; };
 		15D854FA1AF56858003703F1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		15EF56091B2E2A7100AB0C38 /* KeyboardTemplates.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyboardTemplates.swift; sourceTree = "<group>"; };
 		15FE01221C19AB3B00F0C24B /* SAPIssieBoardSmall.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = SAPIssieBoardSmall.png; sourceTree = "<group>"; };
+		5FDF79D91C4E30AB00423556 /* IssieBoard.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = IssieBoard.entitlements; sourceTree = SOURCE_ROOT; };
+		5FDF79DA1C4E30E400423556 /* IssieBoard.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = IssieBoard.entitlements; sourceTree = "<group>"; };
 		B19C950A1AA10B86002C8089 /* Settings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
 		B1AF36AC1A9FE0D1001C5675 /* StandardKeyboard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StandardKeyboard.swift; sourceTree = "<group>"; };
 		B1AF36AF1A9FF595001C5675 /* StandardKeyboardLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = StandardKeyboardLayout.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
@@ -182,7 +182,6 @@
 		B1B037331A9CD9540057C221 = {
 			isa = PBXGroup;
 			children = (
-				159F1A2B1B0C96D800386B51 /* EasyBoard.entitlements */,
 				B1B0373E1A9CD9540057C221 /* IssieBoard */,
 				B1B037661A9CD9BC0057C221 /* ConfigurableKeyboard */,
 				B1B0373D1A9CD9540057C221 /* Products */,
@@ -217,6 +216,7 @@
 		B1B0373F1A9CD9540057C221 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				5FDF79D91C4E30AB00423556 /* IssieBoard.entitlements */,
 				15FE01221C19AB3B00F0C24B /* SAPIssieBoardSmall.png */,
 				151693471AF7D0AB000E719C /* colorPalette.plist */,
 				B1B037401A9CD9540057C221 /* Info.plist */,
@@ -228,7 +228,6 @@
 			isa = PBXGroup;
 			children = (
 				156053B71B53F3F9003AA6AD /* KeyboardSymbols */,
-				159F1A2C1B0C96E000386B51 /* EasyBoard.entitlements */,
 				B1AF36B31A9FFC4D001C5675 /* Views */,
 				B1AF36AE1A9FF573001C5675 /* Controller */,
 				B1AF36AB1A9FE0AC001C5675 /* Model */,
@@ -240,6 +239,7 @@
 		B1B037671A9CD9BC0057C221 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				5FDF79DA1C4E30E400423556 /* IssieBoard.entitlements */,
 				B1B037681A9CD9BC0057C221 /* Info.plist */,
 			);
 			name = "Supporting Files";
@@ -297,7 +297,7 @@
 				TargetAttributes = {
 					B1B0373B1A9CD9540057C221 = {
 						CreatedOnToolsVersion = 6.1.1;
-						DevelopmentTeam = J25PF2MPLA;
+						DevelopmentTeam = D66MDDZ63X;
 						SystemCapabilities = {
 							com.apple.ApplicationGroups.iOS = {
 								enabled = 1;
@@ -306,7 +306,7 @@
 					};
 					B1B037641A9CD9BC0057C221 = {
 						CreatedOnToolsVersion = 6.1.1;
-						DevelopmentTeam = J25PF2MPLA;
+						DevelopmentTeam = D66MDDZ63X;
 						SystemCapabilities = {
 							com.apple.ApplicationGroups.iOS = {
 								enabled = 1;
@@ -514,7 +514,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_ENTITLEMENTS = EasyBoard.entitlements;
+				CODE_SIGN_ENTITLEMENTS = IssieBoard.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = EducKeyboard/Info.plist;
@@ -529,7 +529,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_ENTITLEMENTS = EasyBoard.entitlements;
+				CODE_SIGN_ENTITLEMENTS = IssieBoard.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = EducKeyboard/Info.plist;
@@ -543,7 +543,7 @@
 		B1B0376F1A9CD9BC0057C221 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_ENTITLEMENTS = ConfigurableKeyboard/EasyBoard.entitlements;
+				CODE_SIGN_ENTITLEMENTS = ConfigurableKeyboard/IssieBoard.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PREPROCESSOR_DEFINITIONS = (
@@ -562,7 +562,7 @@
 		B1B037701A9CD9BC0057C221 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_ENTITLEMENTS = ConfigurableKeyboard/EasyBoard.entitlements;
+				CODE_SIGN_ENTITLEMENTS = ConfigurableKeyboard/IssieBoard.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = ConfigurableKeyboard/Info.plist;
