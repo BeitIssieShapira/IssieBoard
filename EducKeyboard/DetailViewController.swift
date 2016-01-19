@@ -163,6 +163,8 @@ class DetailViewController: UIViewController, UIPopoverPresentationControllerDel
                 let colorText = NSString(format: "HSB: %4.2f,%4.2f,%4.2f RGB: %4.2f,%4.2f,%4.2f",
                     Float(h),Float(s),Float(b),Float(r),Float(g),Float(b))
                 self.updateColor(color)
+                
+                print("\(colorText)")
             }
         }
     }
