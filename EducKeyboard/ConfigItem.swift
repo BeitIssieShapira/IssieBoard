@@ -93,7 +93,7 @@ class ConfigItem {
     }
     
     init(key:String ,title: String, defaultValue: AnyObject?, type: ConfigItemType ){
-        UserSettings = NSUserDefaults(suiteName: "group.com.sap.i012387.HashtagPOC")!
+        UserSettings = NSUserDefaults(suiteName: "group.issieshapiro.com.issiboard")!
         self.key = key
         self.title = title
         self.type = type

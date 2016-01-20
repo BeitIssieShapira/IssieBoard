@@ -18,7 +18,7 @@ class Settings {
     var Template4 : KeyboardTemplates
     
     init() {
-        self.userDefaults = NSUserDefaults(suiteName: "group.com.sap.i012387.HashtagPOC")!
+        self.userDefaults = NSUserDefaults(suiteName: "group.issieshapiro.com.issiboard")!
         
         Template1 = KeyboardTemplates(
             keyboardBackgroundColor: UIColor.lightGrayColor().stringValue!,
