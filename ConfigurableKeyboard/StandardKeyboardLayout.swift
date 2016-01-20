@@ -942,7 +942,7 @@ class KeyboardLayout: NSObject, KeyboardKeyProtocol {
         var frames = [CGRect]()
         
         let keySpace = CGFloat(row.count) * keyWidth + CGFloat(row.count - 1) * keyGap
-        var actualGapWidth = keyGap
+        //var actualGapWidth = keyGap
         
         var sideSpace = (frame.width - keySpace) / CGFloat(2)
         
@@ -1000,7 +1000,7 @@ class KeyboardLayout: NSObject, KeyboardKeyProtocol {
         
         var frames = [CGRect]()
         let keySpace = CGFloat(row.count) * keyWidth + CGFloat(row.count - 1) * keyGap
-        var actualGapWidth = keyGap
+        //var actualGapWidth = keyGap
         var sideSpace = (frame.width - keySpace) / CGFloat(2)
         
         if sideSpace > keyWidth/CGFloat(2) {
@@ -1097,7 +1097,7 @@ class KeyboardLayout: NSObject, KeyboardKeyProtocol {
         
         let popupWidth = key.bounds.width + self.layoutConstants.popupWidthIncrement
         let popupHeight = totalHeight - self.layoutConstants.popupGap - key.bounds.height
-        let popupCenterY = 0
+        //let popupCenterY = 0
         
         return CGRectMake((key.bounds.width - popupWidth) / CGFloat(2), -popupHeight - self.layoutConstants.popupGap, popupWidth, popupHeight)
     }
