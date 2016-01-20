@@ -79,7 +79,7 @@ class KeyboardViewController: UIInputViewController {
         var defaults = notification.object as! NSUserDefaults
         defaults.synchronize()
         defaults = NSUserDefaults.standardUserDefaults()
-        var i : Int = defaults.integerForKey("defaultBackgroundColor")
+        //var i : Int = defaults.integerForKey("defaultBackgroundColor")
         defaults.synchronize()
     }
     
@@ -312,8 +312,8 @@ class KeyboardViewController: UIInputViewController {
             if model.type == Key.KeyType.Return {
                 self.currentMode = 0
             }
-            var lastCharCountInBeforeContext: Int = 0
-            var readyForDoubleSpacePeriod: Bool = true
+            //var lastCharCountInBeforeContext: Int = 0
+            //var readyForDoubleSpacePeriod: Bool = true
             
             self.handleAutoPeriod(model)
         }
