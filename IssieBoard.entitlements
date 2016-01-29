@@ -6,5 +6,9 @@
 	<array>
 		<string>group.issieshapiro.com.issiboard</string>
 	</array>
+	<key>keychain-access-groups</key>
+	<array>
+		<string>$(AppIdentifierPrefix)com.issieshapiro.Issieboard</string>
+	</array>
 </dict>
 </plist>
