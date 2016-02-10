@@ -19,7 +19,6 @@
 		159F1A261B0C6D4900386B51 /* IssieBoard.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = B1B037651A9CD9BC0057C221 /* IssieBoard.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		15D854FC1AF56C02003703F1 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 15D854FB1AF56858003703F1 /* Main.storyboard */; };
 		15EF560A1B2E2A7100AB0C38 /* KeyboardTemplates.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15EF56091B2E2A7100AB0C38 /* KeyboardTemplates.swift */; };
-		15FE01231C19AB3B00F0C24B /* SAPIssieBoardSmall.png in Resources */ = {isa = PBXBuildFile; fileRef = 15FE01221C19AB3B00F0C24B /* SAPIssieBoardSmall.png */; };
 		B19C950B1AA10B86002C8089 /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = B19C950A1AA10B86002C8089 /* Settings.swift */; };
 		B1AF36AD1A9FE0D1001C5675 /* StandardKeyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1AF36AC1A9FE0D1001C5675 /* StandardKeyboard.swift */; };
 		B1AF36B01A9FF595001C5675 /* StandardKeyboardLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1AF36AF1A9FF595001C5675 /* StandardKeyboardLayout.swift */; };
@@ -76,7 +75,6 @@
 		158DFAA31B2EBED0002E17F1 /* ConfigSection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConfigSection.swift; sourceTree = "<group>"; };
 		15D854FA1AF56858003703F1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		15EF56091B2E2A7100AB0C38 /* KeyboardTemplates.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyboardTemplates.swift; sourceTree = "<group>"; };
-		15FE01221C19AB3B00F0C24B /* SAPIssieBoardSmall.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = SAPIssieBoardSmall.png; sourceTree = "<group>"; };
 		5FDF79D91C4E30AB00423556 /* IssieBoard.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = IssieBoard.entitlements; sourceTree = SOURCE_ROOT; };
 		5FDF79DA1C4E30E400423556 /* IssieBoard.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = IssieBoard.entitlements; sourceTree = "<group>"; };
 		B19C950A1AA10B86002C8089 /* Settings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
@@ -217,7 +215,6 @@
 			isa = PBXGroup;
 			children = (
 				5FDF79D91C4E30AB00423556 /* IssieBoard.entitlements */,
-				15FE01221C19AB3B00F0C24B /* SAPIssieBoardSmall.png */,
 				151693471AF7D0AB000E719C /* colorPalette.plist */,
 				B1B037401A9CD9540057C221 /* Info.plist */,
 			);
@@ -346,7 +343,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				151693481AF7D0AB000E719C /* colorPalette.plist in Resources */,
-				15FE01231C19AB3B00F0C24B /* SAPIssieBoardSmall.png in Resources */,
 				15D854FC1AF56C02003703F1 /* Main.storyboard in Resources */,
 				B1B0374C1A9CD9540057C221 /* LaunchScreen.xib in Resources */,
 				B1B037491A9CD9540057C221 /* Images.xcassets in Resources */,
