@@ -20,6 +20,7 @@ enum ConfigItemType{
     case Picker
     case FontPicker
     case Templates
+    case Reset
 }
 
 class ConfigItem {
@@ -67,16 +68,16 @@ class ConfigItem {
             case .Color:
                 if let color = (newValue as! UIColor).stringValue {
                     
-                    if(self.key == "ISSIE_KEYBOARD_KEYS_COLOR"){
-                        UserSettings.setObject(color, forKey: "ISSIE_KEYBOARD_CHARSET1_KEYS_COLOR")
-                        UserSettings.setObject(color, forKey: "ISSIE_KEYBOARD_CHARSET2_KEYS_COLOR")
-                        UserSettings.setObject(color, forKey: "ISSIE_KEYBOARD_CHARSET3_KEYS_COLOR")
+                    if(self.key == KEY_ISSIE_KEYBOARD_KEYS_COLOR){
+                        UserSettings.setObject(color, forKey: KEY_ISSIE_KEYBOARD_CHARSET1_KEYS_COLOR)
+                        UserSettings.setObject(color, forKey: KEY_ISSIE_KEYBOARD_CHARSET2_KEYS_COLOR)
+                        UserSettings.setObject(color, forKey: KEY_ISSIE_KEYBOARD_CHARSET3_KEYS_COLOR)
                         UserSettings.synchronize()
                     }
-                    else if(self.key == "ISSIE_KEYBOARD_TEXT_COLOR"){
-                        UserSettings.setObject(color, forKey: "ISSIE_KEYBOARD_CHARSET1_TEXT_COLOR")
-                        UserSettings.setObject(color, forKey: "ISSIE_KEYBOARD_CHARSET2_TEXT_COLOR")
-                        UserSettings.setObject(color, forKey: "ISSIE_KEYBOARD_CHARSET3_TEXT_COLOR")
+                    else if(self.key == KEY_ISSIE_KEYBOARD_TEXT_COLOR){
+                        UserSettings.setObject(color, forKey: KEY_ISSIE_KEYBOARD_CHARSET1_TEXT_COLOR)
+                        UserSettings.setObject(color, forKey: KEY_ISSIE_KEYBOARD_CHARSET2_TEXT_COLOR)
+                        UserSettings.setObject(color, forKey: KEY_ISSIE_KEYBOARD_CHARSET3_TEXT_COLOR)
                         UserSettings.synchronize()
                     }
                     else
@@ -100,6 +101,7 @@ class ConfigItem {
         self.defaultValue = defaultValue
         
         switch self.type{
+        case .Reset: break
         case .String:
             UserSettings.setObject(defaultValue, forKey: self.key)
             UserSettings.synchronize()

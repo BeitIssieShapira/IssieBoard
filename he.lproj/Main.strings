@@ -1,0 +1,36 @@
+/** no localizable strings **/
+     
+
+/* Class = "UITableViewController"; title = "Master"; ObjectID = "7bK-jq-Zjz"; */
+"7bK-jq-Zjz.title" = "מסך ראשי";
+
+/* Class = "UISegmentedControl"; AVK-5P-wQY.segmentTitles[0] = "לפי שורות"; ObjectID = "AVK-5P-wQY"; */
+"AVK-5P-wQY.segmentTitles[0]" = "לפי שורות";
+
+/* Class = "UISegmentedControl"; AVK-5P-wQY.segmentTitles[1] = "לפי אזורים"; ObjectID = "AVK-5P-wQY"; */
+"AVK-5P-wQY.segmentTitles[1]" = "לפי אזורים";
+
+/* Class = "UILabel"; text = "Title"; ObjectID = "Arm-wq-HPj"; */
+"Arm-wq-HPj.text" = "כותרת";
+
+/* Class = "UIButton"; normalTitle = "הסתר מקלדת"; ObjectID = "Gz7-qv-Bvy"; */
+"Gz7-qv-Bvy.normalTitle" = "הסתר מקלדת";
+
+/* Class = "UIViewController"; title = "Detail"; ObjectID = "JEX-9P-axG"; */
+"JEX-9P-axG.title" = "פרטים";
+
+/* Class = "UINavigationController"; title = "Master"; ObjectID = "RMx-3f-FxP"; */
+"RMx-3f-FxP.title" = "מסך ראשי";
+
+/* Class = "UINavigationItem"; title = "Configurations"; ObjectID = "Zdf-7t-Un8"; */
+"Zdf-7t-Un8.title" = "הגדרות";
+
+/* Class = "UIButton"; normalTitle = "הצג מקלדת"; ObjectID = "dCr-Tu-9MV"; */
+"dCr-Tu-9MV.normalTitle" = "הצג מקלדת";
+
+/* Class = "UINavigationItem"; title = "Detail"; ObjectID = "mOI-FS-AaM"; */
+"mOI-FS-AaM.title" = "פרטים";
+
+"ipJ-uE-7yJ.placeholder" = "הקלד שם עבור המקלדת";
+"lCL-uJ-1KT.normalTitle" = "טען את המקלדת הנוכחית";
+"var-jP-5ok.text" = "שם המקלדת";

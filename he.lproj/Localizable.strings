@@ -1,0 +1,32 @@
+
+"Main"      		 = "הגדרות ראשיות";
+"KeyboardBackground"   =  "רקע המקלדת";
+
+"KeysColor"       	= "צבע המקשים";
+"TextColor" 		= "צבע הטקסט";
+
+"VisibleKeys"         = "מקשים נראים";
+"Columns_Rows"         = "שורות-עמודות";
+"SpecialKeys"         =  "מקשים מיוחדים";
+
+"SpecialKeysDefinition"   = "הגדרות מקשים מיוחדים";
+"UpperRight"      = "ימינה-למעלה";
+"Middle"              = "אמצע";
+"LowerLeft"          = "שמאלה-למטה";
+
+"Templates"        = "תבניות";
+"TemplatesSelection"  = "בחירת תבנית מוגדרת מראש";
+
+"AdditionalDefinitions"     = "הגדרות נוספות";
+"SpaceKeyColor" = "צבע מקש הרווח";
+"DeleteKeyColor"   = "צבע מקש מחיקה";
+"EnterKeyColor"     = "צבע מקש ירידת שורה";
+"OtherKeysColor"    = "צבע מקשים נוספים";
+
+"RainbowColors"      = "צבעי הקשת";
+"ClassicColors"      = "צבעים קלאסים";
+"BlackAndWhite"      = "שחור לבן";
+"SaveAndLoadCustomTemplates" = "תבנית חדשה";
+"NewKeyboard" = "מקלדת חדשה";
+"ResetToDefaultKeyboard" = "איפוס למקלדת ברירת המחדל";
+"Reset" = "איפוס";

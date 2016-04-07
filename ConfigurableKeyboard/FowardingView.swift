@@ -138,16 +138,16 @@ class ForwardingView: UIView {
     
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
         for obj in touches {
-            let touch = obj as? UITouch
-            let position = touch!.locationInView(self)
+            let touch = obj as UITouch
+            let position = touch.locationInView(self)
             let view = findNearestView(position)
             
-            let viewChangedOwnership = self.ownView(touch!, viewToOwn: view)
+            let viewChangedOwnership = self.ownView(touch, viewToOwn: view)
             
             if !viewChangedOwnership {
                 self.handleControl(view, controlEvent: .TouchDown)
                 
-                if touch!.tapCount > 1 {
+                if touch.tapCount > 1 {
                     self.handleControl(view, controlEvent: .TouchDownRepeat)
                 }
             }
@@ -156,16 +156,16 @@ class ForwardingView: UIView {
     
     override func touchesMoved(touches: Set<UITouch>, withEvent event: UIEvent?) {
         for obj in touches {
-            let touch = obj as? UITouch
-            let position = touch!.locationInView(self)
+            let touch = obj as UITouch
+            let position = touch.locationInView(self)
             
-            let oldView = self.touchToView[touch!]
+            let oldView = self.touchToView[touch]
             let newView = findNearestView(position)
             
             if oldView != newView {
                 self.handleControl(oldView, controlEvent: .TouchDragExit)
                 
-                let viewChangedOwnership = self.ownView(touch!, viewToOwn: newView)
+                let viewChangedOwnership = self.ownView(touch, viewToOwn: newView)
                 
                 if !viewChangedOwnership {
                     self.handleControl(newView, controlEvent: .TouchDragEnter)
@@ -203,7 +203,7 @@ class ForwardingView: UIView {
   
     override func touchesCancelled(touches: Set<UITouch>?, withEvent event: UIEvent?) {
         for obj in touches! {
-            let touch = obj as! UITouch
+            let touch = obj
             
             let view = self.touchToView[touch]
             

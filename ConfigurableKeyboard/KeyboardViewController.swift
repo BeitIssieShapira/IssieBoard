@@ -121,7 +121,7 @@ class KeyboardViewController: UIInputViewController {
         }
         
         self.setupLayout()
-        
+        //UIApplication().statusBarOrientation
         let orientationSavvyBounds = CGRectMake(0, 0, self.view.bounds.width, self.heightForOrientation(self.interfaceOrientation, withTopBanner: false))
         
         if (lastLayoutBounds != nil && lastLayoutBounds == orientationSavvyBounds) {
@@ -328,7 +328,7 @@ class KeyboardViewController: UIInputViewController {
             }
             
             let charactersAreInCorrectState = { () -> Bool in
-                let previousContext = (self.textDocumentProxy as? UITextDocumentProxy)?.documentContextBeforeInput
+                let previousContext = (self.textDocumentProxy as UITextDocumentProxy).documentContextBeforeInput
                 
                 if previousContext == nil || (previousContext!).characters.count < 3 {
                     return false
@@ -356,10 +356,10 @@ class KeyboardViewController: UIInputViewController {
             }()
             
             if charactersAreInCorrectState {
-                (self.textDocumentProxy as? UITextDocumentProxy)?.deleteBackward()
-                (self.textDocumentProxy as? UITextDocumentProxy)?.deleteBackward()
-                (self.textDocumentProxy as? UITextDocumentProxy)?.insertText(".")
-                (self.textDocumentProxy as? UITextDocumentProxy)?.insertText(" ")
+                (self.textDocumentProxy as UITextDocumentProxy).deleteBackward()
+                (self.textDocumentProxy as UITextDocumentProxy).deleteBackward()
+                (self.textDocumentProxy as UITextDocumentProxy).insertText(".")
+                (self.textDocumentProxy as UITextDocumentProxy).insertText(" ")
             }
             
             self.autoPeriodState = .NoSpace
@@ -381,9 +381,9 @@ class KeyboardViewController: UIInputViewController {
     func backspaceDown(sender: KeyboardKey) {
         self.cancelBackspaceTimers()
         
-        if let textDocumentProxy = self.textDocumentProxy as? UIKeyInput {
-            textDocumentProxy.deleteBackward()
-        }
+   //     if let textDocumentProxy = self.textDocumentProxy as? UIKeyInput {
+            self.textDocumentProxy.deleteBackward()
+   //     }
 
         self.backspaceDelayTimer = NSTimer.scheduledTimerWithTimeInterval(backspaceDelay - backspaceRepeat, target: self, selector: Selector("backspaceDelayCallback"), userInfo: nil, repeats: false)
     }
@@ -400,9 +400,9 @@ class KeyboardViewController: UIInputViewController {
     func backspaceRepeatCallback() {
         self.playKeySound()
         
-        if let textDocumentProxy = self.textDocumentProxy as? UIKeyInput {
-            textDocumentProxy.deleteBackward()
-        }
+      //  if let textDocumentProxy = self.textDocumentProxy as? UIKeyInput {
+            self.textDocumentProxy.deleteBackward()
+      //  }
     }
     
     func dismissKeyboardTapped (sender : KeyboardKey) {
@@ -468,8 +468,8 @@ class KeyboardViewController: UIInputViewController {
     class var globalColors: GlobalColors.Type { get { return GlobalColors.self }}
     
     func keyPressed(key: Key) {
-        if let proxy = (self.textDocumentProxy as? UIKeyInput) {
-            proxy.insertText(key.getKeyOutput())
-        }
+       // if let proxy = (self.textDocumentProxy as? UIKeyInput) {
+            self.textDocumentProxy.insertText(key.getKeyOutput())
+       // }
     }
 }

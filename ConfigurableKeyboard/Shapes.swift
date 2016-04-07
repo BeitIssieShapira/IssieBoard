@@ -32,7 +32,7 @@ class GlobeShape: Shape {
 class Shape: UIView {
     var color: UIColor? {
         didSet {
-            if let color = self.color {
+            if let _ = self.color {
                 self.overflowCanvas.setNeedsDisplay()
             }
         }

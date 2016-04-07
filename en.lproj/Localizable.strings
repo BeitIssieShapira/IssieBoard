@@ -1,0 +1,34 @@
+
+
+"Main"      		 = "Main";
+"KeyboardBackground"   =  "Keyboard Background";
+
+"KeysColor"       	= "Keys Color";
+"TextColor" 		= "Text Color";
+
+
+"VisibleKeys"         = "Visible Keys";
+"Columns_Rows"         = "Columns/Rows";
+"SpecialKeys"         = "Special Keys";
+
+"SpecialKeysDefinition"   = "Special Keys Definition";
+"UpperRight"      = "Upper-Right";
+"Middle"              = "Middle";
+"LowerLeft"          = "Lower-Left";
+
+"Templates"        = "Templates";
+"TemplatesSelection"  = "Predefined Templates";
+
+"AdditionalDefinitions"     = "Additional Definitions";
+"SpaceKeyColor" = "Space Key Color";
+"DeleteKeyColor"   = "Delete Key Color";
+"EnterKeyColor"     = "Enter Key Color";
+"OtherKeysColor"    = "Other Keys Color";
+
+"RainbowColors"      = "Rainbow Colors";
+"ClassicColors"      = "Classic Colors";
+"BlackAndWhite"     = "Black And White";
+"SaveAndLoadCustomTemplates" = "New Template";
+"NewKeyboard" = "New Keyboard";
+"ResetToDefaultKeyboard" = "Reset To Default Keyboard";
+"Reset" = "Reset";

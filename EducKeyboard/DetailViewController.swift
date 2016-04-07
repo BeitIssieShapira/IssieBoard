@@ -16,9 +16,11 @@ class DetailViewController: UIViewController, UIPopoverPresentationControllerDel
     @IBOutlet var PreviewKeyboard: UIButton!
     @IBOutlet var RowColPicker: UISegmentedControl!
     @IBOutlet var TemplatePicker: UIStepper!
+    @IBOutlet var HideButton: UIButton!
     @IBOutlet var itemValue: UITextView!
+    @IBOutlet var resetButton: UIButton!
     
-    var TemplateType = ["My Configuration", "Template1 - Yellow", "Template2 - Orange", "Template3", "Template4"]
+    var TemplateType = ["My Configuration", "Template2 - Orange","Template3"];//,"Template3", "Template4"];
     
     var configItem: ConfigItem? {
         didSet {
@@ -28,9 +30,17 @@ class DetailViewController: UIViewController, UIPopoverPresentationControllerDel
     
     @IBAction func TemplatePickerTapped(sender: UIStepper) {
         TapRecognize(sender)
-        itemValue.text = TemplateType[Int(sender.value)]
-        configItem?.value = TemplateType[Int(sender.value)]
+        let index = Int(sender.value);
+        let numOfTemplates = TemplateType.count;
+        if(index<numOfTemplates){
+            itemValue.text = TemplateType[Int(sender.value)]
+            configItem?.value = TemplateType[Int(sender.value)]
+        }
+        else{
+            sender.value--;
+        }
     }
+    
     
     @IBAction func TapRecognize(sender: AnyObject) {
         ToggleKeyboard.resignFirstResponder()
@@ -46,6 +56,13 @@ class DetailViewController: UIViewController, UIPopoverPresentationControllerDel
         ToggleKeyboard.becomeFirstResponder()
     }
     
+    @IBAction func ResetClicked(sender: UIButton) {
+        InitTemplates.resetToDefaultTemplate()
+    }
+    
+    func performSegue(){
+        performSegueWithIdentifier("loadSaveDetail", sender: self)
+    }
     func configureView() {
         
         if let toggle = self.ToggleKeyboard {
@@ -56,7 +73,8 @@ class DetailViewController: UIViewController, UIPopoverPresentationControllerDel
             if let valueField = self.itemValue {
                 if let palette = self.colorPalette {
                     if let modePicker = self.RowColPicker {
-                        
+                        let font = UIFont.systemFontOfSize(24)
+                        self.RowColPicker.setTitleTextAttributes([NSFontAttributeName: font], forState: UIControlState.Normal)
                         valueField.layer.borderWidth = 1.3
                         self.title = item.title
                         
@@ -101,6 +119,19 @@ class DetailViewController: UIViewController, UIPopoverPresentationControllerDel
                             valueField.hidden = false
                             palette.hidden = true
                             modePicker.hidden = true
+                        case .Reset:
+                            TemplatePicker.value = 0
+                            valueField.userInteractionEnabled = false
+                            TemplatePicker.hidden = true
+                            valueField.hidden = true
+                            palette.hidden = true
+                            modePicker.hidden = true
+                            ToggleKeyboard.hidden = true
+                            PreviewKeyboard.hidden = true
+                            HideButton.hidden = true
+                            resetButton.hidden = false
+                            resetButton.setTitle(wrapWithLocale(TITLE_KEYBOARD_RESET_BUTTON) , forState: UIControlState.Normal)
+                            
                         }
                     }
                 }
@@ -176,7 +207,7 @@ class DetailViewController: UIViewController, UIPopoverPresentationControllerDel
         var i:CGFloat = 1.0
         
         let ClassicColorsLabel :UILabel = UILabel(frame: buttonFrame)
-        ClassicColorsLabel.text = "Classic Colors"
+        ClassicColorsLabel.text = wrapWithLocale(TITLE_PALETTE_CLASSIC);
         ClassicColorsLabel.font = UIFont.boldSystemFontOfSize(CGFloat(20))
         ClassicColorsLabel.textColor = UIColor.blackColor()
         ClassicColorsLabel.sizeToFit()
@@ -192,7 +223,7 @@ class DetailViewController: UIViewController, UIPopoverPresentationControllerDel
         buttonFrame.origin.y = buttonFrame.origin.y + buttonFrame.size.height + 10
         
         let RainbowColorsLabel :UILabel = UILabel(frame: buttonFrame)
-        RainbowColorsLabel.text = "Rainbow Colors"
+        RainbowColorsLabel.text = wrapWithLocale(TITLE_PALETTE_RAINBOW);
         RainbowColorsLabel.font = UIFont.boldSystemFontOfSize(CGFloat(20))
         RainbowColorsLabel.textColor = UIColor.blackColor()
         RainbowColorsLabel.sizeToFit()
@@ -212,7 +243,7 @@ class DetailViewController: UIViewController, UIPopoverPresentationControllerDel
         buttonFrame.origin.y = buttonFrame.origin.y + 10
         
         let BWColorsLabel :UILabel = UILabel(frame: buttonFrame)
-        BWColorsLabel.text = "B&W Colors"
+        BWColorsLabel.text = wrapWithLocale(TITLE_PALETTE_BW);
         BWColorsLabel.font = UIFont.boldSystemFontOfSize(CGFloat(20))
         BWColorsLabel.textColor = UIColor.blackColor()
         BWColorsLabel.sizeToFit()

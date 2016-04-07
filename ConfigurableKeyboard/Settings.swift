@@ -41,7 +41,7 @@ class Settings {
             keysColorCharset2: UIColor.whiteColor().stringValue!,
             keysColorCharset3: UIColor.whiteColor().stringValue!,
             RowOrCol: "By Sections")
-        
+        /*
         Template3 = KeyboardTemplates(
             keyboardBackgroundColor: UIColor.lightGrayColor().stringValue!,
             keysTextColor: UIColor.blackColor().stringValue!,
@@ -51,6 +51,24 @@ class Settings {
             keysColorCharset1: UIColor.yellowColor().stringValue!,
             keysColorCharset2: UIColor.yellowColor().stringValue!,
             keysColorCharset3: UIColor.yellowColor().stringValue!,
+            RowOrCol: "By Sections")
+        */
+        // KEYS: 180,131,82
+        // BG:   152,131,88
+        // SPACE,ENTER: 79,200,209
+        // NUMBERS, CHANGE KEYBOARD: 57,104,172
+        
+        Template3 = KeyboardTemplates(
+            keyboardBackgroundColor: UIColor.lightGrayColor()  .stringValue!,
+            keysTextColor: UIColor.blackColor().stringValue!,
+            keysTextColorCharset1: UIColor.blackColor().stringValue!,
+            keysTextColorCharset2: UIColor.blackColor().stringValue!,
+            keysTextColorCharset3: UIColor.blackColor().stringValue!,
+          //  keysColorCharset1: UIColor(red: 180, green: 131, blue: 82) .stringValue!,
+          //  keysColorCharset2: UIColor (red: 180.0/255.0, green: 131.0/255.0, blue: 82/255.0, alpha: 1.0).stringValue!,
+            keysColorCharset1: UIColor.orangeColor().stringValue!,
+            keysColorCharset2: UIColor.orangeColor().stringValue!,
+            keysColorCharset3: UIColor.orangeColor().stringValue!,
             RowOrCol: "By Sections")
         
         Template4 = KeyboardTemplates(

@@ -10,10 +10,11 @@ import UIKit
 import Foundation
 
 func standardKeyboard() -> Keyboard {
+
     
-    let customCharSetOne : String = "פםןףךלץתצ"
-    let customCharSetTwo : String = "וטאחיעמנה"
-    let customCharSetThree : String = "רקכגדשבסז,."
+   let customCharSetOne : String = "פםןףךלץתצ"
+   let customCharSetTwo : String = "וטאחיעמנה"
+   let customCharSetThree : String = "רקכגדשבסז,."
        
     var visibleKeys : String = Settings.sharedInstance.visibleKeys
     

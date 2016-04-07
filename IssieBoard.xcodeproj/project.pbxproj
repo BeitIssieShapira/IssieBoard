@@ -19,6 +19,13 @@
 		159F1A261B0C6D4900386B51 /* IssieBoard.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = B1B037651A9CD9BC0057C221 /* IssieBoard.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		15D854FC1AF56C02003703F1 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 15D854FB1AF56858003703F1 /* Main.storyboard */; };
 		15EF560A1B2E2A7100AB0C38 /* KeyboardTemplates.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15EF56091B2E2A7100AB0C38 /* KeyboardTemplates.swift */; };
+		560311B51CB13EC000843682 /* DocumentationDefaultTemplates.plist in Resources */ = {isa = PBXBuildFile; fileRef = 560311B41CB13EC000843682 /* DocumentationDefaultTemplates.plist */; };
+		560311B91CB15C3700843682 /* DocumentationDefaultTemplates1.plist in Resources */ = {isa = PBXBuildFile; fileRef = 560311B81CB15C3700843682 /* DocumentationDefaultTemplates1.plist */; };
+		560311BB1CB15C7900843682 /* DocumentationDefaultTemplates2.plist in Resources */ = {isa = PBXBuildFile; fileRef = 560311BA1CB15C7900843682 /* DocumentationDefaultTemplates2.plist */; };
+		560311BD1CB15CBB00843682 /* DocumentationDefaultTemplates3.plist in Resources */ = {isa = PBXBuildFile; fileRef = 560311BC1CB15CBB00843682 /* DocumentationDefaultTemplates3.plist */; };
+		560311C11CB1745500843682 /* InitTemplates.swift in Sources */ = {isa = PBXBuildFile; fileRef = 560311C01CB1745500843682 /* InitTemplates.swift */; };
+		56AD418E1C95DA91003A50BF /* IssieBoard.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 56AD418C1C95DA91003A50BF /* IssieBoard.xcdatamodeld */; };
+		56AD41B31C986EEB003A50BF /* ConfigSetsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56AD41B21C986EEB003A50BF /* ConfigSetsTableViewController.swift */; };
 		B19C950B1AA10B86002C8089 /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = B19C950A1AA10B86002C8089 /* Settings.swift */; };
 		B1AF36AD1A9FE0D1001C5675 /* StandardKeyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1AF36AC1A9FE0D1001C5675 /* StandardKeyboard.swift */; };
 		B1AF36B01A9FF595001C5675 /* StandardKeyboardLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1AF36AF1A9FF595001C5675 /* StandardKeyboardLayout.swift */; };
@@ -38,6 +45,8 @@
 		B1F457CA1AA23B040012BA73 /* ic_keyboard_return_48px-512.png in Resources */ = {isa = PBXBuildFile; fileRef = B1F457C91AA23B040012BA73 /* ic_keyboard_return_48px-512.png */; };
 		B1F457CC1AA25AA30012BA73 /* globe-512.png in Resources */ = {isa = PBXBuildFile; fileRef = B1F457CB1AA25AA30012BA73 /* globe-512.png */; };
 		B1F457CF1AA25F7D0012BA73 /* ic_keyboard_hide_48px-512.png in Resources */ = {isa = PBXBuildFile; fileRef = B1F457CE1AA25F7D0012BA73 /* ic_keyboard_hide_48px-512.png */; };
+		D5835AED1C9D5378007A2666 /* EditConfigViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5835AEC1C9D5378007A2666 /* EditConfigViewController.swift */; };
+		D5FBA3611C9421E00065A96E /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = D5FBA35F1C9421DF0065A96E /* Localizable.strings */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -75,6 +84,13 @@
 		158DFAA31B2EBED0002E17F1 /* ConfigSection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConfigSection.swift; sourceTree = "<group>"; };
 		15D854FA1AF56858003703F1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		15EF56091B2E2A7100AB0C38 /* KeyboardTemplates.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyboardTemplates.swift; sourceTree = "<group>"; };
+		560311B41CB13EC000843682 /* DocumentationDefaultTemplates.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = DocumentationDefaultTemplates.plist; sourceTree = "<group>"; };
+		560311B81CB15C3700843682 /* DocumentationDefaultTemplates1.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = DocumentationDefaultTemplates1.plist; path = ../DocumentationDefaultTemplates1.plist; sourceTree = "<group>"; };
+		560311BA1CB15C7900843682 /* DocumentationDefaultTemplates2.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = DocumentationDefaultTemplates2.plist; path = ../DocumentationDefaultTemplates2.plist; sourceTree = "<group>"; };
+		560311BC1CB15CBB00843682 /* DocumentationDefaultTemplates3.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = DocumentationDefaultTemplates3.plist; path = ../DocumentationDefaultTemplates3.plist; sourceTree = "<group>"; };
+		560311C01CB1745500843682 /* InitTemplates.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InitTemplates.swift; sourceTree = "<group>"; };
+		56AD418D1C95DA91003A50BF /* IssieBoard.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = IssieBoard.xcdatamodel; sourceTree = "<group>"; };
+		56AD41B21C986EEB003A50BF /* ConfigSetsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConfigSetsTableViewController.swift; sourceTree = "<group>"; };
 		5FDF79D91C4E30AB00423556 /* IssieBoard.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = IssieBoard.entitlements; sourceTree = SOURCE_ROOT; };
 		5FDF79DA1C4E30E400423556 /* IssieBoard.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = IssieBoard.entitlements; sourceTree = "<group>"; };
 		B19C950A1AA10B86002C8089 /* Settings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
@@ -100,6 +116,11 @@
 		B1F457C91AA23B040012BA73 /* ic_keyboard_return_48px-512.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "ic_keyboard_return_48px-512.png"; path = "../Resources/ic_keyboard_return_48px-512.png"; sourceTree = "<group>"; };
 		B1F457CB1AA25AA30012BA73 /* globe-512.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "globe-512.png"; path = "../Resources/globe-512.png"; sourceTree = "<group>"; };
 		B1F457CE1AA25F7D0012BA73 /* ic_keyboard_hide_48px-512.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "ic_keyboard_hide_48px-512.png"; path = "../Resources/ic_keyboard_hide_48px-512.png"; sourceTree = "<group>"; };
+		D5835AEC1C9D5378007A2666 /* EditConfigViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditConfigViewController.swift; sourceTree = "<group>"; };
+		D5FBA35D1C90D4710065A96E /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Main.strings; sourceTree = "<group>"; };
+		D5FBA35E1C90D4800065A96E /* he */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = he; path = he.lproj/Main.strings; sourceTree = "<group>"; };
+		D5FBA3601C9421E00065A96E /* he */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = he; path = he.lproj/Localizable.strings; sourceTree = SOURCE_ROOT; };
+		D5FBA3621C9421EF0065A96E /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -180,6 +201,9 @@
 		B1B037331A9CD9540057C221 = {
 			isa = PBXGroup;
 			children = (
+				D5835AEC1C9D5378007A2666 /* EditConfigViewController.swift */,
+				56AD418C1C95DA91003A50BF /* IssieBoard.xcdatamodeld */,
+				56AD41B21C986EEB003A50BF /* ConfigSetsTableViewController.swift */,
 				B1B0373E1A9CD9540057C221 /* IssieBoard */,
 				B1B037661A9CD9BC0057C221 /* ConfigurableKeyboard */,
 				B1B0373D1A9CD9540057C221 /* Products */,
@@ -199,10 +223,13 @@
 			isa = PBXGroup;
 			children = (
 				151693491AF7D19F000E719C /* MasterViewController.swift */,
+				560311B41CB13EC000843682 /* DocumentationDefaultTemplates.plist */,
 				1516934A1AF7D19F000E719C /* DetailViewController.swift */,
-				B1B037411A9CD9540057C221 /* AppDelegate.swift */,
-				15D854FB1AF56858003703F1 /* Main.storyboard */,
 				B1B0374A1A9CD9540057C221 /* LaunchScreen.xib */,
+				B1B037411A9CD9540057C221 /* AppDelegate.swift */,
+				560311C01CB1745500843682 /* InitTemplates.swift */,
+				15D854FB1AF56858003703F1 /* Main.storyboard */,
+				D5FBA35F1C9421DF0065A96E /* Localizable.strings */,
 				156053B81B53F432003AA6AD /* ConfigClasses */,
 				B1B037481A9CD9540057C221 /* Images.xcassets */,
 				B1B0373F1A9CD9540057C221 /* Supporting Files */,
@@ -215,6 +242,9 @@
 			isa = PBXGroup;
 			children = (
 				5FDF79D91C4E30AB00423556 /* IssieBoard.entitlements */,
+				560311BC1CB15CBB00843682 /* DocumentationDefaultTemplates3.plist */,
+				560311B81CB15C3700843682 /* DocumentationDefaultTemplates1.plist */,
+				560311BA1CB15C7900843682 /* DocumentationDefaultTemplates2.plist */,
 				151693471AF7D0AB000E719C /* colorPalette.plist */,
 				B1B037401A9CD9540057C221 /* Info.plist */,
 			);
@@ -294,7 +324,7 @@
 				TargetAttributes = {
 					B1B0373B1A9CD9540057C221 = {
 						CreatedOnToolsVersion = 6.1.1;
-						DevelopmentTeam = D66MDDZ63X;
+						DevelopmentTeam = J25PF2MPLA;
 						SystemCapabilities = {
 							com.apple.ApplicationGroups.iOS = {
 								enabled = 1;
@@ -325,6 +355,7 @@
 			knownRegions = (
 				en,
 				Base,
+				he,
 			);
 			mainGroup = B1B037331A9CD9540057C221;
 			productRefGroup = B1B0373D1A9CD9540057C221 /* Products */;
@@ -342,9 +373,14 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				560311BD1CB15CBB00843682 /* DocumentationDefaultTemplates3.plist in Resources */,
+				D5FBA3611C9421E00065A96E /* Localizable.strings in Resources */,
 				151693481AF7D0AB000E719C /* colorPalette.plist in Resources */,
 				15D854FC1AF56C02003703F1 /* Main.storyboard in Resources */,
 				B1B0374C1A9CD9540057C221 /* LaunchScreen.xib in Resources */,
+				560311B91CB15C3700843682 /* DocumentationDefaultTemplates1.plist in Resources */,
+				560311B51CB13EC000843682 /* DocumentationDefaultTemplates.plist in Resources */,
+				560311BB1CB15C7900843682 /* DocumentationDefaultTemplates2.plist in Resources */,
 				B1B037491A9CD9540057C221 /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -370,7 +406,11 @@
 				158DFAA51B2EBED0002E17F1 /* ConfigItem.swift in Sources */,
 				158DFAA41B2EBED0002E17F1 /* ColorUtility.swift in Sources */,
 				1516934C1AF7D19F000E719C /* DetailViewController.swift in Sources */,
+				56AD41B31C986EEB003A50BF /* ConfigSetsTableViewController.swift in Sources */,
+				56AD418E1C95DA91003A50BF /* IssieBoard.xcdatamodeld in Sources */,
+				560311C11CB1745500843682 /* InitTemplates.swift in Sources */,
 				1516934B1AF7D19F000E719C /* MasterViewController.swift in Sources */,
+				D5835AED1C9D5378007A2666 /* EditConfigViewController.swift in Sources */,
 				B1B037421A9CD9540057C221 /* AppDelegate.swift in Sources */,
 				158DFAA61B2EBED0002E17F1 /* ConfigSection.swift in Sources */,
 			);
@@ -414,6 +454,8 @@
 			isa = PBXVariantGroup;
 			children = (
 				15D854FA1AF56858003703F1 /* Base */,
+				D5FBA35D1C90D4710065A96E /* en */,
+				D5FBA35E1C90D4800065A96E /* he */,
 			);
 			name = Main.storyboard;
 			path = ..;
@@ -425,6 +467,15 @@
 				B1B0374B1A9CD9540057C221 /* Base */,
 			);
 			name = LaunchScreen.xib;
+			sourceTree = "<group>";
+		};
+		D5FBA35F1C9421DF0065A96E /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				D5FBA3601C9421E00065A96E /* he */,
+				D5FBA3621C9421EF0065A96E /* en */,
+			);
+			name = Localizable.strings;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -466,7 +517,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				PROVISIONING_PROFILE = "";
@@ -505,7 +556,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				PROVISIONING_PROFILE = "996f5e2f-6a3a-4569-a60e-6422b7919786";
 				SDKROOT = iphoneos;
@@ -523,6 +574,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = EducKeyboard/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				"MTL_ENABLE_DEBUG_INFO[arch=*]" = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = com.issieshapiro.Issieboard;
 				PRODUCT_NAME = IssieBoard;
 				PROVISIONING_PROFILE = "";
@@ -535,8 +587,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = IssieBoard.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Oren Sela (D66MDDZ63X)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Oren Sela (D66MDDZ63X)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = EducKeyboard/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.issieshapiro.Issieboard;
@@ -613,6 +665,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		56AD418C1C95DA91003A50BF /* IssieBoard.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				56AD418D1C95DA91003A50BF /* IssieBoard.xcdatamodel */,
+			);
+			currentVersion = 56AD418D1C95DA91003A50BF /* IssieBoard.xcdatamodel */;
+			path = IssieBoard.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = B1B037341A9CD9540057C221 /* Project object */;
 }
