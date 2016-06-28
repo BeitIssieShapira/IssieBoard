@@ -19,7 +19,7 @@ class LayoutConstants: NSObject {
     // keyboard area shrinks in size in landscape on 6 and 6+
     class var keyboardShrunkSizeArray: [CGFloat] { get { return [522, 524] }}
     class var keyboardShrunkSizeWidthThreshholds: [CGFloat] { get { return [700] }}
-    class var keyboardShrunkSizeBaseWidthThreshhold: CGFloat { get { return 600 }}
+    class var keyboardShrunkSizeBaseWidthThreshhold: CGFloat { get { return 6600 }}//<<
     
     // row gaps are weird on 6 in portrait
     class var rowGapPortraitArray: [CGFloat] { get { return [15, 11, 10] }}
@@ -128,6 +128,8 @@ class LayoutConstants: NSObject {
             return width
         }
     }
+    
+
     
     class func popupTotalHeight(deviceWidth: CGFloat) -> CGFloat {
         return self.findThreshhold(self.popupTotalHeightArray, threshholds: self.popupTotalHeightDeviceWidthThreshholds, measurement: deviceWidth)
@@ -248,7 +250,7 @@ class GlobalColors: NSObject {
     }
     
     class var keyFont  : UIFont {
-        get { return UIFont(name: Settings.sharedInstance.Font, size: 55)! }
+        get { return UIFont(name: Settings.sharedInstance.Font, size: isIPad() ? 55: 25)! }//<<
     }
 }
 
@@ -593,7 +595,7 @@ class KeyboardLayout: NSObject, KeyboardKeyProtocol {
                 if imageKey.image == nil {
                     let keyboardImage = UIImage(named: "globe-512")
                     let keyboardImageView = UIImageView(image: keyboardImage)
-                    imageKey.setImageSizeToScaleGC(30)
+                    imageKey.setImageSizeToScaleGC(isIPad() ? 30: 20)
                     imageKey.image = keyboardImageView
                 }
             }
@@ -606,7 +608,7 @@ class KeyboardLayout: NSObject, KeyboardKeyProtocol {
                 if imageKey.image == nil {
                     let keyboardImage = UIImage(named: "ic_keyboard_hide_48px-512")
                     let keyboardImageView = UIImageView(image: keyboardImage)
-                    imageKey.setImageSizeToScaleGC(40)
+                    imageKey.setImageSizeToScaleGC(isIPad() ? 40: 25)
                     imageKey.image = keyboardImageView
                 }
             }
@@ -620,7 +622,7 @@ class KeyboardLayout: NSObject, KeyboardKeyProtocol {
                 if imageKey.image == nil {
                     let keyboardImage = UIImage(named: "ic_keyboard_return_48px-512")
                     let keyboardImageView = UIImageView(image: keyboardImage)
-                    imageKey.setImageSizeToScaleGC(60)
+                    imageKey.setImageSizeToScaleGC(isIPad() ? 30: 20)//<<
                     imageKey.image = keyboardImageView
                 }
             }

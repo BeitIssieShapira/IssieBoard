@@ -18,7 +18,7 @@ class ConfigSetsTableViewController: UITableViewController,NSFetchedResultsContr
     var managedObjectContext: NSManagedObjectContext!
     var currentCell:UITableViewCell!
     var previousCell:UITableViewCell!
-    
+    @IBOutlet weak var backBarButtonItem: UIBarButtonItem!
     override func viewDidLoad() {
         super.viewDidLoad()
         let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
@@ -33,13 +33,34 @@ class ConfigSetsTableViewController: UITableViewController,NSFetchedResultsContr
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
+        if(isIPad()){
+            backBarButtonItem.title = ""
+        }else{
+            backBarButtonItem.title = wrapWithLocale(TITLE_CONFIGURATIONS)
+        }
         fetchConfigs()
     }
-    
+    override func viewDidDisappear(animated: Bool) {
+        //self.navigationController?.popToRootViewControllerAnimated(true)
+        //self.navigationController?.popViewControllerAnimated(true)
+    }
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
+        
+        //self.navigationItem.setHidesBackButton(false, animated: false)
+      //  self.navigationItem.setRightBarButtonItem(UIBarButtonItem(title: "Master", style: UIBarButtonItemStyle.Done, target: self, action: "backButtonClicked"), animated: true)
+        
     }
-       
+    func backButtonClicked(){
+        //self.navigationItem.popViewControllerAnimated(false)
+        //self.navigationController?.popViewControllerAnimated
+        //self.navigationController?.popToViewController((self.navigationController?.viewControllers[0])!, animated:true)
+        //var prev = self.navigationController?.popViewControllerAnimated(true)
+        //prev!.navigationController?.popViewControllerAnimated(true)
+        //self.navigationController?.viewControllers.
+        self.navigationController?.popToRootViewControllerAnimated(true)
+       // self.splitViewController?.presentViewController((self.navigationController?.viewControllers[0])!, animated: false, completion: nil)
+    }
     func fetchConfigs(){
         let fetchRequest = NSFetchRequest(entityName: "ConfigSet")
         do{

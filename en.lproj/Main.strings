@@ -4,10 +4,10 @@
 "7bK-jq-Zjz.title" = "Master";
 
 /* Class = "UISegmentedControl"; AVK-5P-wQY.segmentTitles[0] = "by rows"; ObjectID = "AVK-5P-wQY"; */
-"AVK-5P-wQY.segmentTitles[0]" = "by rows";
+"AVK-5P-wQY.segmentTitles[0]" = "By Rows";
 
 /* Class = "UISegmentedControl"; AVK-5P-wQY.segmentTitles[1] = "by sections"; ObjectID = "AVK-5P-wQY"; */
-"AVK-5P-wQY.segmentTitles[1]" = "by sections";
+"AVK-5P-wQY.segmentTitles[1]" = "By Sections";
 
 /* Class = "UILabel"; text = "Title"; ObjectID = "Arm-wq-HPj"; */
 "Arm-wq-HPj.text" = "Title";
@@ -31,5 +31,8 @@
 "mOI-FS-AaM.title" = "Detail";
 
 "ipJ-uE-7yJ.placeholder" = "Enter a name for this keyboard";
-"lCL-uJ-1KT.normalTitle" = "Load this keyboard";
+"lCL-uJ-1KT.normalTitle" = "Select the current keyboard";
 "var-jP-5ok.text" = "Keyboard name";
+
+
+"GWd-my-H0q.normalTitle" = "Show Keyboard";

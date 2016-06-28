@@ -160,11 +160,14 @@ func endCenter() {
     let ctx = UIGraphicsGetCurrentContext()
     CGContextRestoreGState(ctx)
 }
+func isIPad()->Bool{
+    return  UIDevice.currentDevice().userInterfaceIdiom == UIUserInterfaceIdiom.Pad
+}
 
 func drawBackspace(bounds: CGRect, color: UIColor) {
     let factors = getFactors(CGSizeMake(44, 32), toRect: bounds)
-    let xScalingFactor = CGFloat(0.65)
-    let yScalingFactor = CGFloat(0.65)
+    let xScalingFactor = isIPad() ? CGFloat(0.65):CGFloat(0.35)//<<
+    let yScalingFactor = isIPad() ? CGFloat(0.65):CGFloat(0.35)//<<
     let lineWidthScalingFactor = factors.lineWidthScalingFactor
     
     centerShape(CGSizeMake(44 * xScalingFactor, 32 * yScalingFactor), toRect: bounds)

@@ -29,4 +29,10 @@
 "SaveAndLoadCustomTemplates" = "תבנית חדשה";
 "NewKeyboard" = "מקלדת חדשה";
 "ResetToDefaultKeyboard" = "איפוס למקלדת ברירת המחדל";
+"ResetToDefaultKeyboardDone" = "המקלדת מאופסת";
 "Reset" = "איפוס";
+"KeyboardSuccessfullyLoaded" = "המקלדת נטענה בהצלחה";
+
+"ShowKeyboard" = "הצג מקלדת";
+"HideKeyboard" = "הסתר מקלדת";
+"Configurations" = "הגדרות";

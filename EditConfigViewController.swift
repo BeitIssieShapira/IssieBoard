@@ -12,8 +12,10 @@ class EditConfigViewController: UIViewController {
 
     var managedObjectContext: NSManagedObjectContext!
     var configSet: NSManagedObject!
+    var prevConfigSet: NSManagedObject!
     var UserSettings: NSUserDefaults!
     var updateCellDelegate:UpdateCellsDelegate!
+    var rollbackRequired:Bool = true
     
     @IBOutlet weak var loadKeyboardButton: UIButton!
     @IBOutlet weak var textField: UITextField!    
@@ -31,26 +33,43 @@ class EditConfigViewController: UIViewController {
             let titleString = String(format: "%@", self.textField.text!)
             self.title = titleString
             self.loadKeyboardButton.hidden = false
+            setPreviousConfigForCancelationCase()
+            updateCurrentDeviceStateByCurrentConfigSet()
             
         } else{
             self.title = wrapWithLocale(TITLE_NEW_KEYBOARD)
             self.loadKeyboardButton.hidden = true
+            rollbackRequired = false
         }
         // Do any additional setup after loading the view.
     }
     
+    override func viewWillDisappear(animated: Bool) {
+        if(rollbackRequired){
+            configSet = prevConfigSet
+            updateCurrentDeviceStateByCurrentConfigSet()
+        }
+    }
+    
     @IBAction func loadButtonClicked(sender: UIButton) {
+        rollbackRequired = false;
         configSet.setValue(self.textField.text, forKey: "configurationName")
         updateCurrentDeviceStateByCurrentConfigSet();
         updateCellDelegate.updateCheckedCell()
+        let newTitle = wrapWithLocale(TITLE_KEYBOARD_LOADED)
+        UIView.transitionWithView(loadKeyboardButton, duration: 0.6, options: [.TransitionFlipFromTop ], animations: {self.loadKeyboardButton.setTitle(newTitle, forState:UIControlState.Normal )},
+            completion:{(finished:Bool)->() in self.navigationController?.popViewControllerAnimated(true)
+                NSThread.sleepForTimeInterval(1.2)
+        })
         
-        self.navigationController?.popViewControllerAnimated(true)
+       // self.navigationController?.popViewControllerAnimated(true)
     }
   
     @IBAction func doneDidClick(){
         if configSet != nil {
             self.updateConfigSet(true)
         }else{
+            rollbackRequired = false
             if textField.text != ""{
                 self.createNewConfigSet()
                 self.navigationController?.popViewControllerAnimated(true)
@@ -73,6 +92,12 @@ class EditConfigViewController: UIViewController {
         }
     }
     
+    func setPreviousConfigForCancelationCase(){
+        let configSetEntity = NSEntityDescription.entityForName("ConfigSet", inManagedObjectContext: self.managedObjectContext)
+        prevConfigSet = NSManagedObject(entity: configSetEntity!, insertIntoManagedObjectContext: nil)
+        updateConfigSetObjectByCurrentState(prevConfigSet)
+        prevConfigSet.setValue("previous", forKey:"configurationName")
+    }
     func updateConfigSetObjectByCurrentState(configSetObject:NSManagedObject){
         UserSettings = NSUserDefaults(suiteName: "group.issieshapiro.com.issiboard")!
         configSetObject.setValue(self.textField.text, forKey:"configurationName")

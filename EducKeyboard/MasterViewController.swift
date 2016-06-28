@@ -108,7 +108,10 @@ class MasterViewController: UITableViewController	 {
                 if(object.key == KEY_ISSIE_KEYBOARD_SAVE_LOAD){
                    // performSegueWithIdentifier("loadSave", sender: detailViewController)
                 let controller = (segue.destinationViewController as! UINavigationController).topViewController as! DetailViewController
+                   // controller.navigationItem.leftBarButtonItem = self.splitViewController?.displayModeButtonItem()//<<
+                   // controller.navigationItem.leftItemsSupplementBackButton = true//<<
                     controller.performSegue()
+                    
                 } else {
                  let controller = (segue.destinationViewController as! UINavigationController).topViewController as! DetailViewController
                 
@@ -121,6 +124,8 @@ class MasterViewController: UITableViewController	 {
         }
         
        if segue.identifier == "loadSave"{
+        //let controller = (segue.destinationViewController as! UINavigationController).topViewController as! DetailViewController
+        //controller.navigationItem.setHidesBackButton(false, animated: false)
         //let loadSaveController = ConfigSetsTableViewController()
         //let navController = segue.sourceViewController as! UINavigationController
         
@@ -152,12 +157,16 @@ class MasterViewController: UITableViewController	 {
         let item: ConfigItem = items[indexPath.row]
         
         cell.textLabel!.text = item.title
-        
+        cell.textLabel!.font = UIFont(name: "HelveticaNeue-Bold", size: 16.0)
         return cell
     }
     
     override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
         return true
+    }
+    
+    @IBAction func backFromTemplates(segue: UIStoryboardSegue){
+    
     }
 }
 
@@ -194,8 +203,13 @@ let TITLE_NEW_KEYBOARD        = "NewKeyboard";
 let TITLE_SAVE_LOAD           = "SaveAndLoadCustomTemplates";
 let TITLE_KEYBOARD_RESET      = "Reset"
 let TITLE_KEYBOARD_RESET_BUTTON   = "ResetToDefaultKeyboard"
+let TITLE_KEYBOARD_RESET_DONE = "ResetToDefaultKeyboardDone"
+let TITLE_KEYBOARD_LOADED     = "KeyboardSuccessfullyLoaded"
 let KEY_ISSIE_KEYBOARD_SAVE_LOAD  = "KEY_ISSIE_KEYBOARD_SAVE_LOAD";
 
+let TITLE_SHOW_KEYBOARD     = "ShowKeyboard"
+let TITLE_HIDE_KEYBOARD     = "HideKeyboard"
+let TITLE_CONFIGURATIONS    = "Configurations"
 //KEYS
 
 let KEY_ISSIE_KEYBOARD_RESET                   = "KEY_ISSIE_KEYBOARD_RESET"
@@ -218,6 +232,7 @@ let KEY_ISSIE_KEYBOARD_SPACE_COLOR             = "ISSIE_KEYBOARD_SPACE_COLOR";
 let KEY_ISSIE_KEYBOARD_ENTER_COLOR             = "ISSIE_KEYBOARD_ENTER_COLOR";
 let KEY_ISSIE_KEYBOARD_BACKSPACE_COLOR         = "ISSIE_KEYBOARD_BACKSPACE_COLOR";
 let KEY_ISSIE_KEYBOARD_OTHERDEFAULTKEYS_COLOR  = "ISSIE_KEYBOARD_OTHERDEFAULTKEYS_COLOR";
+
 public  struct Constants{
 public static let KEYS_ARRAY = [
  KEY_ISSIE_KEYBOARD_BACKGROUND_COLOR        ,
@@ -248,6 +263,18 @@ func wrapWithLocale (titleToWrap:String) -> String
     return NSBundle.mainBundle().localizedStringForKey( titleToWrap, value: titleToWrap,table:nil);
 }
 
+func isIPad()->Bool{
+    return  UIDevice.currentDevice().userInterfaceIdiom == UIUserInterfaceIdiom.Pad
+}
+
+func isIpadPro() -> Bool
+{
+    if (UIDevice.currentDevice().userInterfaceIdiom == UIUserInterfaceIdiom.Pad &&
+        (UIScreen.mainScreen().bounds.size.height == 1366 || UIScreen.mainScreen().bounds.size.width == 1366)) {
+            return true
+    }
+    return false
+}
 /* FYI, here's the hebrew titles
 let TITLE_MAIN_SETTINGS       = "הגדרות ראשיות";
 let TITLE_KEYBOARD_BACKGROUND = "רקע המקלדת";

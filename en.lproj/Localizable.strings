@@ -31,4 +31,10 @@
 "SaveAndLoadCustomTemplates" = "New Template";
 "NewKeyboard" = "New Keyboard";
 "ResetToDefaultKeyboard" = "Reset To Default Keyboard";
+"ResetToDefaultKeyboardDone" = "Reset Completed";
+"KeyboardSuccessfullyLoaded" = "The Keyboard Was Loaded Successfully";
 "Reset" = "Reset";
+
+"ShowKeyboard" = "Show Keyboard";
+"HideKeyboard" = "Hide Keyboard";
+"Configurations" = "Configurations";

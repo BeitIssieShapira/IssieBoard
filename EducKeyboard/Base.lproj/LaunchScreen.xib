@@ -12,7 +12,7 @@
             <rect key="frame" x="0.0" y="0.0" width="480" height="480"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" image="WelcomeScreenLogo" translatesAutoresizingMaskIntoConstraints="NO" id="xKP-pl-8lY">
+                <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleAspectFit" image="WelcomeScreenLogo-iPhonePortrait.png" translatesAutoresizingMaskIntoConstraints="NO" id="xKP-pl-8lY">
                     <rect key="frame" x="0.0" y="0.0" width="480" height="480"/>
                     <constraints>
                         <constraint firstAttribute="width" secondItem="xKP-pl-8lY" secondAttribute="height" multiplier="1:1" id="Hsw-HF-HUe"/>
@@ -32,6 +32,6 @@
         </view>
     </objects>
     <resources>
-        <image name="WelcomeScreenLogo" width="500" height="500"/>
+        <image name="WelcomeScreenLogo-iPhonePortrait.png" width="750" height="1334"/>
     </resources>
 </document>
