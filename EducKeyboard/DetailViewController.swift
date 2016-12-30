@@ -153,15 +153,15 @@ class DetailViewController: UIViewController, UIPopoverPresentationControllerDel
         let currentFirstResponder = (isTypeKeysScenario()) ?
             itemValue : ToggleKeyboard
         didNowPerformShowHideKeyboard = true
-        if(currentFirstResponder?.isFirstResponder)!{
+        if(currentFirstResponder.isFirstResponder){
             
             title = wrapWithLocale(TITLE_SHOW_KEYBOARD)
-            currentFirstResponder?.resignFirstResponder()
+            currentFirstResponder.resignFirstResponder()
             didNowPerformShowHideKeyboard = false
         }
         else{
             title = wrapWithLocale(TITLE_HIDE_KEYBOARD)
-            currentFirstResponder?.becomeFirstResponder()
+            currentFirstResponder.becomeFirstResponder()
         }
         UIView.transition(with: sender, duration: 0.3, options: [.transitionFlipFromTop ], animations: {sender.setTitle(title, for:UIControlState() )},
             completion:nil
