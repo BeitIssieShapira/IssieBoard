@@ -13,7 +13,7 @@ class EditConfigViewController: UIViewController {
     var managedObjectContext: NSManagedObjectContext!
     var configSet: NSManagedObject!
     var prevConfigSet: NSManagedObject!
-    var UserSettings: NSUserDefaults!
+    var UserSettings: UserDefaults!
     var updateCellDelegate:UpdateCellsDelegate!
     var rollbackRequired:Bool = true
     
@@ -21,45 +21,65 @@ class EditConfigViewController: UIViewController {
     @IBOutlet weak var textField: UITextField!    
     @IBOutlet weak var doneBarButtonItem: UIBarButtonItem!
 
+    static func getTranslateConfigurationName(configSet:NSManagedObject!)->String{
+        let rawValue = configSet.value(forKey: "configurationName") as? String
+        if (MasterViewController.getPreferredLanguage() == "HE"){
+            return rawValue!
+        }
+        else {
+            switch rawValue!{
+            case "תבנית מוכנה 1 - ברירת מחדל" :
+                return "Predefined Keyboard 1 - Default"
+            case "תבנית מוכנה 2":
+                return "Predefined Keyboard 2"
+            case "תבנית מוכנה 3":
+                return "Predefined Keyboard 3"
+            default:
+                return rawValue!
+            }
+        }
+        return ""
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
         
         self.textField.becomeFirstResponder()
         
-        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
         managedObjectContext = appDelegate.managedObjectContext
         if configSet != nil {
-            self.textField.text = configSet.valueForKey("configurationName") as? String
+            self.textField.text = EditConfigViewController.getTranslateConfigurationName(configSet: configSet)
+            //configSet.value(forKey: "configurationName") as? String
             let titleString = String(format: "%@", self.textField.text!)
             self.title = titleString
-            self.loadKeyboardButton.hidden = false
+            self.loadKeyboardButton.isHidden = false
             setPreviousConfigForCancelationCase()
             updateCurrentDeviceStateByCurrentConfigSet()
             
         } else{
             self.title = wrapWithLocale(TITLE_NEW_KEYBOARD)
-            self.loadKeyboardButton.hidden = true
+            self.loadKeyboardButton.isHidden = true
             rollbackRequired = false
         }
         // Do any additional setup after loading the view.
     }
     
-    override func viewWillDisappear(animated: Bool) {
+    override func viewWillDisappear(_ animated: Bool) {
         if(rollbackRequired){
             configSet = prevConfigSet
             updateCurrentDeviceStateByCurrentConfigSet()
         }
     }
     
-    @IBAction func loadButtonClicked(sender: UIButton) {
+    @IBAction func loadButtonClicked(_ sender: UIButton) {
         rollbackRequired = false;
         configSet.setValue(self.textField.text, forKey: "configurationName")
         updateCurrentDeviceStateByCurrentConfigSet();
         updateCellDelegate.updateCheckedCell()
         let newTitle = wrapWithLocale(TITLE_KEYBOARD_LOADED)
-        UIView.transitionWithView(loadKeyboardButton, duration: 0.6, options: [.TransitionFlipFromTop ], animations: {self.loadKeyboardButton.setTitle(newTitle, forState:UIControlState.Normal )},
-            completion:{(finished:Bool)->() in self.navigationController?.popViewControllerAnimated(true)
-                NSThread.sleepForTimeInterval(1.2)
+        UIView.transition(with: loadKeyboardButton, duration: 0.6, options: [.transitionFlipFromTop ], animations: {self.loadKeyboardButton.setTitle(newTitle, for:UIControlState() )},
+            completion:{(finished:Bool)->() in self.navigationController?.popViewController(animated: true)
+                Thread.sleep(forTimeInterval: 1.2)
         })
         
        // self.navigationController?.popViewControllerAnimated(true)
@@ -72,12 +92,12 @@ class EditConfigViewController: UIViewController {
             rollbackRequired = false
             if textField.text != ""{
                 self.createNewConfigSet()
-                self.navigationController?.popViewControllerAnimated(true)
+                self.navigationController?.popViewController(animated: true)
             }
         }
     }
 
-    func updateConfigSet(shouldPopView:Bool){
+    func updateConfigSet(_ shouldPopView:Bool){
         // For "no updates, only renaming" policy, awitch the commented/uncommented rows below
         //configSet.setValue(self.textField.text, forKey: "configurationName")
         updateConfigSetObjectByCurrentState(configSet)
@@ -85,7 +105,7 @@ class EditConfigViewController: UIViewController {
         do {
             try managedObjectContext.save()
             if(shouldPopView == true){
-                self.navigationController?.popViewControllerAnimated(true)
+                self.navigationController?.popViewController(animated: true)
             }
         } catch let error as NSError{
             print ("could not save \(error)")
@@ -93,18 +113,18 @@ class EditConfigViewController: UIViewController {
     }
     
     func setPreviousConfigForCancelationCase(){
-        let configSetEntity = NSEntityDescription.entityForName("ConfigSet", inManagedObjectContext: self.managedObjectContext)
-        prevConfigSet = NSManagedObject(entity: configSetEntity!, insertIntoManagedObjectContext: nil)
+        let configSetEntity = NSEntityDescription.entity(forEntityName: "ConfigSet", in: self.managedObjectContext)
+        prevConfigSet = NSManagedObject(entity: configSetEntity!, insertInto: nil)
         updateConfigSetObjectByCurrentState(prevConfigSet)
         prevConfigSet.setValue("previous", forKey:"configurationName")
     }
-    func updateConfigSetObjectByCurrentState(configSetObject:NSManagedObject){
-        UserSettings = NSUserDefaults(suiteName: "group.issieshapiro.com.issiboard")!
+    func updateConfigSetObjectByCurrentState(_ configSetObject:NSManagedObject){
+        UserSettings = UserDefaults(suiteName: "group.issieshapiro.com.issiboard")!
         configSetObject.setValue(self.textField.text, forKey:"configurationName")
 
 
         for key in Constants.KEYS_ARRAY{
-            let currentUserValue = UserSettings.valueForKey(key)
+            let currentUserValue = UserSettings.value(forKey: key)
             let coreDataKey = "i" + String(key.characters.dropFirst())
             if(currentUserValue != nil){
                 configSetObject.setValue(currentUserValue, forKey:coreDataKey)
@@ -113,13 +133,14 @@ class EditConfigViewController: UIViewController {
     }
     
     func updateCurrentDeviceStateByCurrentConfigSet(){
-        UserSettings = NSUserDefaults(suiteName: "group.issieshapiro.com.issiboard")!
+        UserSettings = UserDefaults(suiteName: "group.issieshapiro.com.issiboard")!
         //configSetObject.setValue(self.textField.text, forKey:"configurationName")
         for key in Constants.KEYS_ARRAY{
-            let currentConfigValue = configSet.valueForKey(key) as! String
-            //if(currentConfigValue != nil){
+            var currentConfigValue = configSet.value(forKey: key)
+            if(currentConfigValue == nil)&&(key == KEY_ISSIE_KEYBOARD_LANGUAGES){
+                currentConfigValue = MasterViewController.getPreferredLanguage()
+            }
                 UserSettings.setValue(currentConfigValue, forKey:key)
-            //}
         }
         do{
             try managedObjectContext.save()
@@ -129,8 +150,8 @@ class EditConfigViewController: UIViewController {
         }
     }
     func createNewConfigSet(){
-        let configSetEntity = NSEntityDescription.entityForName("ConfigSet", inManagedObjectContext: self.managedObjectContext)
-        let configSetObject = NSManagedObject(entity: configSetEntity!, insertIntoManagedObjectContext: self.managedObjectContext)
+        let configSetEntity = NSEntityDescription.entity(forEntityName: "ConfigSet", in: self.managedObjectContext)
+        let configSetObject = NSManagedObject(entity: configSetEntity!, insertInto: self.managedObjectContext)
         //configSetObject.setValue(self.textField.text, forKey:"configurationName")
         updateConfigSetObjectByCurrentState(configSetObject)
         do{
@@ -141,8 +162,8 @@ class EditConfigViewController: UIViewController {
     }
     
     func createPredefinedConfigSets(){
-        let configSetEntity = NSEntityDescription.entityForName("ConfigSet", inManagedObjectContext: self.managedObjectContext)
-        let configSetObject = NSManagedObject(entity: configSetEntity!, insertIntoManagedObjectContext: self.managedObjectContext)
+        let configSetEntity = NSEntityDescription.entity(forEntityName: "ConfigSet", in: self.managedObjectContext)
+        let configSetObject = NSManagedObject(entity: configSetEntity!, insertInto: self.managedObjectContext)
         configSetObject.setValue(self.textField.text, forKey:"configurationName")
         do{
             try managedObjectContext.save()

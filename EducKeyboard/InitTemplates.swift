@@ -13,23 +13,23 @@ import CoreData
 class InitTemplates: NSObject {
 
     static func loadPlists(){
-        let UserSettings = NSUserDefaults(suiteName: "group.issieshapiro.com.issiboard")!
-        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+        let UserSettings = UserDefaults(suiteName: "group.issieshapiro.com.issiboard")!
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
         let managedObjectContext = appDelegate.managedObjectContext
 
         for index in 1...3 {
-        let bundlePath = NSBundle.mainBundle().pathForResource("DocumentationDefaultTemplates" + String(index), ofType: "plist")
+        let bundlePath = Bundle.main.path(forResource: "DocumentationDefaultTemplates" + String(index), ofType: "plist")
         let templateDictionary1 = NSMutableDictionary(contentsOfFile: bundlePath!)
         
         
         var fullArray = Constants.KEYS_ARRAY
         fullArray.append("configurationName")
         
-        let configSetEntity = NSEntityDescription.entityForName("ConfigSet", inManagedObjectContext: managedObjectContext)
-        let configSetObject = NSManagedObject(entity: configSetEntity!, insertIntoManagedObjectContext: managedObjectContext)
+        let configSetEntity = NSEntityDescription.entity(forEntityName: "ConfigSet", in: managedObjectContext)
+        let configSetObject = NSManagedObject(entity: configSetEntity!, insertInto: managedObjectContext)
         //configSetObject.setValue(self.textField.text, forKey:"configurationName")
         for key in fullArray{
-            let currentValue = templateDictionary1?.valueForKey(key)
+            let currentValue = templateDictionary1?.value(forKey: key)
             var coreDataKey = "i" + String(key.characters.dropFirst())
             if(key == "configurationName")
             {
@@ -53,8 +53,8 @@ class InitTemplates: NSObject {
     }
 
     static func resetToDefaultTemplate(){
-        let UserSettings = NSUserDefaults(suiteName: "group.issieshapiro.com.issiboard")!
-            let bundlePath = NSBundle.mainBundle().pathForResource("DocumentationDefaultTemplates1", ofType: "plist")
+        let UserSettings = UserDefaults(suiteName: "group.issieshapiro.com.issiboard")!
+            let bundlePath = Bundle.main.path(forResource: "DocumentationDefaultTemplates1", ofType: "plist")
             let templateDictionary1 = NSMutableDictionary(contentsOfFile: bundlePath!)
             
             
@@ -63,7 +63,7 @@ class InitTemplates: NSObject {
 
             //configSetObject.setValue(self.textField.text, forKey:"configurationName")
             for key in fullArray{
-                let currentValue = templateDictionary1?.valueForKey(key)
+                let currentValue = templateDictionary1?.value(forKey: key)
                 if(currentValue != nil){
                     UserSettings.setValue(currentValue, forKey:key)
                 }
@@ -74,10 +74,10 @@ class InitTemplates: NSObject {
     
     
     static func createNewInitIndicator(){
-        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
         let managedObjectContext = appDelegate.managedObjectContext
-        let initIndicatorEntity = NSEntityDescription.entityForName("DidCreateDefaultTemplates", inManagedObjectContext: managedObjectContext)
-        let initIndicatorObject = NSManagedObject(entity: initIndicatorEntity!, insertIntoManagedObjectContext: managedObjectContext)
+        let initIndicatorEntity = NSEntityDescription.entity(forEntityName: "DidCreateDefaultTemplates", in: managedObjectContext)
+        let initIndicatorObject = NSManagedObject(entity: initIndicatorEntity!, insertInto: managedObjectContext)
         //configSetObject.setValue(self.textField.text, forKey:"configurationName")
         initIndicatorObject.setValue(true, forKey:"didInit")
         do{
@@ -89,11 +89,11 @@ class InitTemplates: NSObject {
     
     
     static func loadDefaultTemplates(){
-        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
         let managedObjectContext = appDelegate.managedObjectContext
-        let fetchRequest = NSFetchRequest(entityName: "DidCreateDefaultTemplates")
+        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "DidCreateDefaultTemplates")
         do{
-            let didInitIndicator = try managedObjectContext.executeFetchRequest(fetchRequest)
+            let didInitIndicator = try managedObjectContext.fetch(fetchRequest)
             if (didInitIndicator.count == 0){
                 InitTemplates.loadPlists()
                 createNewInitIndicator()

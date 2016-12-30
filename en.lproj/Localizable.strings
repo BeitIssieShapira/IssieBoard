@@ -38,3 +38,7 @@
 "ShowKeyboard" = "Show Keyboard";
 "HideKeyboard" = "Hide Keyboard";
 "Configurations" = "Configurations";
+"Languages" = "Languages";
+"EN" = "English";
+"HE"  = "Hebrew";
+"BOTH" = "English & Hebrew";

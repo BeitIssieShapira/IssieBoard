@@ -11,6 +11,7 @@ import QuartzCore
 import CoreData
 
 
+
 class DetailViewController: UIViewController, UIPopoverPresentationControllerDelegate, UITextViewDelegate, UIScrollViewDelegate {
     
     @IBOutlet weak var colorPalette: UIView!
@@ -23,8 +24,10 @@ class DetailViewController: UIViewController, UIPopoverPresentationControllerDel
     @IBOutlet var resetButton: UIButton!
     @IBOutlet var showHideKeyboard: UIButton!
     @IBOutlet weak var scrollView: UIScrollView!
+    @IBOutlet weak var languagesView: UIView!
     
     //var configSet: NSManagedObject!
+    let langKeys = ["EN","HE","BOTH"]
     var onTheWayToTemplates:Bool        = false
     var didNowPerformShowHideKeyboard   = false
     //var KEYBOARD_STATE_DURING_UPDATE = 0
@@ -33,15 +36,16 @@ class DetailViewController: UIViewController, UIPopoverPresentationControllerDel
     let IPAD_BUTTON_SIZE :CGFloat    = 100
     let IPAD_PRO_BUTTON_SIZE:CGFloat = 140
     let IPHONE_BUTTON_SIZE:CGFloat   = 60
-    let ALL_VISIBLE_KEYS = "אבגדהוזחטיכלמנסעןפצקרשתםףךץ1234567890.,?!'•_\\|~<>$€£[]{}#%^*+=.,?!'\"-/:;()₪&@";
+    let enKeys = "QWERTYUIOPASDFGHJKLZXCVBNM"
+    let ALL_VISIBLE_KEYS = "אבגדהוזחטיכלמנסעןפצקרשתםףךץ1234567890.,?!'•_\\|~<>$€£[]{}#%^*+=.,?!'\"-/:;()₪&@QWERTYUIOPASDFGHJKLZXCVBNMqwertyuiopasdfghjklzxcvbnm"
     let ARRAY_OF_COLORS = [
-        UIColor.purpleColor(),
+        UIColor.purple,
         "9C07E1",
         "C800FF",
         "F28DFB",
         "FF00BB",
         "8980DE",
-        UIColor.blueColor(),
+        UIColor.blue,
         "6000FF",
         "0080FF",
         "00DDFF",
@@ -49,23 +53,23 @@ class DetailViewController: UIViewController, UIPopoverPresentationControllerDel
         "8DFBCD",
         "225E16",
         "11D950",
-        UIColor.greenColor(),
-        UIColor.yellowColor(),
+        UIColor.green,
+        UIColor.yellow,
         "EDED21",
         "FF6200",
         "FF9500",
-        UIColor.redColor(),
+        UIColor.red,
         "C70A0A",
-        UIColor.brownColor(),
+        UIColor.brown,
         "C27946",
         "F5C28C",
         "DE808D",
-        UIColor.whiteColor(),
-        UIColor.lightGrayColor(),
-        UIColor.grayColor(),
-        UIColor.darkGrayColor(),
-        UIColor.blackColor()
-    ]
+        UIColor.white,
+        UIColor.lightGray,
+        UIColor.gray,
+        UIColor.darkGray,
+        UIColor.black
+    ] as [Any]
     
     var configItem: ConfigItem? {
         didSet {
@@ -74,54 +78,152 @@ class DetailViewController: UIViewController, UIPopoverPresentationControllerDel
     }
 
     
-    @IBAction func TapRecognize(sender: AnyObject) {
+    @IBAction func TapRecognize(_ sender: AnyObject) {
         if(isTypeKeysScenario()){
             return
         }
-        if(ToggleKeyboard.isFirstResponder()||itemValue.isFirstResponder()){
+        if(ToggleKeyboard.isFirstResponder||itemValue.isFirstResponder){
             showHideTapped(showHideKeyboard)
         }
     }
+    /* TODO:Remove
+    static func setPreviousCurrentMode(currentMode:Int){
+        print("Keyboard hidden")
+        let valueToSave = String(currentMode)
+        NSUserDefaults(suiteName: "group.issieshapiro.com.issiboard")!.setObject(valueToSave, forKey: "currentMode")
+        NSUserDefaults(suiteName: "group.issieshapiro.com.issiboard")!.synchronize()
+    }
+    */
+    static func getPreviousCurrentMode()->Int{
+        if let savedValue = UserDefaults(suiteName: "group.issieshapiro.com.issiboard")!.string(forKey: "currentMode") {
+            print(savedValue)
+            return Int(savedValue)!
+        }
+        else{
+            return 0
+        }
+    }
+    @IBAction func languageButtonTapped(_ sender: UIButton) {
+        
+        let unselectedColor = UIColor.init(colorLiteralRed: 0.921431005
+            , green: 0.921452641, blue: 0.921441018, alpha: 1.0)
+        let selectedColor = UIColor.init(colorLiteralRed: 0.450857997
+            , green: 0.988297522, blue: 0.83763045, alpha: 1.0)
+        
+        self.languagesView.subviews.forEach {
+            let button = $0 as! UIButton
+            button.isSelected = false
+            button.backgroundColor = unselectedColor
+            button.tintColor = unselectedColor
+            button.setTitleColor(UIColor.black, for: UIControlState.normal)
+            button.setTitleColor(UIColor.black, for: UIControlState.selected)
+            button.titleShadowColor(for: UIControlState.selected)
+            button.layer.borderWidth = 5
+            button.layer.borderColor = unselectedColor.cgColor
+            //let currentLangKey = langKeys[button.tag-1]
+            //button.setTitle(wrapWithLocale(currentLangKey) , for: UIControlState.normal)
+        }
+
+        UIView.transition(with: sender, duration: 0.3, options: [.transitionFlipFromTop ], animations: {
+            sender.isSelected = true;
+            sender.backgroundColor = selectedColor
+            sender.tintColor = selectedColor
+        },
+                          completion:nil
+        )
+        
+        let languageKey = sender.tag-1
+        //let values = ["EN","HE","BOTH"]
+            if let item: ConfigItem = self.configItem {
+                item.value = langKeys[languageKey] as AnyObject?
+            }
+    }
     
-    
-    @IBAction func showHideTapped(sender: UIButton) {
+    @IBAction func showHideTapped(_ sender: UIButton) {
+        //FORDEBUG TODO:Remove
+        //DetailViewController.setPreviousCurrentMode(2)
+        //let x = DetailViewController.getPreviousCurrentMode()
+        //
+        /*NSNotificationCenter.defaultCenter().postNotificationName("NotificationIdentifier", object: nil)
+        if let savedValue = NSUserDefaults(suiteName: "group.issieshapiro.com.issiboard")!.stringForKey("gotNotification") {
+            print(savedValue)
+        }*/
+        
         var title:String
         let currentFirstResponder = (isTypeKeysScenario()) ?
             itemValue : ToggleKeyboard
         didNowPerformShowHideKeyboard = true
-        if(currentFirstResponder.isFirstResponder()){
+        if(currentFirstResponder?.isFirstResponder)!{
             
             title = wrapWithLocale(TITLE_SHOW_KEYBOARD)
-            currentFirstResponder.resignFirstResponder()
+            currentFirstResponder?.resignFirstResponder()
             didNowPerformShowHideKeyboard = false
         }
         else{
             title = wrapWithLocale(TITLE_HIDE_KEYBOARD)
-            currentFirstResponder.becomeFirstResponder()
+            currentFirstResponder?.becomeFirstResponder()
         }
-        UIView.transitionWithView(sender, duration: 0.3, options: [.TransitionFlipFromTop ], animations: {sender.setTitle(title, forState:UIControlState.Normal )},
+        UIView.transition(with: sender, duration: 0.3, options: [.transitionFlipFromTop ], animations: {sender.setTitle(title, for:UIControlState() )},
             completion:nil
         )
     }
     
-    @IBAction func ChangedMode(sender: UISegmentedControl) {
+    @IBAction func ChangedMode(_ sender: UISegmentedControl) {
         let values = ["By Rows","By Sections"]
-        configItem?.value = values[sender.selectedSegmentIndex]
+        configItem?.value = values[sender.selectedSegmentIndex] as AnyObject?
         //sender.titleForSegmentAtIndex(sender.selectedSegmentIndex)
         TapRecognize(sender)
     }
     
-    @IBAction func PreviewKeyboardClicked(sender: UIButton) {
+    @IBAction func PreviewKeyboardClicked(_ sender: UIButton) {
         ToggleKeyboard.becomeFirstResponder()
     }
     
-    @IBAction func ResetClicked(sender: UIButton) {
+    @IBAction func ResetClicked(_ sender: UIButton) {
         let title = wrapWithLocale(TITLE_KEYBOARD_RESET_DONE)
         InitTemplates.resetToDefaultTemplate()
-        UIView.transitionWithView(sender, duration: 0.3, options: [.TransitionFlipFromTop ], animations: {sender.setTitle(title, forState:UIControlState.Normal )},
+        UIView.transition(with: sender, duration: 0.3, options: [.transitionFlipFromTop ], animations: {sender.setTitle(title, for:UIControlState() )},
             completion:nil
         )
     }
+    
+    func setLanguageButtonsByCurrent(){
+      //  let langKeys = ["EN","HE","BOTH"]
+        let prevSelectedLang:String
+        var selectedButton:UIButton? = nil
+        let navBarHeight = self.navigationController?.navigationBar.frame.size.height
+        let paddingX:CGFloat = 10
+        let paddingY:CGFloat = 10
+        let languagesFrame = self.view.frame
+        let languagesWidth = languagesFrame.width - paddingX * 2
+        let langagesHeight = (languagesFrame.height - paddingY*6 - navBarHeight!) / 3
+        
+        var buttonFrame = CGRect.init(x: paddingX, y: paddingY*3+navBarHeight!, width: languagesWidth, height: langagesHeight)
+        
+        if let item: ConfigItem = self.configItem {
+             prevSelectedLang = item.value as! String // EN,HE,BOTH
+        } else{
+            prevSelectedLang = MasterViewController.getPreferredLanguage()
+        }
+        
+        self.languagesView.subviews.forEach {
+            let button = $0 as! UIButton
+            let currentTag = button.tag
+            let currentLangKey = langKeys[currentTag-1]
+            
+            if 1...3 ~= currentTag{
+                button.setTitle(wrapWithLocale(currentLangKey) , for: UIControlState.normal)
+                button.setTitle(wrapWithLocale(currentLangKey) , for: UIControlState.selected)
+                if (currentLangKey == prevSelectedLang){
+                    selectedButton = button
+                }
+                button.frame = buttonFrame
+                buttonFrame.origin = CGPoint(x: buttonFrame.origin.x, y: buttonFrame.origin.y+paddingY + langagesHeight)
+            }
+        }
+            languageButtonTapped(selectedButton!)
+    }
+    
     func isTypeKeysScenario()->Bool{
         if((self.configItem?.key == KEY_ISSIE_KEYBOARD_VISIBLE_KEYS) ||
             (self.configItem?.key == KEY_ISSIE_KEYBOARD_SPECIAL_KEYS_TEXT)){
@@ -132,28 +234,29 @@ class DetailViewController: UIViewController, UIPopoverPresentationControllerDel
         }
     }
     func performSegue(){
-        performSegueWithIdentifier("loadSaveDetail", sender: self)
+        self.performSegue(withIdentifier: "loadSaveDetail", sender: self)
     }
     func configureView() {
         
         if let toggle = self.ToggleKeyboard {
-            toggle.hidden = true
+            toggle.isHidden = true
         }
         
         if let item: ConfigItem = self.configItem {
             if let valueField = self.itemValue {
                 if let palette = self.colorPalette {
                     if let modePicker = self.RowColPicker {
-                        let font = UIFont.systemFontOfSize(24)
-                        self.RowColPicker.setTitleTextAttributes([NSFontAttributeName: font], forState: UIControlState.Normal)
+                        let font = UIFont.systemFont(ofSize: 24)
+                        self.RowColPicker.setTitleTextAttributes([NSFontAttributeName: font], for: UIControlState())
                         valueField.layer.borderWidth = 1.3
                         self.title = item.title
                         
                         switch item.type {
-                        case .String:
-                            valueField.userInteractionEnabled  = true
-                            palette.hidden = true
-                            scrollView.hidden = true
+                        case .string:
+                            languagesView.isHidden = true
+                            valueField.isUserInteractionEnabled  = true
+                            palette.isHidden = true
+                            scrollView.isHidden = true
                             if(!isTypeKeysScenario()){
                                 valueField.text = item.value as! String
                             }
@@ -163,53 +266,71 @@ class DetailViewController: UIViewController, UIPopoverPresentationControllerDel
                                 }
                             }
                             
-                            modePicker.hidden = true
-                            TemplatePicker.hidden = true
-                        case .Color:
-                            TemplatePicker.hidden = true
-                            palette.hidden = false
-                            scrollView.hidden = false
-                            valueField.userInteractionEnabled = false
+                            modePicker.isHidden = true
+                            TemplatePicker.isHidden = true
+                        case .color:
+                            languagesView.isHidden = true
+                            TemplatePicker.isHidden = true
+                            palette.isHidden = false
+                            scrollView.isHidden = false
+                            valueField.isUserInteractionEnabled = false
                             valueField.backgroundColor = item.value as? UIColor
-                            modePicker.hidden = true
-                        case .Picker:
-                            TemplatePicker.hidden = true
-                            valueField.userInteractionEnabled = true
-                            valueField.hidden = true
-                            palette.hidden = true
-                            scrollView.hidden = true
-                            modePicker.hidden = false
-                        case .FontPicker:
-                            valueField.userInteractionEnabled = true
-                            TemplatePicker.hidden = true
-                            valueField.hidden = true
-                            palette.hidden = true
-                            scrollView.hidden = true
-                            modePicker.hidden = true
-                        case .Templates:
+                            modePicker.isHidden = true
+                        case .picker:
+                            languagesView.isHidden = true
+                            TemplatePicker.isHidden = true
+                            valueField.isUserInteractionEnabled = true
+                            valueField.isHidden = true
+                            palette.isHidden = true
+                            scrollView.isHidden = true
+                            modePicker.isHidden = false
+                        case .fontPicker:
+                            languagesView.isHidden = true
+                            valueField.isUserInteractionEnabled = true
+                            TemplatePicker.isHidden = true
+                            valueField.isHidden = true
+                            palette.isHidden = true
+                            scrollView.isHidden = true
+                            modePicker.isHidden = true
+                        case .templates:
+                            languagesView.isHidden = true
                             TemplatePicker.value = 0
-                            valueField.userInteractionEnabled = false
-                            TemplatePicker.hidden = false
-                            valueField.hidden = false
-                            palette.hidden = true
-                            scrollView.hidden = true
-                            modePicker.hidden = true
-                            showHideKeyboard.hidden = true
-                        case .Reset:
+                            valueField.isUserInteractionEnabled = false
+                            TemplatePicker.isHidden = false
+                            valueField.isHidden = false
+                            palette.isHidden = true
+                            scrollView.isHidden = true
+                            modePicker.isHidden = true
+                            showHideKeyboard.isHidden = true
+                        case .reset:
+                            languagesView.isHidden = true
                             TemplatePicker.value = 0
-                            valueField.userInteractionEnabled = false
-                            TemplatePicker.hidden = true
-                            valueField.hidden = true
-                            palette.hidden = true
-                            scrollView.hidden = true
-                            modePicker.hidden = true
-                            ToggleKeyboard.hidden = true
-                            PreviewKeyboard.hidden = true
-                            showHideKeyboard.hidden = true
-                            HideButton.hidden = true
-                            resetButton.hidden = false
-                            resetButton.setTitle(wrapWithLocale(TITLE_KEYBOARD_RESET_BUTTON) , forState: UIControlState.Normal)
-                            
+                            valueField.isUserInteractionEnabled = false
+                            TemplatePicker.isHidden = true
+                            valueField.isHidden = true
+                            palette.isHidden = true
+                            scrollView.isHidden = true
+                            modePicker.isHidden = true
+                            ToggleKeyboard.isHidden = true
+                            PreviewKeyboard.isHidden = true
+                            showHideKeyboard.isHidden = true
+                            HideButton.isHidden = true
+                            resetButton.isHidden = false
+                            resetButton.setTitle(wrapWithLocale(TITLE_KEYBOARD_RESET_BUTTON) , for: UIControlState())
+                        case.language:
+                            languagesView.isHidden = false
+                            valueField.isUserInteractionEnabled = true
+                            TemplatePicker.isHidden = true
+                            valueField.isHidden = true
+                            palette.isHidden = true
+                            scrollView.isHidden = true
+                            modePicker.isHidden = true
+                            ToggleKeyboard.isHidden = true
+                            PreviewKeyboard.isHidden = true
+                            showHideKeyboard.isHidden = true
+                            HideButton.isHidden = true
+                            resetButton.isHidden = true
+                            setLanguageButtonsByCurrent()
                         }
                     }
                 }
@@ -217,12 +338,12 @@ class DetailViewController: UIViewController, UIPopoverPresentationControllerDel
         }
         else
         {
-            TemplatePicker.hidden = true
-            colorPalette.hidden = true
-            scrollView.hidden = true
-            itemValue.hidden = true
-            RowColPicker.hidden = true
-            showHideKeyboard.hidden = true
+            TemplatePicker.isHidden = true
+            colorPalette.isHidden = true
+            scrollView.isHidden = true
+            itemValue.isHidden = true
+            RowColPicker.isHidden = true
+            showHideKeyboard.isHidden = true
         }
     }
     
@@ -232,7 +353,7 @@ class DetailViewController: UIViewController, UIPopoverPresentationControllerDel
         self.resetButton.layer.cornerRadius = 5
     }
     
-    func updateColor(color: UIColor) {
+    func updateColor(_ color: UIColor) {
         if let valueField = self.itemValue {
             if let item: ConfigItem = self.configItem {
                 valueField.backgroundColor = color
@@ -241,11 +362,11 @@ class DetailViewController: UIViewController, UIPopoverPresentationControllerDel
         }
     }
     
-    func textViewShouldBeginEditing(textView: UITextView) -> Bool {
+    func textViewShouldBeginEditing(_ textView: UITextView) -> Bool {
         if(textView == itemValue){
             if(didNowPerformShowHideKeyboard == false){
                 let title = wrapWithLocale(TITLE_HIDE_KEYBOARD)
-                UIView.transitionWithView(self.showHideKeyboard, duration: 0.3, options: [.TransitionFlipFromTop ], animations: {self.showHideKeyboard.setTitle(title, forState:UIControlState.Normal )},
+                UIView.transition(with: self.showHideKeyboard, duration: 0.3, options: [.transitionFlipFromTop ], animations: {self.showHideKeyboard.setTitle(title, for:UIControlState() )},
                     completion:nil)
             }
             ifEqualAllValuesDisplayEmptyString(textView)
@@ -253,18 +374,18 @@ class DetailViewController: UIViewController, UIPopoverPresentationControllerDel
         didNowPerformShowHideKeyboard = false
         return true
     }
-    func textViewDidEndEditing(textView: UITextView){
+    func textViewDidEndEditing(_ textView: UITextView){
     
         if let detail: ConfigItem = self.configItem {
             if let valueField = self.itemValue {
                 
                 if(valueField.text.isEmptyOrWhiteSpace && configItem?.key == KEY_ISSIE_KEYBOARD_VISIBLE_KEYS)
                 {
-                    detail.value = ALL_VISIBLE_KEYS;
+                    detail.value = ALL_VISIBLE_KEYS as AnyObject?;
                 }
                 else
                 {
-                    detail.value = valueField.text
+                    detail.value = valueField.text as AnyObject?
                 }
             }
         }
@@ -272,17 +393,51 @@ class DetailViewController: UIViewController, UIPopoverPresentationControllerDel
     override func viewDidLoad() {
         super.viewDidLoad()
         self.configureView()
+        
+
         //updateViewByCurrentState()
        // nextWidth   = self.view.frame.size.width
+
     }
-    override func viewWillAppear(animated: Bool) {
+    
+    override func viewWillAppear(_ animated: Bool) {
         self.AdditonalStyleEffects()
         self.scrollView.contentSize.width = 0
         if(isTypeKeysScenario()){
             itemValue.becomeFirstResponder()
         }
+         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(notification:)), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
+
+
+      /*  NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("keyboardWillChange:"), name: UIKeyboardWillChangeFrameNotification, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("keyboardWillHide:"), name: UIKeyboardWillHideNotification, object: nil)*/
     }
     
+    override func viewWillDisappear(_ animated: Bool) {
+        NotificationCenter.default.removeObserver(self, name: NSNotification.Name.UIKeyboardWillHide, object: nil)
+    }
+    
+    func keyboardWillHide(notification:NSNotification)
+    {
+        let title = wrapWithLocale(TITLE_SHOW_KEYBOARD)
+        if (showHideKeyboard.currentTitle != title){
+            UIView.transition(with: showHideKeyboard, duration: 0.3,
+                options: [.transitionFlipFromTop ], animations:
+                {self.showHideKeyboard.setTitle(title, for:UIControlState() )},completion:nil)
+        }
+    }
+    /*
+    func keyboardWillChange(notification:NSNotification)
+    {
+        print("Keyboard size changed")
+    }
+    
+    func keyboardWillHide(notification:NSNotification)
+    {
+        
+        print("Keyboard hidden")
+    }
+    */
     override func viewDidLayoutSubviews() {
         //if(KEYBOARD_STATE_DURING_UPDATE == 0){
         let newViewWidth = self.view.frame.width
@@ -290,12 +445,15 @@ class DetailViewController: UIViewController, UIPopoverPresentationControllerDel
             self.nextWidth = self.view.frame.width
             self.initColorRainbow()
         }
+        if(languagesView.isHidden == false){
+            setLanguageButtonsByCurrent()
+        }
     }
       override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
     
-    func displayColor(sender:UIButton){
+    func displayColor(_ sender:UIButton){
         var r:CGFloat = 0,g:CGFloat = 0,b:CGFloat = 0
         var a:CGFloat = 0
         var h:CGFloat = 0,s:CGFloat = 0,l:CGFloat = 0
@@ -312,7 +470,7 @@ class DetailViewController: UIViewController, UIPopoverPresentationControllerDel
             }
         }
         //updateCurrentKeyByColor(color)
-        UIView.transitionWithView(sender, duration: 0.3, options: [.TransitionFlipFromTop ], animations: nil,
+        UIView.transition(with: sender, duration: 0.3, options: [.transitionFlipFromTop ], animations: nil,
             completion:nil
         )
     }
@@ -333,32 +491,32 @@ class DetailViewController: UIViewController, UIPopoverPresentationControllerDel
         var buttonFrame = CGRect(x: offset, y: 10, width: Int(BUTTON_WIDTH), height: Int(BUTTON_WIDTH))
         
         buttonFrame.origin.y    = makeClassicColorsButtons(buttonFrame,
-                                  stringColorArray: ARRAY_OF_COLORS,iterationNumber: 0)
+                                  stringColorArray: ARRAY_OF_COLORS as! [NSObject],iterationNumber: 0)
         buttonFrame.origin.y = buttonFrame.origin.y + buttonFrame.size.height*1.5
         scrollView.contentSize.height = buttonFrame.origin.y
     }
     
-    func makeUIColorsButtons(buttonFrame:CGRect){
+    func makeUIColorsButtons(_ buttonFrame:CGRect){
         
         var myButtonFrame = buttonFrame
-        var colorsArray: [UIColor] = [UIColor.blackColor(), UIColor.darkGrayColor(),UIColor.grayColor(),UIColor.lightGrayColor(), UIColor.whiteColor(), UIColor.brownColor(), UIColor.orangeColor(), UIColor.yellowColor(),UIColor.blueColor(), UIColor.purpleColor(), UIColor.greenColor()]
+        var colorsArray: [UIColor] = [UIColor.black, UIColor.darkGray,UIColor.gray,UIColor.lightGray, UIColor.white, UIColor.brown, UIColor.orange, UIColor.yellow,UIColor.blue, UIColor.purple, UIColor.green]
         //Second Row
         for i in 0..<11{
             let color = colorsArray[i]
             let aButton = UIButton(frame: myButtonFrame)
             myButtonFrame.origin.x = myButtonFrame.size.width + myButtonFrame.origin.x
             aButton.backgroundColor = color
-            aButton.layer.borderColor = UIColor.whiteColor().CGColor
+            aButton.layer.borderColor = UIColor.white.cgColor
             aButton.layer.borderWidth = 1
             if let view = self.colorPalette{
                 view.addSubview(aButton)
             }
             
-            aButton.addTarget(self, action: "displayColor:", forControlEvents: UIControlEvents.TouchUpInside)
+            aButton.addTarget(self, action: #selector(DetailViewController.displayColor(_:)), for: UIControlEvents.touchUpInside)
         }
     }
     
-    func makeClassicColorsButtons(buttonFrame:CGRect)->CGFloat{
+    func makeClassicColorsButtons(_ buttonFrame:CGRect)->CGFloat{
         
         var myButtonFrame = buttonFrame
         var stringColorArray :[String] = ["C70A0A","FF00BB","C800FF","4400FF","0080FF","00DDFF","11D950","EDED21","FF9500","FF6200","C27946"]
@@ -368,18 +526,18 @@ class DetailViewController: UIViewController, UIPopoverPresentationControllerDel
             let aButton = UIButton(frame: myButtonFrame)
             myButtonFrame.origin.x = myButtonFrame.size.width + myButtonFrame.origin.x
             aButton.backgroundColor = color
-            aButton.layer.borderColor = UIColor.whiteColor().CGColor
+            aButton.layer.borderColor = UIColor.white.cgColor
             aButton.layer.borderWidth = 1
 
             if let view = self.colorPalette{
                 view.addSubview(aButton)
             }
             
-            aButton.addTarget(self, action: "displayColor:", forControlEvents: UIControlEvents.TouchUpInside)
+            aButton.addTarget(self, action: #selector(DetailViewController.displayColor(_:)), for: UIControlEvents.touchUpInside)
         }
         return myButtonFrame.origin.y
     }
-    func makeClassicColorsButtons(buttonFrame:CGRect, stringColorArray :[NSObject],iterationNumber:Int)->CGFloat{
+    func makeClassicColorsButtons(_ buttonFrame:CGRect, stringColorArray :[NSObject],iterationNumber:Int)->CGFloat{
         
         var myButtonFrame = buttonFrame
         let numberOfColors = stringColorArray.count
@@ -391,18 +549,18 @@ class DetailViewController: UIViewController, UIPopoverPresentationControllerDel
             aButton.layer.cornerRadius = buttonFrame.width/2
             myButtonFrame.origin.x = myButtonFrame.size.width + myButtonFrame.origin.x
             aButton.backgroundColor = color
-            aButton.layer.borderColor = UIColor.lightGrayColor().CGColor
+            aButton.layer.borderColor = UIColor.lightGray.cgColor
             aButton.layer.borderWidth = 1
             aButton.alpha = 0.0
             
             if let view = self.scrollView{
                 view.addSubview(aButton)
-                UIView.animateWithDuration(0.15, delay: (Double(i)+Double(iterationNumber))*0.07, options: UIViewAnimationOptions.AllowUserInteraction, animations: {
+                UIView.animate(withDuration: 0.15, delay: (Double(i)+Double(iterationNumber))*0.07, options: UIViewAnimationOptions.allowUserInteraction, animations: {
                         aButton.alpha = 1.0
                     }, completion: nil)
             }
             
-            aButton.addTarget(self, action: "displayColor:", forControlEvents: UIControlEvents.TouchUpInside)
+            aButton.addTarget(self, action: #selector(DetailViewController.displayColor(_:)), for: UIControlEvents.touchUpInside)
         }
         var frameWithUpdatedY = buttonFrame
 
@@ -416,7 +574,7 @@ class DetailViewController: UIViewController, UIPopoverPresentationControllerDel
         }
     }
     
-    func makeBWColorsButtons(buttonFrame:CGRect){
+    func makeBWColorsButtons(_ buttonFrame:CGRect){
         var myButtonFrame = buttonFrame
         var i :CGFloat = 0
         
@@ -426,20 +584,20 @@ class DetailViewController: UIViewController, UIPopoverPresentationControllerDel
             let aButton = UIButton(frame: myButtonFrame)
             myButtonFrame.origin.x = myButtonFrame.size.width + myButtonFrame.origin.x
             aButton.backgroundColor = color
-            aButton.layer.borderColor = UIColor.whiteColor().CGColor
+            aButton.layer.borderColor = UIColor.white.cgColor
             aButton.layer.borderWidth = 1
 
             if let view = self.colorPalette{
                 view.addSubview(aButton)
             }
             
-            aButton.addTarget(self, action: "displayColor:", forControlEvents: UIControlEvents.TouchUpInside)
+            aButton.addTarget(self, action: #selector(DetailViewController.displayColor(_:)), for: UIControlEvents.touchUpInside)
             i = i + 2
         }
         
     }
     
-    func makeRainbowButtons(buttonFrame:CGRect, sat:CGFloat, bright:CGFloat){
+    func makeRainbowButtons(_ buttonFrame:CGRect, sat:CGFloat, bright:CGFloat){
         var myButtonFrame = buttonFrame
         
         for i in 0..<11{
@@ -448,34 +606,34 @@ class DetailViewController: UIViewController, UIPopoverPresentationControllerDel
             let aButton = UIButton(frame: myButtonFrame)
             myButtonFrame.origin.x = myButtonFrame.size.width + myButtonFrame.origin.x
             aButton.backgroundColor = color
-            aButton.layer.borderColor = UIColor.whiteColor().CGColor
+            aButton.layer.borderColor = UIColor.white.cgColor
             aButton.layer.borderWidth = 1
 
             if let view = self.colorPalette{
                 view.addSubview(aButton)
             }
             
-            aButton.addTarget(self, action: "displayColor:", forControlEvents: UIControlEvents.TouchUpInside)
+            aButton.addTarget(self, action: #selector(DetailViewController.displayColor(_:)), for: UIControlEvents.touchUpInside)
         }
     }
-    func ifEqualAllValuesDisplayEmptyString(textView:UITextView!){
+    func ifEqualAllValuesDisplayEmptyString(_ textView:UITextView!){
         if(textView.text == ALL_VISIBLE_KEYS){
             textView.text = ""
         }
     }
-    func hexStringToUIColor (hex:String) -> UIColor {
-        var cString:String = hex.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet() as NSCharacterSet).uppercaseString
+    func hexStringToUIColor (_ hex:String) -> UIColor {
+        var cString:String = hex.trimmingCharacters(in: (NSCharacterSet.whitespacesAndNewlines as NSCharacterSet) as CharacterSet).uppercased()
         
         if (cString.hasPrefix("#")) {
-            cString = cString.substringFromIndex(cString.startIndex.advancedBy(1))
+            cString = cString.substring(from: cString.characters.index(cString.startIndex, offsetBy: 1))
         }
         
         if (cString.characters.count != 6) {
-            return UIColor.grayColor()
+            return UIColor.gray
         }
         
         var rgbValue:UInt32 = 0
-        NSScanner(string: cString).scanHexInt(&rgbValue)
+        Scanner(string: cString).scanHexInt32(&rgbValue)
         
         return UIColor(
             red: CGFloat((rgbValue & 0xFF0000) >> 16) / 255.0,

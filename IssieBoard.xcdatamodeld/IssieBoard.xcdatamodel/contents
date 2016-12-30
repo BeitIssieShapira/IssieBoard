@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="9525" systemVersion="15D21" minimumToolsVersion="Xcode 7.0">
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="11542" systemVersion="15G31" minimumToolsVersion="Xcode 7.0" sourceLanguage="Objective-C" userDefinedModelVersionIdentifier="">
     <entity name="ConfigSet" syncable="YES">
         <attribute name="configurationName" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="iSSIE_KEYBOARD_BACKGROUND_COLOR" optional="YES" attributeType="String" syncable="YES"/>
@@ -13,6 +13,7 @@
         <attribute name="iSSIE_KEYBOARD_CONFIGURATION_NAME" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="iSSIE_KEYBOARD_ENTER_COLOR" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="iSSIE_KEYBOARD_KEYS_COLOR" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="iSSIE_KEYBOARD_LANGUAGES" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="iSSIE_KEYBOARD_OTHERDEFAULTKEYS_COLOR" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="iSSIE_KEYBOARD_ROW_OR_COLUMN" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="iSSIE_KEYBOARD_SPACE_COLOR" optional="YES" attributeType="String" syncable="YES"/>
@@ -24,10 +25,10 @@
         <attribute name="iSSIE_KEYBOARD_VISIBLE_KEYS" optional="YES" attributeType="String" syncable="YES"/>
     </entity>
     <entity name="DidCreateDefaultTemplates" syncable="YES">
-        <attribute name="didInit" optional="YES" attributeType="Boolean" syncable="YES"/>
+        <attribute name="didInit" optional="YES" attributeType="Boolean" usesScalarValueType="NO" syncable="YES"/>
     </entity>
     <elements>
-        <element name="ConfigSet" positionX="-63" positionY="-18" width="128" height="360"/>
+        <element name="ConfigSet" positionX="-63" positionY="-18" width="128" height="375"/>
         <element name="DidCreateDefaultTemplates" positionX="-63" positionY="135" width="128" height="60"/>
     </elements>
 </model>

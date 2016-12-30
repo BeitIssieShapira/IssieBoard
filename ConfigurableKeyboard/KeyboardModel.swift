@@ -10,7 +10,7 @@ class Keyboard {
         self.pages = []
     }
     
-    func addKey(key: Key, row: Int, page: Int) {
+    func addKey(_ key: Key, row: Int, page: Int) {
         if self.pages.count <= page {
             for _ in self.pages.count...page {
                 self.pages.append(Page())
@@ -28,7 +28,7 @@ class Page {
         self.rows = []
     }
     
-    func addKey(key: Key, row: Int) {
+    func addKey(_ key: Key, row: Int) {
         if self.rows.count <= row {
             for _ in self.rows.count...row {
                 self.rows.append([])
@@ -37,25 +37,45 @@ class Page {
         
         self.rows[row].append(key)
     }
+    /*
+     Keyboard Pages
+     0 - Hebrew
+     1 - Numbers
+     2 - Symbols
+     3 - English Lower
+     4 - English Upper
+     5 - Numbers
+     6 - Symbols
+     */
+    enum PagesIndex {
+        case hebrewLetters
+        case hebrewNumbers
+        case hebrewSymbols
+        case englishLower
+        case englishUpper
+        case englishNumbers
+        case englishSymbols
+    }
 }
 
 class Key: Hashable {
     enum KeyType {
-        case Character
-        case Backspace
-        case ModeChange
-        case KeyboardChange
-        case Space
-        case Return
-        case Undo
-        case Restore
-        case DismissKeyboard
-        case CustomCharSetOne
-        case CustomCharSetTwo
-        case CustomCharSetThree
-        case SpecialKeys
-        case HiddenKey
-        case Other
+        case character
+        case backspace
+        case modeChange
+        case keyboardChange
+        case space
+        case shift
+        case `return`
+        case undo
+        case restore
+        case dismissKeyboard
+        case customCharSetOne
+        case customCharSetTwo
+        case customCharSetThree
+        case specialKeys
+        case hiddenKey
+        case other
     }
     
     var type: KeyType
@@ -71,12 +91,12 @@ class Key: Hashable {
         get {
             switch self.type {
             case
-            .Character,
-            .CustomCharSetOne,
-            .CustomCharSetTwo,
-            .CustomCharSetThree,
-            .HiddenKey,
-            .SpecialKeys:
+            .character,
+            .customCharSetOne,
+            .customCharSetTwo,
+            .customCharSetThree,
+            .hiddenKey,
+            .specialKeys:
                 return true
             default:
                 return false
@@ -88,14 +108,15 @@ class Key: Hashable {
         get {
             switch self.type {
             case
-            .Backspace,
-            .ModeChange,
-            .KeyboardChange,
-            .Space,
-            .DismissKeyboard,
-            .Return,
-            .Undo,
-            .Restore :
+            .backspace,
+            .modeChange,
+            .keyboardChange,
+            .space,
+            .shift,
+            .dismissKeyboard,
+            .return,
+            .undo,
+            .restore :
                 return true
             default:
                 return false
@@ -120,7 +141,7 @@ class Key: Hashable {
         self.pageNum = key.getPage()
     }
     
-    func setKeyTitle(keyTitle: String) {
+    func setKeyTitle(_ keyTitle: String) {
         self.keyTitle = keyTitle
     }
     
@@ -133,7 +154,7 @@ class Key: Hashable {
         }
     }
     
-    func setKeyOutput(keyOutput: String) {
+    func setKeyOutput(_ keyOutput: String) {
         self.keyOutput = keyOutput
     }
     
@@ -146,7 +167,7 @@ class Key: Hashable {
         }
     }
     
-    func setPage(pageNum : Int) {
+    func setPage(_ pageNum : Int) {
         self.pageNum = pageNum
     }
     

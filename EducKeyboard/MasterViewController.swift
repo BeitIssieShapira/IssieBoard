@@ -12,66 +12,69 @@ class MasterViewController: UITableViewController	 {
     
     var detailViewController: DetailViewController? = nil
     var loadSaveViewController: ConfigSetsTableViewController? = nil
+    let preferedLanguage  = MasterViewController.getPreferredLanguage()
     var data = [
         ConfigSection(title: wrapWithLocale(TITLE_MAIN_SETTINGS) ,
             items: [
                 ConfigItem(key:KEY_ISSIE_KEYBOARD_RESET ,title: wrapWithLocale(TITLE_KEYBOARD_RESET) ,
-                    defaultValue: UIColor.redColor(),type: ConfigItemType.Reset),
+                    defaultValue: UIColor.red,type: ConfigItemType.reset),
+                ConfigItem(key:KEY_ISSIE_KEYBOARD_LANGUAGES ,title: wrapWithLocale(TITLE_KEYBOARD_LANGUAGES) ,
+                    defaultValue:  MasterViewController.getPreferredLanguage() as AnyObject?,type: ConfigItemType.language),
                 ConfigItem(key:KEY_ISSIE_KEYBOARD_BACKGROUND_COLOR ,title: wrapWithLocale(TITLE_KEYBOARD_BACKGROUND) ,
-                    defaultValue: UIColor.lightGrayColor(),type: ConfigItemType.Color),
+                    defaultValue: UIColor.lightGray,type: ConfigItemType.color),
                 ConfigItem(key:KEY_ISSIE_KEYBOARD_KEYS_COLOR,title: wrapWithLocale(TITLE_COLOR_OF_KEYS),
-                    defaultValue: UIColor.brownColor(),type: ConfigItemType.Color),
+                    defaultValue: UIColor.brown,type: ConfigItemType.color),
                 ConfigItem(key:KEY_ISSIE_KEYBOARD_TEXT_COLOR,title:wrapWithLocale(TITLE_COLOR_OF_TEXT) ,
-                    defaultValue: UIColor.brownColor(),type: ConfigItemType.Color),
+                    defaultValue: UIColor.brown,type: ConfigItemType.color),
                 ConfigItem(key:KEY_ISSIE_KEYBOARD_VISIBLE_KEYS,title:wrapWithLocale(TITLE_VISIBLE_KEYS),
-                    defaultValue: "",type: ConfigItemType.String),
+                    defaultValue: "" as AnyObject?,type: ConfigItemType.string),
                 ConfigItem(key:KEY_ISSIE_KEYBOARD_ROW_OR_COLUMN,title:wrapWithLocale(TITLE_COLS_VS_ROWS),
-                    defaultValue: "By Sections",type: ConfigItemType.Picker) ]),
+                    defaultValue: "By Sections" as AnyObject?,type: ConfigItemType.picker) ]),
         
         ConfigSection(title: wrapWithLocale(TITLE_UPPER_RIGHT) ,
             items: [ConfigItem(key:KEY_ISSIE_KEYBOARD_CHARSET1_KEYS_COLOR,title:wrapWithLocale(TITLE_COLOR_OF_KEYS),
-                    defaultValue: UIColor.yellowColor(),type: ConfigItemType.Color),
+                    defaultValue: UIColor.yellow,type: ConfigItemType.color),
                 ConfigItem(key:KEY_ISSIE_KEYBOARD_CHARSET1_TEXT_COLOR,title:wrapWithLocale(TITLE_COLOR_OF_TEXT),
-                    defaultValue: UIColor.blueColor(),type: ConfigItemType.Color)]),
+                    defaultValue: UIColor.blue,type: ConfigItemType.color)]),
         
         ConfigSection(title: wrapWithLocale(TITLE_MIDDLE) ,
             items: [ConfigItem(key:KEY_ISSIE_KEYBOARD_CHARSET2_KEYS_COLOR,title:wrapWithLocale(TITLE_COLOR_OF_KEYS) ,
-                    defaultValue: UIColor.yellowColor(),type: ConfigItemType.Color),
+                    defaultValue: UIColor.yellow,type: ConfigItemType.color),
                 ConfigItem(key:KEY_ISSIE_KEYBOARD_CHARSET2_TEXT_COLOR,title:wrapWithLocale(TITLE_COLOR_OF_TEXT),
-                    defaultValue: UIColor.blueColor(),type: ConfigItemType.Color)]),
+                    defaultValue: UIColor.blue,type: ConfigItemType.color)]),
         
         ConfigSection(title: wrapWithLocale(TITLE_LOWER_LEFT) ,
             items: [ConfigItem(key:KEY_ISSIE_KEYBOARD_CHARSET3_KEYS_COLOR,title:wrapWithLocale(TITLE_COLOR_OF_KEYS) ,
-                    defaultValue: UIColor.yellowColor(),type: ConfigItemType.Color),
+                    defaultValue: UIColor.yellow,type: ConfigItemType.color),
                 ConfigItem(key:KEY_ISSIE_KEYBOARD_CHARSET3_TEXT_COLOR,title:wrapWithLocale(TITLE_COLOR_OF_TEXT) ,
-                    defaultValue: UIColor.blueColor(),type: ConfigItemType.Color)]),
+                    defaultValue: UIColor.blue,type: ConfigItemType.color)]),
         
         ConfigSection(title: wrapWithLocale(TITLE_SPECIAL_KEYS_DEF) ,
             items: [ConfigItem(key:KEY_ISSIE_KEYBOARD_SPECIAL_KEYS_TEXT,title:wrapWithLocale(TITLE_SPECIAL_KEYS) ,
-                defaultValue: "",type: ConfigItemType.String),
+                defaultValue: "" as AnyObject?,type: ConfigItemType.string),
                 ConfigItem(key:KEY_ISSIE_KEYBOARD_SPECIAL_KEYS_COLOR,title:wrapWithLocale(TITLE_COLOR_OF_KEYS) ,
-                    defaultValue: UIColor.yellowColor(),type: ConfigItemType.Color),
+                    defaultValue: UIColor.yellow,type: ConfigItemType.color),
                 ConfigItem(key:KEY_ISSIE_KEYBOARD_SPECIAL_KEYS_TEXT_COLOR,title:wrapWithLocale(TITLE_COLOR_OF_TEXT) ,
-                    defaultValue: UIColor.blueColor(),type: ConfigItemType.Color)]),
+                    defaultValue: UIColor.blue,type: ConfigItemType.color)]),
         
         ConfigSection(title: wrapWithLocale(TITLE_TEMPLATE) ,
             items: [
             //    ConfigItem(key:KEY_ISSIE_KEYBOARD_TEMPLATES,title:wrapWithLocale(TITLE_TEMPLATE_SELECTION) ,
             //    defaultValue: "My Configuration" , type: ConfigItemType.Templates),
                     ConfigItem(key:KEY_ISSIE_KEYBOARD_SAVE_LOAD,title:wrapWithLocale(TITLE_SAVE_LOAD) ,
-                    defaultValue: UIColor.cyanColor(),    type: ConfigItemType.Color)
+                    defaultValue: UIColor.cyan,    type: ConfigItemType.color)
             ]),
         
         ConfigSection(title: wrapWithLocale(TITLE_ADDITIONAL_DEFS) ,
             items: [
                 ConfigItem(key:KEY_ISSIE_KEYBOARD_SPACE_COLOR,title:wrapWithLocale(TITLE_COLOR_SPACE_KEY) ,
-                    defaultValue: UIColor.cyanColor(),type: ConfigItemType.Color)  ,
+                    defaultValue: UIColor.cyan,type: ConfigItemType.color)  ,
                 ConfigItem(key:KEY_ISSIE_KEYBOARD_BACKSPACE_COLOR,title:wrapWithLocale(TITLE_COLOR_DELETE_KEY) ,
-                    defaultValue: UIColor.cyanColor(),type: ConfigItemType.Color),
+                    defaultValue: UIColor.cyan,type: ConfigItemType.color),
                 ConfigItem(key:KEY_ISSIE_KEYBOARD_ENTER_COLOR,title:wrapWithLocale(TITLE_COLOR_ENTER_KEY) ,
-                    defaultValue: UIColor.cyanColor(),type: ConfigItemType.Color),
+                    defaultValue: UIColor.cyan,type: ConfigItemType.color),
                 ConfigItem(key:KEY_ISSIE_KEYBOARD_OTHERDEFAULTKEYS_COLOR,title:wrapWithLocale(TITLE_COLOR_OTHER_KEYS) ,
-                    defaultValue: UIColor.cyanColor(),    type: ConfigItemType.Color)
+                    defaultValue: UIColor.cyan,    type: ConfigItemType.color)
             ])]
     
     func getData() -> [ConfigSection]
@@ -79,10 +82,18 @@ class MasterViewController: UITableViewController	 {
         return data
     }
     
-
+    static func getPreferredLanguage()->String{
+        let preferedLanguage  = NSLocale.preferredLanguages[0]
+        if((preferedLanguage == "he-IL")||preferedLanguage == "he-US"){
+            return "HE"
+        }
+        else {
+            return "EN"
+        }
+    }
     override func awakeFromNib() {
         super.awakeFromNib()
-        if UIDevice.currentDevice().userInterfaceIdiom == .Pad {
+        if UIDevice.current.userInterfaceIdiom == .pad {
             self.clearsSelectionOnViewWillAppear = false
             self.preferredContentSize = CGSize(width: 320.0, height: 600.0)
         }
@@ -97,7 +108,7 @@ class MasterViewController: UITableViewController	 {
         super.didReceiveMemoryWarning()
     }
     
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         //if(segue.identifier == "ShowInfoPDF"){
         //
         //}
@@ -107,17 +118,17 @@ class MasterViewController: UITableViewController	 {
                 
                 if(object.key == KEY_ISSIE_KEYBOARD_SAVE_LOAD){
                    // performSegueWithIdentifier("loadSave", sender: detailViewController)
-                let controller = (segue.destinationViewController as! UINavigationController).topViewController as! DetailViewController
+                let controller = (segue.destination as! UINavigationController).topViewController as! DetailViewController
                    // controller.navigationItem.leftBarButtonItem = self.splitViewController?.displayModeButtonItem()//<<
                    // controller.navigationItem.leftItemsSupplementBackButton = true//<<
                     controller.performSegue()
                     
                 } else {
-                 let controller = (segue.destinationViewController as! UINavigationController).topViewController as! DetailViewController
+                 let controller = (segue.destination as! UINavigationController).topViewController as! DetailViewController
                 
                 controller.configItem = object
                 
-                controller.navigationItem.leftBarButtonItem = self.splitViewController?.displayModeButtonItem()
+                controller.navigationItem.leftBarButtonItem = self.splitViewController?.displayModeButtonItem
                 controller.navigationItem.leftItemsSupplementBackButton = true
             }
         }
@@ -138,20 +149,20 @@ class MasterViewController: UITableViewController	 {
         }
     }
     
-    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    override func numberOfSections(in tableView: UITableView) -> Int {
         return data.count
     }
     
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return data[section].items.count
     }
     
-    override func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String {
+    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String {
         return data[section].title
     }
     
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath) 
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) 
         let section = data[indexPath.section]
         let items = section.items;
         let item: ConfigItem = items[indexPath.row]
@@ -161,11 +172,11 @@ class MasterViewController: UITableViewController	 {
         return cell
     }
     
-    override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
+    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
         return true
     }
     
-    @IBAction func backFromTemplates(segue: UIStoryboardSegue){
+    @IBAction func backFromTemplates(_ segue: UIStoryboardSegue){
     
     }
 }
@@ -202,6 +213,7 @@ let TITLE_PALETTE_BW          = "BlackAndWhite";
 let TITLE_NEW_KEYBOARD        = "NewKeyboard";
 let TITLE_SAVE_LOAD           = "SaveAndLoadCustomTemplates";
 let TITLE_KEYBOARD_RESET      = "Reset"
+let TITLE_KEYBOARD_LANGUAGES  = "Languages"
 let TITLE_KEYBOARD_RESET_BUTTON   = "ResetToDefaultKeyboard"
 let TITLE_KEYBOARD_RESET_DONE = "ResetToDefaultKeyboardDone"
 let TITLE_KEYBOARD_LOADED     = "KeyboardSuccessfullyLoaded"
@@ -213,6 +225,7 @@ let TITLE_CONFIGURATIONS    = "Configurations"
 //KEYS
 
 let KEY_ISSIE_KEYBOARD_RESET                   = "KEY_ISSIE_KEYBOARD_RESET"
+let KEY_ISSIE_KEYBOARD_LANGUAGES               = "ISSIE_KEYBOARD_LANGUAGES"
 let KEY_ISSIE_KEYBOARD_BACKGROUND_COLOR        = "ISSIE_KEYBOARD_BACKGROUND_COLOR";
 let KEY_ISSIE_KEYBOARD_KEYS_COLOR              = "ISSIE_KEYBOARD_KEYS_COLOR";
 let KEY_ISSIE_KEYBOARD_TEXT_COLOR              = "ISSIE_KEYBOARD_TEXT_COLOR";
@@ -253,24 +266,25 @@ public static let KEYS_ARRAY = [
  KEY_ISSIE_KEYBOARD_SPACE_COLOR             ,
  KEY_ISSIE_KEYBOARD_ENTER_COLOR             ,
  KEY_ISSIE_KEYBOARD_BACKSPACE_COLOR         ,
- KEY_ISSIE_KEYBOARD_OTHERDEFAULTKEYS_COLOR
+ KEY_ISSIE_KEYBOARD_OTHERDEFAULTKEYS_COLOR,
+ KEY_ISSIE_KEYBOARD_LANGUAGES
 ]
 }
-func wrapWithLocale (titleToWrap:String) -> String
+func wrapWithLocale (_ titleToWrap:String) -> String
 {
     //let forDebug = NSBundle.mainBundle().localizedStringForKey( titleToWrap, value: titleToWrap,table:nil);
    // return NSLocalizedString(titleToWrap, comment: titleToWrap)
-    return NSBundle.mainBundle().localizedStringForKey( titleToWrap, value: titleToWrap,table:nil);
+    return Bundle.main.localizedString( forKey: titleToWrap, value: titleToWrap,table:nil);
 }
 
 func isIPad()->Bool{
-    return  UIDevice.currentDevice().userInterfaceIdiom == UIUserInterfaceIdiom.Pad
+    return  UIDevice.current.userInterfaceIdiom == UIUserInterfaceIdiom.pad
 }
 
 func isIpadPro() -> Bool
 {
-    if (UIDevice.currentDevice().userInterfaceIdiom == UIUserInterfaceIdiom.Pad &&
-        (UIScreen.mainScreen().bounds.size.height == 1366 || UIScreen.mainScreen().bounds.size.width == 1366)) {
+    if (UIDevice.current.userInterfaceIdiom == UIUserInterfaceIdiom.pad &&
+        (UIScreen.main.bounds.size.height == 1366 || UIScreen.main.bounds.size.width == 1366)) {
             return true
     }
     return false

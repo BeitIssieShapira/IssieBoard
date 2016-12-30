@@ -30,14 +30,6 @@ To install the IssieBoard application on your device or simulator:
 The keyboard is now available from any application on your device just like any other keyboard. You should be able to select it via the globe icon.
 3.	If you want to configure the appearance of the keyboard, please launch the app and follow the screenshots inside the repository.
 
-Links: 
-
-(Hebrew)
-http://www.beitissie.org.il/tech/issieboard-%D7%9E%D7%A7%D7%9C%D7%93%D7%AA-%D7%95%D7%99%D7%A8%D7%98%D7%95%D7%90%D7%9C%D7%99%D7%AA-%D7%A2%D7%9D-%D7%94%D7%AA%D7%90%D7%9E%D7%95%D7%AA-%D7%90%D7%99%D7%A9%D7%99%D7%95%D7%AA-%D7%A4%D7%A8
-
-(English)
-http://en.beitissie.org.il/tech/issieboard-a-virtual-keyboard-with-customizable-options-a-collaboration-between-beit-issie-shapiro-and-sap-labs-israel/
-
 
 A quick guide in PDF format, "IssieBoardSAP Instructions.pdf", is available in the repository.
 

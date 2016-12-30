@@ -21,7 +21,7 @@ class ConfigSetsTableViewController: UITableViewController,NSFetchedResultsContr
     @IBOutlet weak var backBarButtonItem: UIBarButtonItem!
     override func viewDidLoad() {
         super.viewDidLoad()
-        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
         managedObjectContext = appDelegate.managedObjectContext
         self.title = wrapWithLocale(TITLE_SAVE_LOAD)
         // Uncomment the following line to preserve selection between presentations
@@ -31,7 +31,7 @@ class ConfigSetsTableViewController: UITableViewController,NSFetchedResultsContr
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
     }
     
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         if(isIPad()){
             backBarButtonItem.title = ""
@@ -40,11 +40,11 @@ class ConfigSetsTableViewController: UITableViewController,NSFetchedResultsContr
         }
         fetchConfigs()
     }
-    override func viewDidDisappear(animated: Bool) {
+    override func viewDidDisappear(_ animated: Bool) {
         //self.navigationController?.popToRootViewControllerAnimated(true)
         //self.navigationController?.popViewControllerAnimated(true)
     }
-    override func viewDidAppear(animated: Bool) {
+    override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
         //self.navigationItem.setHidesBackButton(false, animated: false)
@@ -58,13 +58,13 @@ class ConfigSetsTableViewController: UITableViewController,NSFetchedResultsContr
         //var prev = self.navigationController?.popViewControllerAnimated(true)
         //prev!.navigationController?.popViewControllerAnimated(true)
         //self.navigationController?.viewControllers.
-        self.navigationController?.popToRootViewControllerAnimated(true)
+        self.navigationController?.popToRootViewController(animated: true)
        // self.splitViewController?.presentViewController((self.navigationController?.viewControllers[0])!, animated: false, completion: nil)
     }
     func fetchConfigs(){
-        let fetchRequest = NSFetchRequest(entityName: "ConfigSet")
+        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "ConfigSet")
         do{
-            let configObject = try managedObjectContext.executeFetchRequest(fetchRequest)
+            let configObject = try managedObjectContext.fetch(fetchRequest)
             self.configs = configObject as! [NSManagedObject]
 
         } catch let error as NSError{
@@ -87,19 +87,19 @@ class ConfigSetsTableViewController: UITableViewController,NSFetchedResultsContr
         print("Object for configuration: \(confSet)")
     }*/
     
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("loadSaveCell", forIndexPath: indexPath) 
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "loadSaveCell", for: indexPath) 
         // Set up the cell
         let configSet = configs[indexPath.row]
-        cell.textLabel?.text = configSet.valueForKey("configurationName") as? String
+        cell.textLabel?.text = EditConfigViewController.getTranslateConfigurationName(configSet: configSet)//configSet.value(forKey: "configurationName") as? String
         return cell
     }
     
-    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    override func numberOfSections(in tableView: UITableView) -> Int {
         return 1//self.fetchedResultsController.sections!.count
     }
     
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return configs.count
         
         //let sections = self.fetchedResultsController.sections as! [NSFetchedResultsSectionInfo ]
@@ -107,37 +107,37 @@ class ConfigSetsTableViewController: UITableViewController,NSFetchedResultsContr
        // return sectionInfo.numberOfObjects
     }
     
-    func controllerWillChangeContent(controller: NSFetchedResultsController) {
+    func controllerWillChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
         self.tableView.beginUpdates()
     }
     
-    func controller(controller: NSFetchedResultsController, didChangeSection sectionInfo: NSFetchedResultsSectionInfo, atIndex sectionIndex: Int, forChangeType type: NSFetchedResultsChangeType) {
+    func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange sectionInfo: NSFetchedResultsSectionInfo, atSectionIndex sectionIndex: Int, for type: NSFetchedResultsChangeType) {
         switch type {
-        case .Insert:
-            self.tableView.insertSections(NSIndexSet(index: sectionIndex), withRowAnimation: .Fade)
-        case .Delete:
-            self.tableView.deleteSections(NSIndexSet(index: sectionIndex), withRowAnimation: .Fade)
-        case .Move:
+        case .insert:
+            self.tableView.insertSections(IndexSet(integer: sectionIndex), with: .fade)
+        case .delete:
+            self.tableView.deleteSections(IndexSet(integer: sectionIndex), with: .fade)
+        case .move:
             break
-        case .Update:
+        case .update:
             break
         }
     }
     
-    override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
+    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
         if (0...2 ~= indexPath.row){
             return false
         }
         return true
     }
-    override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
-        if editingStyle == .Delete{
+    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete{
             let configSet = self.configs[indexPath.row]
-            self.managedObjectContext.deleteObject(configSet)
-            self.configs.removeAtIndex(indexPath.row)
+            self.managedObjectContext.delete(configSet)
+            self.configs.remove(at: indexPath.row)
             
 
-            self.tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Automatic)
+            self.tableView.deleteRows(at: [indexPath], with: .automatic)
             
             do {
             try self.managedObjectContext.save()
@@ -149,19 +149,19 @@ class ConfigSetsTableViewController: UITableViewController,NSFetchedResultsContr
     }
     
     
-    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        self.tableView.deselectRowAtIndexPath(indexPath, animated: true)
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        self.tableView.deselectRow(at: indexPath, animated: true)
         let configSet = self.configs[indexPath.row]
-        currentCell = tableView.cellForRowAtIndexPath(indexPath)
-        self.performSegueWithIdentifier("showEditScreen", sender: configSet)
+        currentCell = tableView.cellForRow(at: indexPath)
+        self.performSegue(withIdentifier: "showEditScreen", sender: configSet)
     }
     
-    func controllerDidChangeContent(controller: NSFetchedResultsController) {
+    func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
         self.tableView.endUpdates()
     }
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "showEditScreen" {
-        let editConfigViewController = segue.destinationViewController as! EditConfigViewController
+        let editConfigViewController = segue.destination as! EditConfigViewController
             editConfigViewController.configSet = sender as? NSManagedObject
             editConfigViewController.updateCellDelegate = self
             //if(currentCell != nil){
@@ -172,10 +172,10 @@ class ConfigSetsTableViewController: UITableViewController,NSFetchedResultsContr
     
     func updateCheckedCell(){
         if(currentCell != nil){
-            currentCell.accessoryType = UITableViewCellAccessoryType.Checkmark
+            currentCell.accessoryType = UITableViewCellAccessoryType.checkmark
         }
         if(previousCell != nil){
-            previousCell.accessoryType = UITableViewCellAccessoryType.None
+            previousCell.accessoryType = UITableViewCellAccessoryType.none
         }
         previousCell = currentCell
     }

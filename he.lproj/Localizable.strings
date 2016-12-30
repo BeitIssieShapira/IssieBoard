@@ -36,3 +36,7 @@
 "ShowKeyboard" = "הצג מקלדת";
 "HideKeyboard" = "הסתר מקלדת";
 "Configurations" = "הגדרות";
+"Languages" = "שפות";
+"EN" = "אנגלית";
+"HE"  = "עברית";
+"BOTH" = "מקלדת משולבת - עברית ואנגלית";

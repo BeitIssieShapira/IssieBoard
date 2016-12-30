@@ -10,22 +10,23 @@ import Foundation
 import UIKit
 
 enum ControlsType {
-    case TextInput
-    case ColorPicker
+    case textInput
+    case colorPicker
 }
 
 enum ConfigItemType{
-    case String
-    case Color
-    case Picker
-    case FontPicker
-    case Templates
-    case Reset
+    case string
+    case color
+    case picker
+    case fontPicker
+    case templates
+    case reset
+    case language
 }
 
 class ConfigItem {
     
-    var UserSettings: NSUserDefaults
+    var UserSettings: UserDefaults
     let key: String
     let title: String
     let type: ConfigItemType
@@ -34,27 +35,27 @@ class ConfigItem {
     var value: AnyObject? {
         get{
             switch self.type{
-            case .String:
-                if let val = UserSettings.stringForKey(self.key) {
-                    return val
+            case .string,.language:
+                if let val = UserSettings.string(forKey: self.key) {
+                    return val as AnyObject?
                 } else{
                     return self.defaultValue
                 }
-            case .Color:
-                if let val = UserSettings.stringForKey(self.key) {
+            case .color:
+                if let val = UserSettings.string(forKey: self.key) {
                     return UIColor(string: val)
                 } else{
                     return defaultValue
                 }
-            case .Templates:
-                if let val = UserSettings.stringForKey(self.key) {
-                    return val
+            case .templates:
+                if let val = UserSettings.string(forKey: self.key) {
+                    return val as AnyObject?
                 } else {
                     return self.defaultValue
                 }
             default:
-                if let val = UserSettings.stringForKey(self.key) {
-                    return val
+                if let val = UserSettings.string(forKey: self.key) {
+                    return val as AnyObject?
                 } else{
                     return self.defaultValue
                 }
@@ -62,56 +63,56 @@ class ConfigItem {
         }
         set {
             switch self.type{
-            case .String:
-                UserSettings.setObject(newValue, forKey: self.key)
+            case .string,.language:
+                UserSettings.set(newValue, forKey: self.key)
                 UserSettings.synchronize()
-            case .Color:
+            case .color:
                 if let color = (newValue as! UIColor).stringValue {
                     
                     if(self.key == KEY_ISSIE_KEYBOARD_KEYS_COLOR){
-                        UserSettings.setObject(color, forKey: KEY_ISSIE_KEYBOARD_CHARSET1_KEYS_COLOR)
-                        UserSettings.setObject(color, forKey: KEY_ISSIE_KEYBOARD_CHARSET2_KEYS_COLOR)
-                        UserSettings.setObject(color, forKey: KEY_ISSIE_KEYBOARD_CHARSET3_KEYS_COLOR)
+                        UserSettings.set(color, forKey: KEY_ISSIE_KEYBOARD_CHARSET1_KEYS_COLOR)
+                        UserSettings.set(color, forKey: KEY_ISSIE_KEYBOARD_CHARSET2_KEYS_COLOR)
+                        UserSettings.set(color, forKey: KEY_ISSIE_KEYBOARD_CHARSET3_KEYS_COLOR)
                         UserSettings.synchronize()
                     }
                     else if(self.key == KEY_ISSIE_KEYBOARD_TEXT_COLOR){
-                        UserSettings.setObject(color, forKey: KEY_ISSIE_KEYBOARD_CHARSET1_TEXT_COLOR)
-                        UserSettings.setObject(color, forKey: KEY_ISSIE_KEYBOARD_CHARSET2_TEXT_COLOR)
-                        UserSettings.setObject(color, forKey: KEY_ISSIE_KEYBOARD_CHARSET3_TEXT_COLOR)
+                        UserSettings.set(color, forKey: KEY_ISSIE_KEYBOARD_CHARSET1_TEXT_COLOR)
+                        UserSettings.set(color, forKey: KEY_ISSIE_KEYBOARD_CHARSET2_TEXT_COLOR)
+                        UserSettings.set(color, forKey: KEY_ISSIE_KEYBOARD_CHARSET3_TEXT_COLOR)
                         UserSettings.synchronize()
                     }
                     else
                     {
-                        UserSettings.setObject(color, forKey: self.key)
+                        UserSettings.set(color, forKey: self.key)
                         UserSettings.synchronize()
                     }
                 }
             default:
-                UserSettings.setObject(newValue, forKey: self.key)
+                UserSettings.set(newValue, forKey: self.key)
                 UserSettings.synchronize()
             }
         }
     }
     
     init(key:String ,title: String, defaultValue: AnyObject?, type: ConfigItemType ){
-        UserSettings = NSUserDefaults(suiteName: "group.issieshapiro.com.issiboard")!
+        UserSettings = UserDefaults(suiteName: "group.issieshapiro.com.issiboard")!
         self.key = key
         self.title = title
         self.type = type
         self.defaultValue = defaultValue
         
         switch self.type{
-        case .Reset: break
-        case .String:
-            UserSettings.setObject(defaultValue, forKey: self.key)
+        case .reset: break
+        case .string:
+            UserSettings.set(defaultValue, forKey: self.key)
             UserSettings.synchronize()
-        case .Color:
+        case .color:
             if let color = (defaultValue as! UIColor).stringValue {
-                UserSettings.setObject(color, forKey: self.key)
+                UserSettings.set(color, forKey: self.key)
                 UserSettings.synchronize()
             }
         default:
-            UserSettings.setObject(defaultValue, forKey: self.key)
+            UserSettings.set(defaultValue, forKey: self.key)
             UserSettings.synchronize()
         }
     }

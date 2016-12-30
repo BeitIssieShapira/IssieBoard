@@ -333,10 +333,11 @@
 				TargetAttributes = {
 					B1B0373B1A9CD9540057C221 = {
 						CreatedOnToolsVersion = 6.1.1;
-						DevelopmentTeam = D66MDDZ63X;
+						DevelopmentTeam = SKNJT9TD9G;
+						LastSwiftMigration = 0810;
 						SystemCapabilities = {
 							com.apple.ApplicationGroups.iOS = {
-								enabled = 1;
+								enabled = 0;
 							};
 							com.apple.Keychain = {
 								enabled = 1;
@@ -345,7 +346,9 @@
 					};
 					B1B037641A9CD9BC0057C221 = {
 						CreatedOnToolsVersion = 6.1.1;
-						DevelopmentTeam = D66MDDZ63X;
+						DevelopmentTeam = SKNJT9TD9G;
+						LastSwiftMigration = 0810;
+						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
 							com.apple.ApplicationGroups.iOS = {
 								enabled = 1;
@@ -584,12 +587,14 @@
 				CODE_SIGN_ENTITLEMENTS = IssieBoard.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = SKNJT9TD9G;
 				INFOPLIST_FILE = EducKeyboard/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				"MTL_ENABLE_DEBUG_INFO[arch=*]" = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = com.issieshapiro.Issieboard;
 				PRODUCT_NAME = IssieBoard;
 				PROVISIONING_PROFILE = "";
+				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -601,11 +606,13 @@
 				CODE_SIGN_ENTITLEMENTS = IssieBoard.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = SKNJT9TD9G;
 				INFOPLIST_FILE = EducKeyboard/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.issieshapiro.Issieboard;
 				PRODUCT_NAME = IssieBoard;
 				PROVISIONING_PROFILE = "";
+				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
@@ -616,16 +623,18 @@
 				CODE_SIGN_ENTITLEMENTS = ConfigurableKeyboard/IssieBoard.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = SKNJT9TD9G;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
 					"$(inherited)",
 				);
 				INFOPLIST_FILE = ConfigurableKeyboard/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.issieshapiro.Issieboard.ConfigurableKeyboard;
+				PRODUCT_BUNDLE_IDENTIFIER = com.issieshapiro.Issieboard;
 				PRODUCT_NAME = IssieBoard;
 				PROVISIONING_PROFILE = "";
 				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = 2;
 			};
 			name = Debug;
@@ -634,14 +643,16 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = ConfigurableKeyboard/IssieBoard.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				DEVELOPMENT_TEAM = SKNJT9TD9G;
 				INFOPLIST_FILE = ConfigurableKeyboard/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.issieshapiro.Issieboard.ConfigurableKeyboard;
+				PRODUCT_BUNDLE_IDENTIFIER = com.issieshapiro.Issieboard;
 				PRODUCT_NAME = IssieBoard;
 				PROVISIONING_PROFILE = "";
 				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = 2;
 			};
 			name = Release;

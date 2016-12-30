@@ -18,7 +18,7 @@ extension String {
     var isWhiteSpace        : Bool { return !self.isEmpty && self.trim().isEmpty }
     
     func trim() -> String {
-        return self.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceCharacterSet())
+        return self.trimmingCharacters(in: CharacterSet.whitespaces)
     }
 
 }
@@ -27,15 +27,15 @@ extension UIColor {
     
     convenience init(rgba: String) {
         
-        let redf = ((rgba as NSString).substringFromIndex(0) as NSString).substringToIndex(6)
-        let greenf = ((rgba as NSString).substringFromIndex(7) as NSString).substringToIndex(6)
-        let bluef = ((rgba as NSString).substringFromIndex(14) as NSString).substringToIndex(6)
-        let alphaf = ((rgba as NSString).substringFromIndex(21) as NSString).substringToIndex(6)
+        let redf = ((rgba as NSString).substring(from: 0) as NSString).substring(to: 6)
+        let greenf = ((rgba as NSString).substring(from: 7) as NSString).substring(to: 6)
+        let bluef = ((rgba as NSString).substring(from: 14) as NSString).substring(to: 6)
+        let alphaf = ((rgba as NSString).substring(from: 21) as NSString).substring(to: 6)
         
-        let red:   CGFloat = CGFloat(NSNumberFormatter().numberFromString(redf)!)
-        let green: CGFloat = CGFloat(NSNumberFormatter().numberFromString(greenf)!)
-        let blue:  CGFloat = CGFloat(NSNumberFormatter().numberFromString(bluef)!)
-        let alpha: CGFloat = CGFloat(NSNumberFormatter().numberFromString(alphaf)!)
+        let red:   CGFloat = CGFloat(NumberFormatter().number(from: redf)!)
+        let green: CGFloat = CGFloat(NumberFormatter().number(from: greenf)!)
+        let blue:  CGFloat = CGFloat(NumberFormatter().number(from: bluef)!)
+        let alpha: CGFloat = CGFloat(NumberFormatter().number(from: alphaf)!)
         
         self.init(red:red, green:green, blue:blue, alpha:alpha)
     }
