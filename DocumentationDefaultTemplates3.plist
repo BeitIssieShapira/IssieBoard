@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>ISSIE_KEYBOARD_BACKGROUND_COLOR</key>
+	<string>0.9091,0.9091,0.9091,1.0000</string>
+	<key>ISSIE_KEYBOARD_BACKSPACE_COLOR</key>
+	<string>0.0000,1.0000,1.0000,1.0000</string>
+	<key>ISSIE_KEYBOARD_CHARSET1_KEYS_COLOR</key>
+	<string>1.0000,0.7273,0.4000,1.0000</string>
+	<key>ISSIE_KEYBOARD_CHARSET1_TEXT_COLOR</key>
+	<string>0.0000,0.0000,1.0000,1.0000</string>
+	<key>ISSIE_KEYBOARD_CHARSET2_KEYS_COLOR</key>
+	<string>1.0000,0.7273,0.4000,1.0000</string>
+	<key>ISSIE_KEYBOARD_CHARSET2_TEXT_COLOR</key>
+	<string>0.0000,0.0000,1.0000,1.0000</string>
+	<key>ISSIE_KEYBOARD_CHARSET3_KEYS_COLOR</key>
+	<string>1.0000,0.7273,0.4000,1.0000</string>
+	<key>ISSIE_KEYBOARD_CHARSET3_TEXT_COLOR</key>
+	<string>0.0000,0.0000,1.0000,1.0000</string>
+	<key>ISSIE_KEYBOARD_ENTER_COLOR</key>
+	<string>0.0000,1.0000,1.0000,1.0000</string>
+	<key>ISSIE_KEYBOARD_KEYS_COLOR</key>
+	<string>1.0000,0.8740,0.0443,1.0000</string>
+	<key>ISSIE_KEYBOARD_OTHERDEFAULTKEYS_COLOR</key>
+	<string>0.0000,1.0000,1.0000,1.0000</string>
+	<key>ISSIE_KEYBOARD_ROW_OR_COLUMN</key>
+	<string>By Sections</string>
+	<key>ISSIE_KEYBOARD_SPACE_COLOR</key>
+	<string>0.0000,1.0000,1.0000,1.0000</string>
+	<key>ISSIE_KEYBOARD_SPECIAL_KEYS_COLOR</key>
+	<string>0.0000,1.0000,1.0000,1.0000</string>
+	<key>ISSIE_KEYBOARD_SPECIAL_KEYS_TEXT</key>
+	<string></string>
+	<key>ISSIE_KEYBOARD_SPECIAL_KEYS_TEXT_COLOR</key>
+	<string>0.0000,0.0000,1.0000,1.0000</string>
+	<key>ISSIE_KEYBOARD_TEMPLATES</key>
+	<string></string>
+	<key>ISSIE_KEYBOARD_TEXT_COLOR</key>
+	<string>0.6000,0.4000,0.2000,1.0000</string>
+	<key>ISSIE_KEYBOARD_VISIBLE_KEYS</key>
+	<string></string>
+	<key>configurationName</key>
+	<string>תבנית מוכנה 3</string>
+</dict>
+</plist>
