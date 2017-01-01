@@ -38,7 +38,6 @@ class EditConfigViewController: UIViewController {
                 return rawValue!
             }
         }
-        return ""
     }
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -78,7 +77,7 @@ class EditConfigViewController: UIViewController {
         updateCellDelegate.updateCheckedCell()
         let newTitle = wrapWithLocale(TITLE_KEYBOARD_LOADED)
         UIView.transition(with: loadKeyboardButton, duration: 0.6, options: [.transitionFlipFromTop ], animations: {self.loadKeyboardButton.setTitle(newTitle, for:UIControlState() )},
-            completion:{(finished:Bool)->() in self.navigationController?.popViewController(animated: true)
+            completion:{(finished:Bool)->() in _ = self.navigationController?.popViewController(animated: true)
                 Thread.sleep(forTimeInterval: 1.2)
         })
         
@@ -92,7 +91,7 @@ class EditConfigViewController: UIViewController {
             rollbackRequired = false
             if textField.text != ""{
                 self.createNewConfigSet()
-                self.navigationController?.popViewController(animated: true)
+                _ = self.navigationController?.popViewController(animated: true)
             }
         }
     }
@@ -105,7 +104,7 @@ class EditConfigViewController: UIViewController {
         do {
             try managedObjectContext.save()
             if(shouldPopView == true){
-                self.navigationController?.popViewController(animated: true)
+               _ = self.navigationController?.popViewController(animated: true)
             }
         } catch let error as NSError{
             print ("could not save \(error)")
@@ -119,7 +118,7 @@ class EditConfigViewController: UIViewController {
         prevConfigSet.setValue("previous", forKey:"configurationName")
     }
     func updateConfigSetObjectByCurrentState(_ configSetObject:NSManagedObject){
-        UserSettings = UserDefaults(suiteName: "group.issieshapiro.com.issiboard")!
+        UserSettings = UserDefaults(suiteName: MasterViewController.groupName)!
         configSetObject.setValue(self.textField.text, forKey:"configurationName")
 
 
@@ -133,7 +132,7 @@ class EditConfigViewController: UIViewController {
     }
     
     func updateCurrentDeviceStateByCurrentConfigSet(){
-        UserSettings = UserDefaults(suiteName: "group.issieshapiro.com.issiboard")!
+        UserSettings = UserDefaults(suiteName: MasterViewController.groupName)!
         //configSetObject.setValue(self.textField.text, forKey:"configurationName")
         for key in Constants.KEYS_ARRAY{
             var currentConfigValue = configSet.value(forKey: key)

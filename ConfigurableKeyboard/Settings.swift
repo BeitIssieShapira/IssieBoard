@@ -23,7 +23,7 @@ class Settings {
     var Template4 : KeyboardTemplates
     
     init() {
-        self.userDefaults = UserDefaults(suiteName: "group.issieshapiro.com.issiboard")!
+        self.userDefaults = UserDefaults(suiteName: KeyboardViewController.groupName)!
         
         Template1 = KeyboardTemplates(
             keyboardBackgroundColor: UIColor.lightGray.stringValue!,

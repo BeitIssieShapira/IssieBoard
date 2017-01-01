@@ -86,16 +86,9 @@ class DetailViewController: UIViewController, UIPopoverPresentationControllerDel
             showHideTapped(showHideKeyboard)
         }
     }
-    /* TODO:Remove
-    static func setPreviousCurrentMode(currentMode:Int){
-        print("Keyboard hidden")
-        let valueToSave = String(currentMode)
-        NSUserDefaults(suiteName: "group.issieshapiro.com.issiboard")!.setObject(valueToSave, forKey: "currentMode")
-        NSUserDefaults(suiteName: "group.issieshapiro.com.issiboard")!.synchronize()
-    }
-    */
+
     static func getPreviousCurrentMode()->Int{
-        if let savedValue = UserDefaults(suiteName: "group.issieshapiro.com.issiboard")!.string(forKey: "currentMode") {
+        if let savedValue = UserDefaults(suiteName: MasterViewController.groupName)!.string(forKey: "currentMode") {
             print(savedValue)
             return Int(savedValue)!
         }
@@ -140,14 +133,6 @@ class DetailViewController: UIViewController, UIPopoverPresentationControllerDel
     }
     
     @IBAction func showHideTapped(_ sender: UIButton) {
-        //FORDEBUG TODO:Remove
-        //DetailViewController.setPreviousCurrentMode(2)
-        //let x = DetailViewController.getPreviousCurrentMode()
-        //
-        /*NSNotificationCenter.defaultCenter().postNotificationName("NotificationIdentifier", object: nil)
-        if let savedValue = NSUserDefaults(suiteName: "group.issieshapiro.com.issiboard")!.stringForKey("gotNotification") {
-            print(savedValue)
-        }*/
         
         var title:String
         let currentFirstResponder = (isTypeKeysScenario()) ?
@@ -188,7 +173,6 @@ class DetailViewController: UIViewController, UIPopoverPresentationControllerDel
     }
     
     func setLanguageButtonsByCurrent(){
-      //  let langKeys = ["EN","HE","BOTH"]
         let prevSelectedLang:String
         var selectedButton:UIButton? = nil
         let navBarHeight = self.navigationController?.navigationBar.frame.size.height
@@ -393,10 +377,6 @@ class DetailViewController: UIViewController, UIPopoverPresentationControllerDel
     override func viewDidLoad() {
         super.viewDidLoad()
         self.configureView()
-        
-
-        //updateViewByCurrentState()
-       // nextWidth   = self.view.frame.size.width
 
     }
     
@@ -407,10 +387,6 @@ class DetailViewController: UIViewController, UIPopoverPresentationControllerDel
             itemValue.becomeFirstResponder()
         }
          NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(notification:)), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
-
-
-      /*  NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("keyboardWillChange:"), name: UIKeyboardWillChangeFrameNotification, object: nil)
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("keyboardWillHide:"), name: UIKeyboardWillHideNotification, object: nil)*/
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -426,18 +402,7 @@ class DetailViewController: UIViewController, UIPopoverPresentationControllerDel
                 {self.showHideKeyboard.setTitle(title, for:UIControlState() )},completion:nil)
         }
     }
-    /*
-    func keyboardWillChange(notification:NSNotification)
-    {
-        print("Keyboard size changed")
-    }
-    
-    func keyboardWillHide(notification:NSNotification)
-    {
-        
-        print("Keyboard hidden")
-    }
-    */
+
     override func viewDidLayoutSubviews() {
         //if(KEYBOARD_STATE_DURING_UPDATE == 0){
         let newViewWidth = self.view.frame.width

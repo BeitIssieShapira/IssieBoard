@@ -4,6 +4,7 @@ import AudioToolbox
 
 class KeyboardViewController: UIInputViewController {
     
+    static let groupName = "group.com.issieshapiro.Issieboard"
     let backspaceDelay: TimeInterval = 0.5
     let backspaceRepeat: TimeInterval = 0.07
     var keyboard: Keyboard!
@@ -83,8 +84,8 @@ class KeyboardViewController: UIInputViewController {
 
     func methodOfReceivedNotification(_ notification: Notification){
         //Take Action on Notification
-        UserDefaults(suiteName: "group.issieshapiro.com.issiboard")!.set("XXX", forKey: "gotNotification")
-        UserDefaults(suiteName: "group.issieshapiro.com.issiboard")!.synchronize()
+        UserDefaults(suiteName: KeyboardViewController.groupName)!.set("XXX", forKey: "gotNotification")
+        UserDefaults(suiteName: KeyboardViewController.groupName)!.synchronize()
         fatalError("NSCoding not supported")
     }
     required init?(coder: NSCoder) {
@@ -124,19 +125,19 @@ class KeyboardViewController: UIInputViewController {
     static func setPreviousCurrentMode(_ currentMode:Int){
         print("Keyboard hidden")
         let valueToSave = String(currentMode)
-        UserDefaults(suiteName: "group.issieshapiro.com.issiboard")!.set(valueToSave, forKey: "currentMode")
-        UserDefaults(suiteName: "group.issieshapiro.com.issiboard")!.synchronize()
+        UserDefaults(suiteName: KeyboardViewController.groupName)!.set(valueToSave, forKey: "currentMode")
+        UserDefaults(suiteName: KeyboardViewController.groupName)!.synchronize()
     }
     
     static func getPreviousCurrentMode()->Int{
-        if let savedValue = UserDefaults(suiteName: "group.issieshapiro.com.issiboard")!.string(forKey: "currentMode") {
+        if let savedValue = UserDefaults(suiteName: KeyboardViewController.groupName)!.string(forKey: "currentMode") {
             print(savedValue)
             return Int(savedValue)!
         }
         else{
             //No Previous, so we'll return according to Keyboard language
-            var userDefaults:UserDefaults
-                = UserDefaults(suiteName: "group.issieshapiro.com.issiboard")!
+            let userDefaults:UserDefaults
+                = UserDefaults(suiteName: KeyboardViewController.groupName)!
             let cLanguage = userDefaults.string(forKey: "ISSIE_KEYBOARD_LANGUAGES")!
             switch cLanguage {
             case "EN":
@@ -188,10 +189,11 @@ class KeyboardViewController: UIInputViewController {
         if view.bounds == CGRect.zero {
             return
         }
-        
+        let interfaceOrientation = self.preferredInterfaceOrientationForPresentation
+        //self.interfaceOrientation
         self.setupLayout()
         //UIApplication().statusBarOrientation
-        let orientationSavvyBounds = CGRect(x: 0, y: 0, width: self.view.bounds.width, height: self.heightForOrientation(self.interfaceOrientation, withTopBanner: false))
+        let orientationSavvyBounds = CGRect(x: 0, y: 0, width: self.view.bounds.width, height: self.heightForOrientation(interfaceOrientation, withTopBanner: false))
         
         if (lastLayoutBounds != nil && lastLayoutBounds == orientationSavvyBounds) {
         }
@@ -211,7 +213,9 @@ class KeyboardViewController: UIInputViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        self.keyboardHeight = self.heightForOrientation(self.interfaceOrientation, withTopBanner: true)
+        let interfaceOrientation = self.preferredInterfaceOrientationForPresentation
+        //self.interfaceOrientation
+        self.keyboardHeight = self.heightForOrientation(interfaceOrientation, withTopBanner: true)
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -284,7 +288,7 @@ class KeyboardViewController: UIInputViewController {
                         if key.isCharacter && key.type != Key.KeyType.hiddenKey && !(key.keyTitle!.lowercased() == "abc"){
                             if UIDevice.current.userInterfaceIdiom != UIUserInterfaceIdiom.pad {
                                 keyView.addTarget(self, action: #selector(KeyboardViewController.showPopup(_:)), for: [.touchDown, .touchDragInside, .touchDragEnter])
-                                keyView.addTarget(keyView, action: Selector("hidePopup"), for: [.touchDragExit, .touchCancel])
+                                keyView.addTarget(keyView, action: Selector(("hidePopup")), for: [.touchDragExit, .touchCancel])
                                 keyView.addTarget(self, action: #selector(KeyboardViewController.hidePopupDelay(_:)), for: [.touchUpInside, .touchUpOutside, .touchDragOutside])
                             }
                         }
@@ -533,7 +537,7 @@ class KeyboardViewController: UIInputViewController {
     }
     
     func playKeySound() {
-        DispatchQueue.global(priority: DispatchQueue.GlobalQueuePriority.default).async(execute: {
+        DispatchQueue.global(qos: DispatchQoS.QoSClass.default).async(execute: {
             AudioServicesPlaySystemSound(1104)
         })
     }

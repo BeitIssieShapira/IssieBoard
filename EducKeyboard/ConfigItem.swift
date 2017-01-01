@@ -95,7 +95,7 @@ class ConfigItem {
     }
     
     init(key:String ,title: String, defaultValue: AnyObject?, type: ConfigItemType ){
-        UserSettings = UserDefaults(suiteName: "group.issieshapiro.com.issiboard")!
+        UserSettings = UserDefaults(suiteName: MasterViewController.groupName)!
         self.key = key
         self.title = title
         self.type = type

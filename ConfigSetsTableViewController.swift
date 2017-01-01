@@ -58,7 +58,7 @@ class ConfigSetsTableViewController: UITableViewController,NSFetchedResultsContr
         //var prev = self.navigationController?.popViewControllerAnimated(true)
         //prev!.navigationController?.popViewControllerAnimated(true)
         //self.navigationController?.viewControllers.
-        self.navigationController?.popToRootViewController(animated: true)
+        _ = self.navigationController?.popToRootViewController(animated: true)
        // self.splitViewController?.presentViewController((self.navigationController?.viewControllers[0])!, animated: false, completion: nil)
     }
     func fetchConfigs(){

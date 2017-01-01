@@ -369,7 +369,7 @@ class KeyboardLayout: NSObject, KeyboardKeyProtocol {
                     }
                 }
                 
-                foundCachedKeys.map {
+                _ = foundCachedKeys.map {
                     keyMap.removeValue(forKey: $0)
                 }
                 
@@ -613,7 +613,7 @@ class KeyboardLayout: NSObject, KeyboardKeyProtocol {
             key.borderColor = self.globalColors.defaultBorderColor
             key.downColor = self.globalColors.defaultKeyColor
             if key.shape == nil {
-                let backspaceShape = self.getShape(BackspaceShape)
+                let backspaceShape = self.getShape(BackspaceShape.self)
                 key.shape = backspaceShape
             }
             key.labelInset = 3
@@ -1049,7 +1049,7 @@ class KeyboardLayout: NSObject, KeyboardKeyProtocol {
         
         var currentOrigin = frame.origin.x
         
-        for key in row {
+        for _ in row {
             frames.append(CGRect(x: rounded(currentOrigin), y: frame.origin.y, width: sizeOfSpecialKeyExceptOne, height: frame.height))
             currentOrigin += (sizeOfSpecialKeyExceptOne + keyGap)
         }

@@ -8,7 +8,7 @@
 	</array>
 	<key>keychain-access-groups</key>
 	<array>
-		<string>$(AppIdentifierPrefix)com.issieshapiro.Issieboard.ConfigurableKeyboard</string>
+		<string>$(AppIdentifierPrefix)com.issieshapiro.Issieboard.ConfigurableKB</string>
 	</array>
 </dict>
 </plist>

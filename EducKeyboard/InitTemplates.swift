@@ -13,7 +13,7 @@ import CoreData
 class InitTemplates: NSObject {
 
     static func loadPlists(){
-        let UserSettings = UserDefaults(suiteName: "group.issieshapiro.com.issiboard")!
+        let UserSettings = UserDefaults(suiteName: MasterViewController.groupName)!
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         let managedObjectContext = appDelegate.managedObjectContext
 
@@ -53,7 +53,7 @@ class InitTemplates: NSObject {
     }
 
     static func resetToDefaultTemplate(){
-        let UserSettings = UserDefaults(suiteName: "group.issieshapiro.com.issiboard")!
+        let UserSettings = UserDefaults(suiteName: MasterViewController.groupName)!
             let bundlePath = Bundle.main.path(forResource: "DocumentationDefaultTemplates1", ofType: "plist")
             let templateDictionary1 = NSMutableDictionary(contentsOfFile: bundlePath!)
             

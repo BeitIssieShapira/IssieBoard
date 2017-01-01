@@ -9,7 +9,7 @@
 import UIKit
 
 class MasterViewController: UITableViewController	 {
-    
+    static let groupName = "group.com.issieshapiro.Issieboard"
     var detailViewController: DetailViewController? = nil
     var loadSaveViewController: ConfigSetsTableViewController? = nil
     let preferedLanguage  = MasterViewController.getPreferredLanguage()
