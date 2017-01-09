@@ -198,6 +198,7 @@ class DetailViewController: UIViewController, UIPopoverPresentationControllerDel
             if 1...3 ~= currentTag{
                 button.setTitle(wrapWithLocale(currentLangKey) , for: UIControlState.normal)
                 button.setTitle(wrapWithLocale(currentLangKey) , for: UIControlState.selected)
+                button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 18)
                 if (currentLangKey == prevSelectedLang){
                     selectedButton = button
                 }
