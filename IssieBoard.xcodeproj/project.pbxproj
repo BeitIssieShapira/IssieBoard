@@ -639,7 +639,7 @@
 				);
 				INFOPLIST_FILE = ConfigurableKeyboard/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.issieshapiro.Issieboard.ConfigurableKB;
+				PRODUCT_BUNDLE_IDENTIFIER = com.issieshapiro.Issieboard.ConfigurableKeyboard;
 				PRODUCT_NAME = IssieBoard;
 				PROVISIONING_PROFILE = "";
 				SKIP_INSTALL = YES;
@@ -657,7 +657,7 @@
 				DEVELOPMENT_TEAM = SKNJT9TD9G;
 				INFOPLIST_FILE = ConfigurableKeyboard/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.issieshapiro.Issieboard.ConfigurableKB;
+				PRODUCT_BUNDLE_IDENTIFIER = com.issieshapiro.Issieboard.ConfigurableKeyboard;
 				PRODUCT_NAME = IssieBoard;
 				PROVISIONING_PROFILE = "";
 				SKIP_INSTALL = YES;
