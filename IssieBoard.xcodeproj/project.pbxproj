@@ -24,7 +24,6 @@
 		560311BB1CB15C7900843682 /* DocumentationDefaultTemplates2.plist in Resources */ = {isa = PBXBuildFile; fileRef = 560311BA1CB15C7900843682 /* DocumentationDefaultTemplates2.plist */; };
 		560311BD1CB15CBB00843682 /* DocumentationDefaultTemplates3.plist in Resources */ = {isa = PBXBuildFile; fileRef = 560311BC1CB15CBB00843682 /* DocumentationDefaultTemplates3.plist */; };
 		560311C11CB1745500843682 /* InitTemplates.swift in Sources */ = {isa = PBXBuildFile; fileRef = 560311C01CB1745500843682 /* InitTemplates.swift */; };
-		56AD418E1C95DA91003A50BF /* IssieBoard.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 56AD418C1C95DA91003A50BF /* IssieBoard.xcdatamodeld */; };
 		56AD41B31C986EEB003A50BF /* ConfigSetsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56AD41B21C986EEB003A50BF /* ConfigSetsTableViewController.swift */; };
 		B19C950B1AA10B86002C8089 /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = B19C950A1AA10B86002C8089 /* Settings.swift */; };
 		B1AF36AD1A9FE0D1001C5675 /* StandardKeyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1AF36AC1A9FE0D1001C5675 /* StandardKeyboard.swift */; };
@@ -49,6 +48,7 @@
 		D56F4E111D160D8A00E91860 /* WelcomeScreenLogo-iPhonePortrait.png in Resources */ = {isa = PBXBuildFile; fileRef = D56F4E0F1D160D8A00E91860 /* WelcomeScreenLogo-iPhonePortrait.png */; };
 		D56F4E131D160D9D00E91860 /* WelcomeScreenLogo.png in Resources */ = {isa = PBXBuildFile; fileRef = D56F4E121D160D9D00E91860 /* WelcomeScreenLogo.png */; };
 		D5835AED1C9D5378007A2666 /* EditConfigViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5835AEC1C9D5378007A2666 /* EditConfigViewController.swift */; };
+		D5DADBDF1E2D7AD300A5E0AA /* IssieBoard.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = D5DADBDD1E2D7AD300A5E0AA /* IssieBoard.xcdatamodeld */; };
 		D5FBA3611C9421E00065A96E /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = D5FBA35F1C9421DF0065A96E /* Localizable.strings */; };
 /* End PBXBuildFile section */
 
@@ -92,7 +92,6 @@
 		560311BA1CB15C7900843682 /* DocumentationDefaultTemplates2.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = DocumentationDefaultTemplates2.plist; path = ../DocumentationDefaultTemplates2.plist; sourceTree = "<group>"; };
 		560311BC1CB15CBB00843682 /* DocumentationDefaultTemplates3.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = DocumentationDefaultTemplates3.plist; path = ../DocumentationDefaultTemplates3.plist; sourceTree = "<group>"; };
 		560311C01CB1745500843682 /* InitTemplates.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InitTemplates.swift; sourceTree = "<group>"; };
-		56AD418D1C95DA91003A50BF /* IssieBoard.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = IssieBoard.xcdatamodel; sourceTree = "<group>"; };
 		56AD41B21C986EEB003A50BF /* ConfigSetsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConfigSetsTableViewController.swift; sourceTree = "<group>"; };
 		5FDF79D91C4E30AB00423556 /* IssieBoard.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = IssieBoard.entitlements; sourceTree = SOURCE_ROOT; };
 		5FDF79DA1C4E30E400423556 /* IssieBoard.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = IssieBoard.entitlements; sourceTree = "<group>"; };
@@ -123,6 +122,8 @@
 		D56F4E0F1D160D8A00E91860 /* WelcomeScreenLogo-iPhonePortrait.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "WelcomeScreenLogo-iPhonePortrait.png"; path = "Images.xcassets/WelcomeScreenLogo.imageset/WelcomeScreenLogo-iPhonePortrait.png"; sourceTree = "<group>"; };
 		D56F4E121D160D9D00E91860 /* WelcomeScreenLogo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = WelcomeScreenLogo.png; path = Images.xcassets/WelcomeScreenLogo.imageset/WelcomeScreenLogo.png; sourceTree = "<group>"; };
 		D5835AEC1C9D5378007A2666 /* EditConfigViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditConfigViewController.swift; sourceTree = "<group>"; };
+		D5DADBDE1E2D7AD300A5E0AA /* IssieBoard.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = IssieBoard.xcdatamodel; sourceTree = "<group>"; };
+		D5DADBE01E2D7AE800A5E0AA /* IssieBoard 2.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "IssieBoard 2.xcdatamodel"; sourceTree = "<group>"; };
 		D5FBA35D1C90D4710065A96E /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Main.strings; sourceTree = "<group>"; };
 		D5FBA35E1C90D4800065A96E /* he */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = he; path = he.lproj/Main.strings; sourceTree = "<group>"; };
 		D5FBA3601C9421E00065A96E /* he */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = he; path = he.lproj/Localizable.strings; sourceTree = SOURCE_ROOT; };
@@ -208,7 +209,7 @@
 			isa = PBXGroup;
 			children = (
 				D5835AEC1C9D5378007A2666 /* EditConfigViewController.swift */,
-				56AD418C1C95DA91003A50BF /* IssieBoard.xcdatamodeld */,
+				D5DADBDD1E2D7AD300A5E0AA /* IssieBoard.xcdatamodeld */,
 				56AD41B21C986EEB003A50BF /* ConfigSetsTableViewController.swift */,
 				B1B0373E1A9CD9540057C221 /* IssieBoard */,
 				B1B037661A9CD9BC0057C221 /* ConfigurableKeyboard */,
@@ -340,7 +341,7 @@
 								enabled = 0;
 							};
 							com.apple.Keychain = {
-								enabled = 0;
+								enabled = 1;
 							};
 						};
 					};
@@ -354,7 +355,7 @@
 								enabled = 1;
 							};
 							com.apple.Keychain = {
-								enabled = 0;
+								enabled = 1;
 							};
 						};
 					};
@@ -418,11 +419,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D5DADBDF1E2D7AD300A5E0AA /* IssieBoard.xcdatamodeld in Sources */,
 				158DFAA51B2EBED0002E17F1 /* ConfigItem.swift in Sources */,
 				158DFAA41B2EBED0002E17F1 /* ColorUtility.swift in Sources */,
 				1516934C1AF7D19F000E719C /* DetailViewController.swift in Sources */,
 				56AD41B31C986EEB003A50BF /* ConfigSetsTableViewController.swift in Sources */,
-				56AD418E1C95DA91003A50BF /* IssieBoard.xcdatamodeld in Sources */,
 				560311C11CB1745500843682 /* InitTemplates.swift in Sources */,
 				1516934B1AF7D19F000E719C /* MasterViewController.swift in Sources */,
 				D5835AED1C9D5378007A2666 /* EditConfigViewController.swift in Sources */,
@@ -644,7 +645,7 @@
 				PROVISIONING_PROFILE = "";
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 3.0;
-				TARGETED_DEVICE_FAMILY = 2;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
 		};
@@ -662,7 +663,7 @@
 				PROVISIONING_PROFILE = "";
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 3.0;
-				TARGETED_DEVICE_FAMILY = 2;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
 		};
@@ -699,13 +700,15 @@
 /* End XCConfigurationList section */
 
 /* Begin XCVersionGroup section */
-		56AD418C1C95DA91003A50BF /* IssieBoard.xcdatamodeld */ = {
+		D5DADBDD1E2D7AD300A5E0AA /* IssieBoard.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
-				56AD418D1C95DA91003A50BF /* IssieBoard.xcdatamodel */,
+				D5DADBE01E2D7AE800A5E0AA /* IssieBoard 2.xcdatamodel */,
+				D5DADBDE1E2D7AD300A5E0AA /* IssieBoard.xcdatamodel */,
 			);
-			currentVersion = 56AD418D1C95DA91003A50BF /* IssieBoard.xcdatamodel */;
-			path = IssieBoard.xcdatamodeld;
+			currentVersion = D5DADBE01E2D7AE800A5E0AA /* IssieBoard 2.xcdatamodel */;
+			name = IssieBoard.xcdatamodeld;
+			path = IssieBoard.xcdatamodeld/IssieBoard.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;
 		};
