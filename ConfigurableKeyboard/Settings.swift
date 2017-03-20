@@ -17,6 +17,32 @@ class Settings {
         }()
     
     
+    static func ifNeededSetToDefault(userDefaults:UserDefaults){
+        let UserSettings = userDefaults
+        let cString: String? = UserSettings.string(forKey: KEY_ISSIE_KEYBOARD_BACKGROUND_COLOR)
+      //  if(cString == nil){
+      //      Settings.resetToDefaultTemplate(userDefaults: userDefaults)
+      //  }
+    }
+    
+    static func resetToDefaultTemplate(userDefaults:UserDefaults){
+        let UserSettings = userDefaults
+        let bundlePath = Bundle.main.path(forResource: "DocumentationDefaultTemplates1", ofType: "plist")
+        let templateDictionary1 = NSMutableDictionary(contentsOfFile: bundlePath!)
+        
+        
+        var fullArray = Constants.KEYS_ARRAY
+        fullArray.append("configurationName")
+
+        for key in fullArray{
+            let currentValue = templateDictionary1?.value(forKey: key)
+            if(currentValue != nil){
+                UserSettings.setValue(currentValue, forKey:key)
+            }
+        }
+        UserSettings.synchronize()
+    }
+    
     var Template1 : KeyboardTemplates
     var Template2 : KeyboardTemplates
     var Template3 : KeyboardTemplates
@@ -24,7 +50,7 @@ class Settings {
     
     init() {
         self.userDefaults = UserDefaults(suiteName: KeyboardViewController.groupName)!
-        
+        Settings.ifNeededSetToDefault(userDefaults: self.userDefaults)
         Template1 = KeyboardTemplates(
             keyboardBackgroundColor: UIColor.lightGray.stringValue!,
             keysTextColor: UIColor.black.stringValue!,
@@ -456,3 +482,52 @@ class Settings {
     }
     
 }
+
+let KEY_ISSIE_KEYBOARD_RESET                   = "KEY_ISSIE_KEYBOARD_RESET"
+let KEY_ISSIE_KEYBOARD_LANGUAGES               = "ISSIE_KEYBOARD_LANGUAGES"
+let KEY_ISSIE_KEYBOARD_BACKGROUND_COLOR        = "ISSIE_KEYBOARD_BACKGROUND_COLOR"
+let KEY_ISSIE_KEYBOARD_KEYS_COLOR              = "ISSIE_KEYBOARD_KEYS_COLOR"
+let KEY_ISSIE_KEYBOARD_TEXT_COLOR              = "ISSIE_KEYBOARD_TEXT_COLOR"
+let KEY_ISSIE_KEYBOARD_VISIBLE_KEYS            = "ISSIE_KEYBOARD_VISIBLE_KEYS"
+let KEY_ISSIE_KEYBOARD_ROW_OR_COLUMN           = "ISSIE_KEYBOARD_ROW_OR_COLUMN"
+let KEY_ISSIE_KEYBOARD_CHARSET1_KEYS_COLOR     = "ISSIE_KEYBOARD_CHARSET1_KEYS_COLOR"
+let KEY_ISSIE_KEYBOARD_CHARSET1_TEXT_COLOR     = "ISSIE_KEYBOARD_CHARSET1_TEXT_COLOR"
+let KEY_ISSIE_KEYBOARD_CHARSET2_KEYS_COLOR     = "ISSIE_KEYBOARD_CHARSET2_KEYS_COLOR"
+let KEY_ISSIE_KEYBOARD_CHARSET2_TEXT_COLOR     = "ISSIE_KEYBOARD_CHARSET2_TEXT_COLOR"
+let KEY_ISSIE_KEYBOARD_CHARSET3_KEYS_COLOR     = "ISSIE_KEYBOARD_CHARSET3_KEYS_COLOR"
+let KEY_ISSIE_KEYBOARD_CHARSET3_TEXT_COLOR     = "ISSIE_KEYBOARD_CHARSET3_TEXT_COLOR"
+let KEY_ISSIE_KEYBOARD_SPECIAL_KEYS_TEXT       = "ISSIE_KEYBOARD_SPECIAL_KEYS_TEXT"
+let KEY_ISSIE_KEYBOARD_SPECIAL_KEYS_COLOR      = "ISSIE_KEYBOARD_SPECIAL_KEYS_COLOR"
+let KEY_ISSIE_KEYBOARD_SPECIAL_KEYS_TEXT_COLOR = "ISSIE_KEYBOARD_SPECIAL_KEYS_TEXT_COLOR"
+let KEY_ISSIE_KEYBOARD_TEMPLATES               = "ISSIE_KEYBOARD_TEMPLATES"
+let KEY_ISSIE_KEYBOARD_SPACE_COLOR             = "ISSIE_KEYBOARD_SPACE_COLOR"
+let KEY_ISSIE_KEYBOARD_ENTER_COLOR             = "ISSIE_KEYBOARD_ENTER_COLOR"
+let KEY_ISSIE_KEYBOARD_BACKSPACE_COLOR         = "ISSIE_KEYBOARD_BACKSPACE_COLOR"
+let KEY_ISSIE_KEYBOARD_OTHERDEFAULTKEYS_COLOR  = "ISSIE_KEYBOARD_OTHERDEFAULTKEYS_COLOR"
+
+public  struct Constants{
+    
+    public static let KEYS_ARRAY = [
+        KEY_ISSIE_KEYBOARD_BACKGROUND_COLOR        ,
+        KEY_ISSIE_KEYBOARD_KEYS_COLOR              ,
+        KEY_ISSIE_KEYBOARD_TEXT_COLOR              ,
+        KEY_ISSIE_KEYBOARD_VISIBLE_KEYS            ,
+        KEY_ISSIE_KEYBOARD_ROW_OR_COLUMN           ,
+        KEY_ISSIE_KEYBOARD_CHARSET1_KEYS_COLOR     ,
+        KEY_ISSIE_KEYBOARD_CHARSET1_TEXT_COLOR     ,
+        KEY_ISSIE_KEYBOARD_CHARSET2_KEYS_COLOR     ,
+        KEY_ISSIE_KEYBOARD_CHARSET2_TEXT_COLOR     ,
+        KEY_ISSIE_KEYBOARD_CHARSET3_KEYS_COLOR     ,
+        KEY_ISSIE_KEYBOARD_CHARSET3_TEXT_COLOR     ,
+        KEY_ISSIE_KEYBOARD_SPECIAL_KEYS_TEXT       ,
+        KEY_ISSIE_KEYBOARD_SPECIAL_KEYS_COLOR      ,
+        KEY_ISSIE_KEYBOARD_SPECIAL_KEYS_TEXT_COLOR ,
+        KEY_ISSIE_KEYBOARD_TEMPLATES               ,
+        KEY_ISSIE_KEYBOARD_SPACE_COLOR             ,
+        KEY_ISSIE_KEYBOARD_ENTER_COLOR             ,
+        KEY_ISSIE_KEYBOARD_BACKSPACE_COLOR         ,
+        KEY_ISSIE_KEYBOARD_OTHERDEFAULTKEYS_COLOR,
+        KEY_ISSIE_KEYBOARD_LANGUAGES
+    ]
+}
+

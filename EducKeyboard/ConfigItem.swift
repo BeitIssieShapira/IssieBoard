@@ -101,9 +101,13 @@ class ConfigItem {
         self.type = type
         self.defaultValue = defaultValue
         
+        let val = UserSettings.string(forKey: self.key)
+        if (val != nil) {
+            return
+        }
         switch self.type{
         case .reset: break
-        case .string:
+        case .string,.language:
             UserSettings.set(defaultValue, forKey: self.key)
             UserSettings.synchronize()
         case .color:

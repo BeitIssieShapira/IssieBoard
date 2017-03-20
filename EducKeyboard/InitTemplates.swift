@@ -52,6 +52,13 @@ class InitTemplates: NSObject {
         
     }
 
+    static func ifNeededSetToDefault(){
+        let UserSettings = UserDefaults(suiteName: MasterViewController.groupName)!
+        let cString: String? = UserSettings.string(forKey: KEY_ISSIE_KEYBOARD_BACKGROUND_COLOR)
+        if(cString == nil){
+            resetToDefaultTemplate()
+        }
+    }
     static func resetToDefaultTemplate(){
         let UserSettings = UserDefaults(suiteName: MasterViewController.groupName)!
             let bundlePath = Bundle.main.path(forResource: "DocumentationDefaultTemplates1", ofType: "plist")
@@ -98,6 +105,9 @@ class InitTemplates: NSObject {
                 InitTemplates.loadPlists()
                 createNewInitIndicator()
                 
+            }
+            else{
+              //  ifNeededSetToDefault()
             }
         } catch let error as NSError{
             print("could not fetch Indicator \(error), \(error.userInfo)")

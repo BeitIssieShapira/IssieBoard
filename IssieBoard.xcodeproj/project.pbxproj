@@ -44,6 +44,7 @@
 		B1F457CA1AA23B040012BA73 /* ic_keyboard_return_48px-512.png in Resources */ = {isa = PBXBuildFile; fileRef = B1F457C91AA23B040012BA73 /* ic_keyboard_return_48px-512.png */; };
 		B1F457CC1AA25AA30012BA73 /* globe-512.png in Resources */ = {isa = PBXBuildFile; fileRef = B1F457CB1AA25AA30012BA73 /* globe-512.png */; };
 		B1F457CF1AA25F7D0012BA73 /* ic_keyboard_hide_48px-512.png in Resources */ = {isa = PBXBuildFile; fileRef = B1F457CE1AA25F7D0012BA73 /* ic_keyboard_hide_48px-512.png */; };
+		D567535B1E3E6EAD00E32811 /* DocumentationDefaultTemplates1.plist in Resources */ = {isa = PBXBuildFile; fileRef = D567535A1E3E6EAD00E32811 /* DocumentationDefaultTemplates1.plist */; };
 		D56F4E101D160D8A00E91860 /* WelcomeScreenLogo-iPhoneLandscape.png in Resources */ = {isa = PBXBuildFile; fileRef = D56F4E0E1D160D8A00E91860 /* WelcomeScreenLogo-iPhoneLandscape.png */; };
 		D56F4E111D160D8A00E91860 /* WelcomeScreenLogo-iPhonePortrait.png in Resources */ = {isa = PBXBuildFile; fileRef = D56F4E0F1D160D8A00E91860 /* WelcomeScreenLogo-iPhonePortrait.png */; };
 		D56F4E131D160D9D00E91860 /* WelcomeScreenLogo.png in Resources */ = {isa = PBXBuildFile; fileRef = D56F4E121D160D9D00E91860 /* WelcomeScreenLogo.png */; };
@@ -118,6 +119,7 @@
 		B1F457C91AA23B040012BA73 /* ic_keyboard_return_48px-512.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "ic_keyboard_return_48px-512.png"; path = "../Resources/ic_keyboard_return_48px-512.png"; sourceTree = "<group>"; };
 		B1F457CB1AA25AA30012BA73 /* globe-512.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "globe-512.png"; path = "../Resources/globe-512.png"; sourceTree = "<group>"; };
 		B1F457CE1AA25F7D0012BA73 /* ic_keyboard_hide_48px-512.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "ic_keyboard_hide_48px-512.png"; path = "../Resources/ic_keyboard_hide_48px-512.png"; sourceTree = "<group>"; };
+		D567535A1E3E6EAD00E32811 /* DocumentationDefaultTemplates1.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = DocumentationDefaultTemplates1.plist; sourceTree = "<group>"; };
 		D56F4E0E1D160D8A00E91860 /* WelcomeScreenLogo-iPhoneLandscape.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "WelcomeScreenLogo-iPhoneLandscape.png"; path = "Images.xcassets/WelcomeScreenLogo.imageset/WelcomeScreenLogo-iPhoneLandscape.png"; sourceTree = "<group>"; };
 		D56F4E0F1D160D8A00E91860 /* WelcomeScreenLogo-iPhonePortrait.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "WelcomeScreenLogo-iPhonePortrait.png"; path = "Images.xcassets/WelcomeScreenLogo.imageset/WelcomeScreenLogo-iPhonePortrait.png"; sourceTree = "<group>"; };
 		D56F4E121D160D9D00E91860 /* WelcomeScreenLogo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = WelcomeScreenLogo.png; path = Images.xcassets/WelcomeScreenLogo.imageset/WelcomeScreenLogo.png; sourceTree = "<group>"; };
@@ -249,8 +251,8 @@
 			isa = PBXGroup;
 			children = (
 				5FDF79D91C4E30AB00423556 /* IssieBoard.entitlements */,
-				560311BC1CB15CBB00843682 /* DocumentationDefaultTemplates3.plist */,
 				560311B81CB15C3700843682 /* DocumentationDefaultTemplates1.plist */,
+				560311BC1CB15CBB00843682 /* DocumentationDefaultTemplates3.plist */,
 				560311BA1CB15C7900843682 /* DocumentationDefaultTemplates2.plist */,
 				D56F4E0E1D160D8A00E91860 /* WelcomeScreenLogo-iPhoneLandscape.png */,
 				D56F4E121D160D9D00E91860 /* WelcomeScreenLogo.png */,
@@ -276,6 +278,7 @@
 		B1B037671A9CD9BC0057C221 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				D567535A1E3E6EAD00E32811 /* DocumentationDefaultTemplates1.plist */,
 				5FDF79DA1C4E30E400423556 /* IssieBoard.entitlements */,
 				B1B037681A9CD9BC0057C221 /* Info.plist */,
 			);
@@ -408,6 +411,7 @@
 				B1F457CF1AA25F7D0012BA73 /* ic_keyboard_hide_48px-512.png in Resources */,
 				B1F457CA1AA23B040012BA73 /* ic_keyboard_return_48px-512.png in Resources */,
 				B1F457CC1AA25AA30012BA73 /* globe-512.png in Resources */,
+				D567535B1E3E6EAD00E32811 /* DocumentationDefaultTemplates1.plist in Resources */,
 				155A17631B45B28E006F75DA /* backspace-480.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

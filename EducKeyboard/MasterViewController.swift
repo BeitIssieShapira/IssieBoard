@@ -101,6 +101,7 @@ class MasterViewController: UITableViewController	 {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        //InitTemplates.ifNeededSetToDefault()
         InitTemplates.loadDefaultTemplates()
     }
     

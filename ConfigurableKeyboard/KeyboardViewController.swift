@@ -81,13 +81,14 @@ class KeyboardViewController: UIInputViewController {
         }*/
     }
      
-
+/*
     func methodOfReceivedNotification(_ notification: Notification){
         //Take Action on Notification
         UserDefaults(suiteName: KeyboardViewController.groupName)!.set("XXX", forKey: "gotNotification")
         UserDefaults(suiteName: KeyboardViewController.groupName)!.synchronize()
         fatalError("NSCoding not supported")
     }
+ */
     required init?(coder: NSCoder) {
         fatalError("NSCoding not supported")
     }
@@ -189,6 +190,9 @@ class KeyboardViewController: UIInputViewController {
         if view.bounds == CGRect.zero {
             return
         }
+        
+        //self.load
+        
         let interfaceOrientation = self.preferredInterfaceOrientationForPresentation
         //self.interfaceOrientation
         self.setupLayout()
