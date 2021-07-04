@@ -47,14 +47,17 @@ class Page {
      5 - Numbers
      6 - Symbols
      */
-    enum PagesIndex {
-        case hebrewLetters
+    enum PagesIndex : Int {
+        case hebrewLetters = 0
         case hebrewNumbers
         case hebrewSymbols
         case englishLower
         case englishUpper
         case englishNumbers
         case englishSymbols
+        case arabicLetters
+        case arabicNumbers
+        case arabicSymbols
     }
 }
 
@@ -75,6 +78,7 @@ class Key: Hashable {
         case customCharSetThree
         case specialKeys
         case hiddenKey
+        case punctuation
         case other
     }
     
@@ -112,6 +116,7 @@ class Key: Hashable {
             .modeChange,
             .keyboardChange,
             .space,
+            .punctuation,
             .shift,
             .dismissKeyboard,
             .return,

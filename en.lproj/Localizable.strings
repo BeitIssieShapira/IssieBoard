@@ -8,13 +8,13 @@
 
 
 "VisibleKeys"         = "Visible Keys";
-"Columns_Rows"         = "Columns/Rows";
-"SpecialKeys"         = "Special Keys";
+"Columns_Rows"         = "Sections/Rows";
+"SpecialKeys"         = "Selecting Keys";
 
-"SpecialKeysDefinition"   = "Special Keys Definition";
-"UpperRight"      = "Upper-Right";
-"Middle"              = "Middle";
-"LowerLeft"          = "Lower-Left";
+"SpecialKeysDefinition"   = "Highlighted Keys";
+"UpperRight"      = "Right-Upper";
+"Middle"              = "MIDDLE";
+"LowerLeft"          = "Left-Lower";
 
 "Templates"        = "Templates";
 "TemplatesSelection"  = "Predefined Templates";
@@ -39,6 +39,32 @@
 "HideKeyboard" = "Hide Keyboard";
 "Configurations" = "Configurations";
 "Languages" = "Languages";
+"KeysOrder" = "Keys Order";
+"OrderStandard" = "Standard";
+"OrderABC" = "ABC";
 "EN" = "English";
 "HE"  = "Hebrew";
+"AR"  = "Arabic";
 "BOTH" = "English & Hebrew";
+"AR_EN"  = "Arabic & English";
+"AR_HE"  = "Arabic & Hebrew";
+
+"PredefinedKeyboard1" = "Predefined Keyboard 1 - Default";
+"PredefinedKeyboard2" = "Predefined Keyboard 2";
+"PredefinedKeyboard3" = "Predefined Keyboard 3";
+
+"EnableMiddle" = "2 Colors / 3 Colors";
+"RightLeft" = "Right/Left";
+"RightMiddleLeft" = "Right/Middle/Left";
+"PleaseEnableMiddle" = "Please enable middle color first";
+"PleaseEnableMiddleDesc"  = "In order to change to rows mode, please enable middle color first at 'Enable\Disable Middle'";
+"PleaseSetToColumns"  = "Please set to  columns mode first";
+"PleaseSetToColumnsDesc"= "In order to disable middle color and setup a 2 colors keyboard, please set to colmns mode first at 'Columns/Rows'";
+"OK" = "OK";
+
+"InfoVisibleKeys" = "Choose keys to appear on keyboard";
+"InfoSpecialKeys" = "Choose keys to appear in a different color";
+"InfoRowsCols" = "Divide keyboard by row (upper-middle-bottom) or by section (left-middle-right or left-right)";
+
+
+"infoLink" = "http://en.beitissie.org.il/tech/issieboard-virtual-keyboard-customizable-options-collaboration-beit-issie-shapiro-sap-labs-israel-2/";

@@ -14,7 +14,7 @@ class ImageKey: KeyboardKey {
         didSet {
             if let imageView = image {
                 self.addSubview(imageView)
-                imageView.contentMode = UIViewContentMode.scaleAspectFit
+                imageView.contentMode = UIView.ContentMode.scaleAspectFit
                 self.redrawImage()
                 updateColors()
             }

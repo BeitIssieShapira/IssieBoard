@@ -412,27 +412,50 @@ class KeyboardLayout: NSObject, KeyboardKeyProtocol {
         CATransaction.commit()
     }
     
+    /*
+     Keyboard Pages
+     0 - Hebrew
+     1 - Numbers
+     2 - Symbols
+     3 - English Lower
+     4 - English Upper
+     5 - Numbers
+     6 - Symbols
+     
+     7 - Arabic
+     8 - Numbers
+     9 - Symbols
+     */
     func setAppearanceForKey(_ key: KeyboardKey, model: Key) {
         key.text = model.getKeyTitle()
         key.label.font = self.globalColors.keyFont
         key.label.adjustsFontSizeToFitWidth = true
         
         // Settings - By Sections Strings //
+        /*
         let customCharSetOneHE : String = "פםןףךלץתצ"
         let customCharSetTwoHE : String = "וטאחיעמנה"
         let customCharSetThreeHE : String = "רקכגדשבסז,."
         
+        let customCharSetOneAR : String = "خحجنمكوةث"
+        let customCharSetTwoAR : String = "فغعهبلاتvدزر"
+        let customCharSetThreeAR : String = "ضصقشسيظطذ"
+        
         let customCharSetOneEN : String = "iopjklm,."
         let customCharSetTwoEN : String = "rtyufghvbn"
         let customCharSetThreeEN : String = "qweasdzxc"
-        
+         */
+        /*
         let customCharSetOne : String = customCharSetOneEN + customCharSetOneEN.uppercased() + customCharSetOneHE
+        + customCharSetOneAR
         let customCharSetTwo : String = customCharSetTwoEN + customCharSetTwoEN.uppercased() + customCharSetTwoHE
+        + customCharSetTwoAR
         let customCharSetThree : String = customCharSetThreeEN + customCharSetThreeEN.uppercased() + customCharSetThreeHE
-        
-        let customTwoCharSetOne : String = "@&₪$098'\""
-        let customTwoCharSetTwo : String = "765;()?!"
-        let customTwoCharSetThree : String = ".,4123-/:"
+        + customCharSetThreeAR
+        */
+        let customTwoCharSetOne : String = "@&₪$٨٩٠098'\""
+        let customTwoCharSetTwo : String = "٥٦v765;()?؟!"
+        let customTwoCharSetThree : String = ".,4123١٢٣٤-/:"
         
         let customThreeCharSetOne : String = "*+=$€£'•"
         let customThreeCharSetTwo : String = "?!~<>#%^"
@@ -443,23 +466,59 @@ class KeyboardLayout: NSObject, KeyboardKeyProtocol {
         let customKeyboardOneRowTwoHE : String = "שדגכעיחלךף"
         let customKeyboardOneRowThreeHE : String = "זסבהנמצתץ"
         
+        let customKeyboardOneRowOneHEsorted : String = ",.אבגדהוזח"
+        let customKeyboardOneRowTwoHEsorted : String = "טיכלמנסעפצ"
+        let customKeyboardOneRowThreeHEsorted : String = "קרשתךםןףץ"
+        
+        let customKeyboardOneRowOneAR : String = "ضصقفغعهخحج"
+        let customKeyboardOneRowTwoAR : String = "شسيبلاتنمك"
+        let customKeyboardOneRowThreeAR : String = "ظطذدزروةث"
+        
+        //TODO set the sorted arabic
+                let rowsOfKeysARsorted = [
+        "ابتثجحخدذر"
+                    ,
+                    "زسشصضطظعغف"
+                    ,
+                   "قكلمنههوي"
+                ]
+        let customKeyboardOneRowOneARsorted : String = rowsOfKeysARsorted[0]
+        let customKeyboardOneRowTwoARsorted : String = rowsOfKeysARsorted[1]
+        let customKeyboardOneRowThreeARsorted : String = rowsOfKeysARsorted[2]
+
+        
         let customKeyboardOneRowOneEN : String = "qwertyuiop"
         let customKeyboardOneRowTwoEN : String = "asdfghjkl"
         let customKeyboardOneRowThreeEN : String = "zxcvbnm,."
         
+        let customKeyboardOneRowOneENsorted : String = "abcdefghij"
+        let customKeyboardOneRowTwoENsorted : String = "klmnopqrs"
+        let customKeyboardOneRowThreeENsorted : String = "tuvwxyz,."
+        
         let customKeyboardOneRowOne : String = customKeyboardOneRowOneEN + customKeyboardOneRowOneEN.uppercased() + customKeyboardOneRowOneHE
+        + customKeyboardOneRowOneAR
         let customKeyboardOneRowTwo : String = customKeyboardOneRowTwoEN + customKeyboardOneRowTwoEN.uppercased() + customKeyboardOneRowTwoHE
+        + customKeyboardOneRowTwoAR
         let customKeyboardOneRowThree : String = customKeyboardOneRowThreeEN + customKeyboardOneRowThreeEN.uppercased() + customKeyboardOneRowThreeHE
+        + customKeyboardOneRowThreeAR
+        
+        let customKeyboardOneRowOnesorted : String = customKeyboardOneRowOneENsorted + customKeyboardOneRowOneENsorted.uppercased() + customKeyboardOneRowOneHEsorted
+         + customKeyboardOneRowOneARsorted
+         let customKeyboardOneRowTwosorted : String = customKeyboardOneRowTwoENsorted + customKeyboardOneRowTwoENsorted.uppercased() + customKeyboardOneRowTwoHEsorted
+         + customKeyboardOneRowTwoARsorted
+         let customKeyboardOneRowThreesorted : String = customKeyboardOneRowThreeENsorted + customKeyboardOneRowThreeENsorted.uppercased() + customKeyboardOneRowThreeHEsorted
+         + customKeyboardOneRowThreeARsorted
         
         let customKeyboardThreeRowOne : String = "[]{}#%^*+="
         let customKeyboardThreeRowTwo : String = "_\\|~<>$€£"
         let customKeyboardThreeRowThree : String = "?!'•,."
         
-        let customKeyboardTwoRowOne : String = "1234567890"
+        let customKeyboardTwoRowOne : String = "1234567890١٢٣٤٥٦v٨٩٠"
         let customKeyboardTwoRowTwo : String = "-/:;()₪$&@"
-        let customKeyboardTwoRowThree : String = "?!'\",."
+        let customKeyboardTwoRowThree : String = "?؟!'\",."
         
         let rowOrCol : String = Settings.sharedInstance.RowOrCol
+        let isOrderedABC : Bool = Settings.sharedInstance.Language.hasSuffix("@")
         
         if(Settings.sharedInstance.SpecialKeys.uppercased().range(of: key.text.uppercased()) != nil)
         {
@@ -469,7 +528,10 @@ class KeyboardLayout: NSObject, KeyboardKeyProtocol {
         {
             if(rowOrCol == "By Rows")
             {
-                if((model.pageNum == 0)||(model.pageNum == 3)||(model.pageNum == 4))
+                var rowOne = isOrderedABC ? customKeyboardOneRowOnesorted : customKeyboardOneRowOne
+                var rowTwo = isOrderedABC ? customKeyboardOneRowTwosorted : customKeyboardOneRowTwo
+                var rowThree = isOrderedABC ? customKeyboardOneRowThreesorted : customKeyboardOneRowThree
+                if((model.pageNum == 0)||(model.pageNum == 3)||(model.pageNum == 4)||(model.pageNum == 7))
                 {
                     if(",.".range(of: key.text) != nil){
                         if(model.pageNum == 0){
@@ -480,47 +542,49 @@ class KeyboardLayout: NSObject, KeyboardKeyProtocol {
                         }
                     }
                     else
-                    if customKeyboardOneRowOne.range(of: key.text) != nil {
+                    if rowOne.range(of: key.text) != nil && key.text.range(of: "abc") == nil && key.text.range(of: "ABC") == nil && key.text.range(of: "אבג") == nil{
                         model.type = Key.KeyType.customCharSetOne
                     }
-                    else if customKeyboardOneRowTwo.range(of: key.text) != nil {
+                    else if rowTwo.range(of: key.text) != nil {
                         model.type = Key.KeyType.customCharSetTwo
                     }
-                    else if customKeyboardOneRowThree.range(of: key.text) != nil {
+                    else if rowThree.range(of: key.text) != nil {
                         model.type = Key.KeyType.customCharSetThree
                     }
                 }
-                else if((model.pageNum == 1)||(model.pageNum == 5))
+                else if((model.pageNum == 1)||(model.pageNum == 5)||(model.pageNum == 8))
                 {
-                    if customKeyboardTwoRowOne.range(of: key.text) != nil{
+                    if rowOne.range(of: key.text) != nil{
                         model.type = Key.KeyType.customCharSetOne
                     }
-                    else if customKeyboardTwoRowTwo.range(of: key.text) != nil{
+                    else if rowTwo.range(of: key.text) != nil{
                         model.type = Key.KeyType.customCharSetTwo
                     }
-                    else if customKeyboardTwoRowThree.range(of: key.text) != nil{
+                    else if rowThree.range(of: key.text) != nil{
                         model.type = Key.KeyType.customCharSetThree
                     }
                 }
-                else if((model.pageNum == 2)||(model.pageNum == 6))
+                else if((model.pageNum == 2)||(model.pageNum == 6)||(model.pageNum == 9))
                 {
-                    if customKeyboardThreeRowOne.range(of: key.text) != nil{
+                    if rowOne.range(of: key.text) != nil{
                         model.type = Key.KeyType.customCharSetOne
                     }
-                    else if customKeyboardThreeRowTwo.range(of: key.text) != nil{
+                    else if rowTwo.range(of: key.text) != nil{
                         model.type = Key.KeyType.customCharSetTwo
                     }
-                    else if customKeyboardThreeRowThree.range(of: key.text) != nil{
+                    else if rowThree.range(of: key.text) != nil{
                         model.type = Key.KeyType.customCharSetThree
                     }
                 }
             }
+            
             else
-            {
+            { //By Sections
                 //Letters Pages: 0-Hebrew, 3&5-English
                 if((model.pageNum == Page.PagesIndex.hebrewLetters.hashValue) ||
                    (model.pageNum == Page.PagesIndex.englishLower.hashValue) ||
-                   (model.pageNum == Page.PagesIndex.englishUpper.hashValue))
+                   (model.pageNum == Page.PagesIndex.englishUpper.hashValue) ||
+                    (model.pageNum == Page.PagesIndex.arabicLetters.hashValue))
                 {
                     if(",.".range(of: key.text) != nil){
                         if(model.pageNum == Page.PagesIndex.hebrewLetters.hashValue){
@@ -529,8 +593,11 @@ class KeyboardLayout: NSObject, KeyboardKeyProtocol {
                         else{
                             model.type = Key.KeyType.customCharSetOne
                         }
+ 
                     }
-                    else
+                
+
+                        /*
                     if customCharSetOne.range(of: key.text) != nil {
                         model.type = Key.KeyType.customCharSetOne
                     }
@@ -540,9 +607,11 @@ class KeyboardLayout: NSObject, KeyboardKeyProtocol {
                     else if customCharSetThree.range(of: key.text) != nil {
                         model.type = Key.KeyType.customCharSetThree
                     }
+                    */
                 }
-                else if((model.pageNum == 1)||(model.pageNum == 5))
+                else if((model.pageNum == 1)||(model.pageNum == 5)||(model.pageNum == 8))
                 {
+                    /*
                     if customTwoCharSetOne.range(of: key.text) != nil{
                         model.type = Key.KeyType.customCharSetOne
                     }
@@ -552,9 +621,11 @@ class KeyboardLayout: NSObject, KeyboardKeyProtocol {
                     else if customTwoCharSetThree.range(of: key.text) != nil{
                         model.type = Key.KeyType.customCharSetThree
                     }
+                    */
                 }
-                else if((model.pageNum == 2)||(model.pageNum == 6))
+                else if((model.pageNum == 2)||(model.pageNum == 6)||(model.pageNum == 9))
                 {
+                    /*
                     if customThreeCharSetOne.range(of: key.text) != nil{
                         model.type = Key.KeyType.customCharSetOne
                     }
@@ -564,10 +635,11 @@ class KeyboardLayout: NSObject, KeyboardKeyProtocol {
                     else if customThreeCharSetThree.range(of: key.text) != nil{
                         model.type = Key.KeyType.customCharSetThree
                     }
+                    */
                 }
             }
         }
-        
+ 
         
         switch model.type {
         case
@@ -603,10 +675,11 @@ class KeyboardLayout: NSObject, KeyboardKeyProtocol {
         case
         Key.KeyType.space :
             key.color = Settings.sharedInstance.SpaceColor
+            key.textColor = UIColor.clear
+            key.text = "space"//Fix reader bug
             key.borderColor = self.globalColors.defaultBorderColor
             key.downColor = self.globalColors.changeModeKeyColor
             key.downTextColor = nil
-            key.textColor = self.globalColors.defaultTextColor
         case
         Key.KeyType.backspace :
             key.color = Settings.sharedInstance.BackspaceColor
@@ -616,9 +689,11 @@ class KeyboardLayout: NSObject, KeyboardKeyProtocol {
                 let backspaceShape = self.getShape(BackspaceShape.self)
                 key.shape = backspaceShape
             }
+            key.text = "Delete" //Fix reader bug
+            key.textColor = UIColor.clear
             key.labelInset = 3
         case
-        Key.KeyType.modeChange :
+        Key.KeyType.modeChange, Key.KeyType.punctuation  :
             key.color = Settings.sharedInstance.OtherKeysColor
             key.borderColor = self.globalColors.defaultBorderColor
             key.downColor = self.globalColors.defaultKeyColor
@@ -626,6 +701,8 @@ class KeyboardLayout: NSObject, KeyboardKeyProtocol {
         case
         Key.KeyType.keyboardChange :
             key.color = Settings.sharedInstance.OtherKeysColor
+            key.textColor = UIColor.clear
+            key.text = "change keyboard" //Fix reader bug
             key.borderColor = self.globalColors.defaultBorderColor
             key.downColor = self.globalColors.defaultKeyColor
             if let imageKey = key as? ImageKey {
@@ -639,6 +716,8 @@ class KeyboardLayout: NSObject, KeyboardKeyProtocol {
         case
         Key.KeyType.dismissKeyboard:
             key.color = Settings.sharedInstance.OtherKeysColor
+            key.textColor = UIColor.clear
+            key.text = "dismiss keyboard" //Fix reader bug
             key.borderColor = self.globalColors.defaultBorderColor
             key.downColor = self.globalColors.defaultKeyColor
             if let imageKey = key as? ImageKey {
@@ -655,11 +734,12 @@ class KeyboardLayout: NSObject, KeyboardKeyProtocol {
             key.borderColor = self.globalColors.defaultBorderColor
             key.downColor = self.globalColors.defaultKeyColor
             key.textColor = self.globalColors.defaultTextColor
+            key.textColor = UIColor.clear //Fix reader bug
             if let imageKey = key as? ImageKey {
                 if imageKey.image == nil {
                     let keyboardImage = UIImage(named: "ic_keyboard_return_48px-512")
                     let keyboardImageView = UIImageView(image: keyboardImage)
-                    imageKey.setImageSizeToScaleGC(isIPad() ? 30: 20)//<<
+                    imageKey.setImageSizeToScaleGC(isIPad() ? 30: 20)
                     imageKey.image = keyboardImageView
                 }
             }
@@ -671,21 +751,20 @@ class KeyboardLayout: NSObject, KeyboardKeyProtocol {
             key.isHidden = true;
             key.downColor = nil
         case
-        Key.KeyType.specialKeys :
-            if(Settings.sharedInstance.currentTemplate == "My Configuration"){
+        Key.KeyType.specialKeys:
                 key.color = Settings.sharedInstance.SpecialKeyColor
                 key.textColor = Settings.sharedInstance.SpecialKeyTextColor
                 key.borderColor = Settings.sharedInstance.defaultBackgroundColor
-            }
-            else{
-                key.color = Settings.sharedInstance.GetKeyColorByTemplate(model)
-                key.textColor = Settings.sharedInstance.GetKeyTextColorByTemplate(model)
-                key.borderColor = Settings.sharedInstance.GetBackgroundColorByTemplate()
-            }
             key.downColor = nil
         default:
             break
         }
+        
+        key.isAccessibilityElement = true //fix voiceOver bug 26.6.21
+        key.accessibilityTraits = [.keyboardKey, .playsSound]
+        key.accessibilityLabel = key.text
+        key.accessibilityIdentifier = key.text
+        //key.accessibilityValue = key.text
     }
     
     // if pool is disabled, always returns a unique key view for the corresponding key model

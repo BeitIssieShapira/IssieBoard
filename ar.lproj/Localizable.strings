@@ -1,0 +1,65 @@
+
+"Main"      		 = "اعدادات رئيسية";
+
+"KeyboardBackground"   =  "خلفية لوحة المفاتيح";
+
+"KeysColor"       	= "لون المفاتيح";
+"TextColor" 		= "لون النص";
+
+"VisibleKeys"         = "مفاتيح مرئية";
+"Columns_Rows"         = "أسطر- مناطق";
+"SpecialKeys"         =  "مفاتيح خاصة";
+
+
+"SpecialKeysDefinition"   = "إبراز المفاتيح";
+"UpperRight"      = "يمين-للأعلى";
+"Middle"              = "وسط";
+"LowerLeft"          = "يسار-للأسفل";
+
+"Templates"        = "قوالب";
+"TemplatesSelection"  = "اختيار قالب معد مسبقا";
+
+"AdditionalDefinitions"     = "اعدادات اضافية";
+"SpaceKeyColor" = "لون مفتاح الفراغ";
+"DeleteKeyColor"   = "لون مفتاح المسح";
+"EnterKeyColor"     = "لون مفتاح الإدخال";
+"OtherKeysColor"    = "لون المفاتيح الاضافية";
+
+"RainbowColors"      = "ألوان الطيف";
+"ClassicColors"      = "ألوان كلاسيكية";
+"BlackAndWhite"      = "أسود أبيض";
+"SaveAndLoadCustomTemplates" = "قالب جديد";
+"NewKeyboard" = "لوحة مفاتيح جديدة";
+"ResetToDefaultKeyboard" = "إعادة ضبط الخيارات للوحة المفاتيح الافتراضية";
+"Reset" = "إعادة ضبط الخيارات";
+
+
+"ShowKeyboard" = "أظهر لوحة المفاتيح";
+"HideKeyboard" = "إخفاء لوحة المفاتيح";
+"Configurations" = "إعدادات";
+"Languages" = "اللغات";
+"EN" = "الانجليزية";
+"HE"  = "العبرية";
+"AR"  = "العربية";
+"BOTH" = "العبريه والانجليزية";
+"AR_EN"  ="العربية والانجليزية"; 
+"AR_HE"  = "العبرية والعربية";
+
+"PredefinedKeyboard1" = "قالب لوحة المفاتيح 1 - افتراضي";
+"PredefinedKeyboard2" = "قالب لوحة المفاتيح 2";
+"PredefinedKeyboard3" = "قالب لوحة المفاتيح 3";
+
+"EnableMiddle" = "2 Colors / 3 Colors";
+"RightLeft" = "Right/Left";
+"RightMiddleLeft" = "Right/Middle/Left";
+"PleaseEnableMiddle" = "Please enable middle color first";
+"PleaseEnableMiddleDesc"  = "In order to change to rows mode, please enable middle color first at 'Enable\Disable Middle'";
+"PleaseSetToColumns"  = "Please set to  columns mode first";
+"PleaseSetToColumnsDesc"= "In order to disable middle color and setup a 2 colors keyboard, please set to colmns mode first at 'Columns/Rows'";
+"OK" = "OK";
+
+"InfoVisibleKeys" = "اختيار المفاتيح المحدودة التي ستظهر";
+"InfoSpecialKeys" = "اختيار مفاتيح مخصصه بلون معين";
+"InfoRowsCols" = "ضبط الالوان حسب أسطر لوحه المفاتيح: للأعلى - بالوسط-للأسفل- او حسب المناطق: يمين - وسط - يسار / يمين - يسار";
+
+"infoLink" = "http://en.beitissie.org.il/tech/issieboard-virtual-keyboard-customizable-options-collaboration-beit-issie-shapiro-sap-labs-israel-2/";

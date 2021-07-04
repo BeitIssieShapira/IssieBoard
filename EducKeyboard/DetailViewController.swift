@@ -27,17 +27,22 @@ class DetailViewController: UIViewController, UIPopoverPresentationControllerDel
     @IBOutlet weak var languagesView: UIView!
     
     //var configSet: NSManagedObject!
-    let langKeys = ["EN","HE","BOTH"]
+    let langKeys = ["EN","HE","BOTH","AR","AR_EN","AR_HE"]
+    let languageOrderIndicator = "@"
+    var selectedLanguageOrder = ""
     var onTheWayToTemplates:Bool        = false
     var didNowPerformShowHideKeyboard   = false
+    var didSetupLanguageButtons         = false
+    var keyboardIsAnimating             = false //26.6.2021 for solving visible keys and template race conditions
     //var KEYBOARD_STATE_DURING_UPDATE = 0
     var nextWidth:CGFloat    = 0.0
     let MAX_COLORS_PER_ROW   = 10
     let IPAD_BUTTON_SIZE :CGFloat    = 100
     let IPAD_PRO_BUTTON_SIZE:CGFloat = 140
     let IPHONE_BUTTON_SIZE:CGFloat   = 60
+    let DURATION_OF_KEYBOARD_ANIMATION = 0.6 //Found a value which solves the race but not too slow
     let enKeys = "QWERTYUIOPASDFGHJKLZXCVBNM"
-    let ALL_VISIBLE_KEYS = "אבגדהוזחטיכלמנסעןפצקרשתםףךץ1234567890.,?!'•_\\|~<>$€£[]{}#%^*+=.,?!'\"-/:;()₪&@QWERTYUIOPASDFGHJKLZXCVBNMqwertyuiopasdfghjklzxcvbnm"
+    let ALL_VISIBLE_KEYS = "אבגדהוזחטיכלמנסעןפצקרשתםףךץ1234567890.,?!'•_\\|~<>$€£[]{}#%^*+=.,?!'\"-/:;()₪&@QWERTYUIOPASDFGHJKLZXCVBNMqwertyuiopasdfghjklzxcvbnmضصقفغعهخحجشسيبلاتنمكظطذدزروةث١؟٢٣٤٥٦v٨٩٠"
     let ARRAY_OF_COLORS = [
         UIColor.purple,
         "9C07E1",
@@ -96,11 +101,11 @@ class DetailViewController: UIViewController, UIPopoverPresentationControllerDel
             return 0
         }
     }
-    @IBAction func languageButtonTapped(_ sender: UIButton) {
-        
-        let unselectedColor = UIColor.init(colorLiteralRed: 0.921431005
+    
+    func languageButtonVisualSetup(_ sender: UIButton) {
+        let unselectedColor =  UIColor.init(red: 0.921431005
             , green: 0.921452641, blue: 0.921441018, alpha: 1.0)
-        let selectedColor = UIColor.init(colorLiteralRed: 0.450857997
+        let selectedColor = UIColor.init(red: 0.450857997
             , green: 0.988297522, blue: 0.83763045, alpha: 1.0)
         
         self.languagesView.subviews.forEach {
@@ -108,15 +113,13 @@ class DetailViewController: UIViewController, UIPopoverPresentationControllerDel
             button.isSelected = false
             button.backgroundColor = unselectedColor
             button.tintColor = unselectedColor
-            button.setTitleColor(UIColor.black, for: UIControlState.normal)
-            button.setTitleColor(UIColor.black, for: UIControlState.selected)
-            button.titleShadowColor(for: UIControlState.selected)
+            button.setTitleColor(UIColor.black, for: UIControl.State.normal)
+            button.setTitleColor(UIColor.black, for: UIControl.State.selected)
+            button.titleShadowColor(for: UIControl.State.selected)
             button.layer.borderWidth = 5
             button.layer.borderColor = unselectedColor.cgColor
-            //let currentLangKey = langKeys[button.tag-1]
-            //button.setTitle(wrapWithLocale(currentLangKey) , for: UIControlState.normal)
         }
-
+        
         UIView.transition(with: sender, duration: 0.3, options: [.transitionFlipFromTop ], animations: {
             sender.isSelected = true;
             sender.backgroundColor = selectedColor
@@ -124,40 +127,177 @@ class DetailViewController: UIViewController, UIPopoverPresentationControllerDel
         },
                           completion:nil
         )
+    }
+    
+    @IBAction func languageButtonTapped(_ sender: UIButton) {
         
+        let unselectedColor =  UIColor.init(red: 0.921431005
+            , green: 0.921452641, blue: 0.921441018, alpha: 1.0)
+        let selectedColor = UIColor.init(red: 0.450857997
+            , green: 0.988297522, blue: 0.83763045, alpha: 1.0)
+        //Swift4
+        //let unselectedColor = UIColor.init(colorLiteralRed: 0.921431005
+        //    , green: 0.921452641, blue: 0.921441018, alpha: 1.0)
+        //let selectedColor = UIColor.init(colorLiteralRed: 0.450857997
+        //    , green: 0.988297522, blue: 0.83763045, alpha: 1.0)
+     /*   let unselectedColor =  UIColor.init(red: 0.921431005
+            , green: 0.921452641, blue: 0.921441018, alpha: 1.0)
+        let selectedColor = UIColor.init(red: 0.450857997
+            , green: 0.988297522, blue: 0.83763045, alpha: 1.0)
+        
+        self.languagesView.subviews.forEach {
+            let button = $0 as! UIButton
+            button.isSelected = false
+            button.backgroundColor = unselectedColor
+            button.tintColor = unselectedColor
+            button.setTitleColor(UIColor.black, for: UIControl.State.normal)
+            button.setTitleColor(UIColor.black, for: UIControl.State.selected)
+            button.titleShadowColor(for: UIControl.State.selected)
+            button.layer.borderWidth = 5
+            button.layer.borderColor = unselectedColor.cgColor
+            //let currentLangKey = langKeys[button.tag-1]
+            //button.setTitle(wrapWithLocale(currentLangKey) , for: UIControlState.normal)
+        }*/
+        languageButtonVisualSetup(sender)
+
+        /*UIView.transition(with: sender, duration: 0.3, options: [.transitionFlipFromTop ], animations: {
+            sender.isSelected = true;
+            sender.backgroundColor = selectedColor
+            sender.tintColor = selectedColor
+        },
+                          completion:nil
+        )*/
+        if(didSetupLanguageButtons==true){
+            /*let setupClosure = {
+                let languageKey = sender.tag-1
+                if let item: ConfigItem = self.configItem {
+                    self.resetVisibleKeys()
+                    item.value = (self.langKeys[languageKey] + self.selectedLanguageOrder) as AnyObject?
+                }
+            }*/
+            
+//            if (selectedLanguageOrder == self.languageOrderIndicator){
+//            selectedLanguageOrder =
+//            }
+        }
         let languageKey = sender.tag-1
-        //let values = ["EN","HE","BOTH"]
             if let item: ConfigItem = self.configItem {
+                resetVisibleKeys()
                 item.value = langKeys[languageKey] as AnyObject?
+                //setLanguageOrderPopUpReturnSelection(item)
             }
     }
     
+    func setLanguageOrderPopUpReturnSelection(_ item: ConfigItem){
+        let alert = UIAlertController(title: wrapWithLocale(TITLE_ALPHABET), message: TITLE_ALPHABET_DESC, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: TITLE_ALPHABET_STANDARD, style: .default, handler: nil))
+        alert.addAction(UIAlertAction(title: TITLE_ALPHABET_ABC, style: .cancel, handler: { action in item.value  = (item.value as! String) + self.languageOrderIndicator as AnyObject}))
+        self.present(alert, animated: true)
+    }
+    
+    func setLanguageOrderBySegmentedValue(_ sender: UISegmentedControl){
+        if(sender.selectedSegmentIndex == 0){//Standard
+            configItem?.value = configItem!.value?.replacingOccurrences(of: self.languageOrderIndicator, with: "") as AnyObject
+        }
+        else {//ABC
+            if(!isCurrentKeysOrderByABC()) {
+                configItem?.value  = (configItem?.value as! String) + self.languageOrderIndicator as AnyObject
+            }
+        }
+    }
+    
+    func isCurrentKeysOrderByABC()->Bool {
+        return (configItem!.value?.hasSuffix(self.languageOrderIndicator))!
+    }
+    func setupKeysOrderPicker(){
+        let initialValue = isCurrentKeysOrderByABC() ? 1 : 0
+        RowColPicker.selectedSegmentIndex = initialValue
+        RowColPicker.setTitle(wrapWithLocale(TITLE_ALPHABET_STANDARD), forSegmentAt: 0)
+        RowColPicker.setTitle(wrapWithLocale(TITLE_ALPHABET_ABC), forSegmentAt: 1)
+    }
+    
     @IBAction func showHideTapped(_ sender: UIButton) {
-        
+        //26.6.2021 for solving visible keys and template race
+//        if (keyboardIsAnimating){
+//            return
+//        }
         var title:String
         let currentFirstResponder = (isTypeKeysScenario()) ?
             itemValue : ToggleKeyboard
         didNowPerformShowHideKeyboard = true
-        if(currentFirstResponder?.isFirstResponder)!{
+        if(currentFirstResponder!.isFirstResponder){
             
             title = wrapWithLocale(TITLE_SHOW_KEYBOARD)
-            currentFirstResponder?.resignFirstResponder()
+            currentFirstResponder!.resignFirstResponder()
             didNowPerformShowHideKeyboard = false
         }
         else{
             title = wrapWithLocale(TITLE_HIDE_KEYBOARD)
-            currentFirstResponder?.becomeFirstResponder()
+            currentFirstResponder!.becomeFirstResponder()
         }
-        UIView.transition(with: sender, duration: 0.3, options: [.transitionFlipFromTop ], animations: {sender.setTitle(title, for:UIControlState() )},
+        UIView.transition(with: sender, duration: DURATION_OF_KEYBOARD_ANIMATION, options: [.transitionFlipFromTop], animations: {sender.setTitle(title, for:UIControl.State() )},
             completion:nil
         )
     }
     
     @IBAction func ChangedMode(_ sender: UISegmentedControl) {
-        let values = ["By Rows","By Sections"]
-        configItem?.value = values[sender.selectedSegmentIndex] as AnyObject?
-        //sender.titleForSegmentAtIndex(sender.selectedSegmentIndex)
-        TapRecognize(sender)
+        
+        let isKeyboardOn = self.showHideKeyboard.title(for: self.showHideKeyboard.state) == wrapWithLocale(TITLE_HIDE_KEYBOARD)
+        if(isKeyboardOn) {
+            TapRecognize(sender)
+                DispatchQueue.main.asyncAfter(deadline: .now() + DURATION_OF_KEYBOARD_ANIMATION, execute: {
+                    self.ChangedMode(sender)
+            })
+        }
+        else {
+            //TapRecognize(sender)//changed at 7.2020, if stable...
+            if(wrapWithLocale(TITLE_KEYBOARD_KEYS_ORDER) == configItem?.title){
+                setLanguageOrderBySegmentedValue(sender)
+            }
+            else {
+                let values = ["By Rows","By Sections"]
+                //"By Rows"/"By Sections" switch
+                let newValue = values[sender.selectedSegmentIndex]
+                configItem?.value = newValue as AnyObject?
+                //DetailViewController.switchMiddleState();
+                let navController = self.splitViewController?.viewControllers.first as? UINavigationController
+                let masterView = navController?.topViewController as? MasterViewController
+                masterView?.tableView.reloadSections([4,6], with: .automatic)
+                if(newValue == "By Rows"){//We force the switch to be enabled
+                    //masterView?.middleSwitchView!.setOn(true, animated: false)
+                     let switchView = masterView?.middleSwitchView
+                    if (switchView != nil){
+                        setIsHiddenViewAnimated(view: switchView!, isHidden: true)
+                    }
+                    
+                    if(DetailViewController.isTwoColorsKeyboard()){
+                        DetailViewController.switchMiddleState()
+                        masterView?.setupDisabledMiddleCells()
+                    }
+                }
+                else {
+                    let switchView = masterView?.middleSwitchView
+                    if (switchView != nil){
+                        setIsHiddenViewAnimated(view: switchView!, isHidden: false)
+                    }
+                }
+            }
+            showHideTapped(showHideKeyboard)
+        }
+    }
+    
+    func setIsHiddenViewAnimated(view:UIView, isHidden:Bool){
+        UIView.animate(
+            withDuration: 0.25,
+            animations: {
+                view.alpha = isHidden ? 0.0 : 1.0
+        },
+            completion: { isFinished in
+                if isFinished {
+                    view.isHidden = isHidden
+                }
+        }
+        )
     }
     
     @IBAction func PreviewKeyboardClicked(_ sender: UIButton) {
@@ -167,9 +307,10 @@ class DetailViewController: UIViewController, UIPopoverPresentationControllerDel
     @IBAction func ResetClicked(_ sender: UIButton) {
         let title = wrapWithLocale(TITLE_KEYBOARD_RESET_DONE)
         InitTemplates.resetToDefaultTemplate()
-        UIView.transition(with: sender, duration: 0.3, options: [.transitionFlipFromTop ], animations: {sender.setTitle(title, for:UIControlState() )},
+        UIView.transition(with: sender, duration: 0.3, options: [.transitionFlipFromTop ], animations: {sender.setTitle(title, for:UIControl.State() )},
             completion:nil
         )
+        reloadMasterSelectedRow()
     }
     
     func setLanguageButtonsByCurrent(){
@@ -180,7 +321,7 @@ class DetailViewController: UIViewController, UIPopoverPresentationControllerDel
         let paddingY:CGFloat = 10
         let languagesFrame = self.view.frame
         let languagesWidth = languagesFrame.width - paddingX * 2
-        let langagesHeight = (languagesFrame.height - paddingY*6 - navBarHeight!) / 3
+        let langagesHeight = (languagesFrame.height - paddingY*10 - navBarHeight!) / 6
         
         var buttonFrame = CGRect.init(x: paddingX, y: paddingY*3+navBarHeight!, width: languagesWidth, height: langagesHeight)
         
@@ -195,18 +336,19 @@ class DetailViewController: UIViewController, UIPopoverPresentationControllerDel
             let currentTag = button.tag
             let currentLangKey = langKeys[currentTag-1]
             
-            if 1...3 ~= currentTag{
-                button.setTitle(wrapWithLocale(currentLangKey) , for: UIControlState.normal)
-                button.setTitle(wrapWithLocale(currentLangKey) , for: UIControlState.selected)
+            if 1...6 ~= currentTag{
+                button.setTitle(wrapWithLocale(currentLangKey) , for: UIControl.State.normal)
+                button.setTitle(wrapWithLocale(currentLangKey) , for: UIControl.State.selected)
                 button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 18)
-                if (currentLangKey == prevSelectedLang){
+                if (currentLangKey == prevSelectedLang.replacingOccurrences(of: self.languageOrderIndicator, with: "")){
                     selectedButton = button
                 }
                 button.frame = buttonFrame
                 buttonFrame.origin = CGPoint(x: buttonFrame.origin.x, y: buttonFrame.origin.y+paddingY + langagesHeight)
             }
         }
-            languageButtonTapped(selectedButton!)
+            //languageButtonTapped(selectedButton!)
+        languageButtonVisualSetup(selectedButton!)
     }
     
     func isTypeKeysScenario()->Bool{
@@ -221,6 +363,11 @@ class DetailViewController: UIViewController, UIPopoverPresentationControllerDel
     func performSegue(){
         self.performSegue(withIdentifier: "loadSaveDetail", sender: self)
     }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        let controller = (segue.destination as! ConfigSetsTableViewController)
+    }
+        
     func configureView() {
         
         if let toggle = self.ToggleKeyboard {
@@ -232,7 +379,7 @@ class DetailViewController: UIViewController, UIPopoverPresentationControllerDel
                 if let palette = self.colorPalette {
                     if let modePicker = self.RowColPicker {
                         let font = UIFont.systemFont(ofSize: 24)
-                        self.RowColPicker.setTitleTextAttributes([NSFontAttributeName: font], for: UIControlState())
+                        self.RowColPicker.setTitleTextAttributes([NSAttributedString.Key(rawValue: convertFromNSAttributedStringKey(NSAttributedString.Key.font)): font], for: UIControl.State())
                         valueField.layer.borderWidth = 1.3
                         self.title = item.title
                         
@@ -261,6 +408,19 @@ class DetailViewController: UIViewController, UIPopoverPresentationControllerDel
                             valueField.isUserInteractionEnabled = false
                             valueField.backgroundColor = item.value as? UIColor
                             modePicker.isHidden = true
+                            if(wrapWithLocale(TITLE_ENABLE_MIDDLE) == configItem?.title){
+                                modePicker.isHidden = false
+                                palette.isHidden = true
+                                scrollView.isHidden = true
+                                valueField.isUserInteractionEnabled = true
+                                valueField.isHidden = true
+                                RowColPicker.setTitle(wrapWithLocale(TITLE_RIGHT_LEFT), forSegmentAt: 0)
+                                RowColPicker.setTitle(wrapWithLocale(TITLE_RIGHT_MIDDLE_LEFT), forSegmentAt: 1)
+                                RowColPicker.selectedSegmentIndex = DetailViewController.isTwoColorsKeyboard() ? 0 : 1
+
+                                showAlertMessage()
+                            }
+                            
                         case .picker:
                             languagesView.isHidden = true
                             TemplatePicker.isHidden = true
@@ -269,6 +429,12 @@ class DetailViewController: UIViewController, UIPopoverPresentationControllerDel
                             palette.isHidden = true
                             scrollView.isHidden = true
                             modePicker.isHidden = false
+                            
+                            RowColPicker.selectedSegmentIndex = configItem?.value as! String == "By Rows" ? 0 : 1
+                            if(configItem?.title == wrapWithLocale(TITLE_KEYBOARD_KEYS_ORDER)){
+                                setupKeysOrderPicker()
+                            }
+                            //showAlertMessage() TODO: uncomment if we wan alert on sections/rows when middle disabled
                         case .fontPicker:
                             languagesView.isHidden = true
                             valueField.isUserInteractionEnabled = true
@@ -301,7 +467,7 @@ class DetailViewController: UIViewController, UIPopoverPresentationControllerDel
                             showHideKeyboard.isHidden = true
                             HideButton.isHidden = true
                             resetButton.isHidden = false
-                            resetButton.setTitle(wrapWithLocale(TITLE_KEYBOARD_RESET_BUTTON) , for: UIControlState())
+                            resetButton.setTitle(wrapWithLocale(TITLE_KEYBOARD_RESET_BUTTON) , for: UIControl.State())
                         case.language:
                             languagesView.isHidden = false
                             valueField.isUserInteractionEnabled = true
@@ -316,6 +482,7 @@ class DetailViewController: UIViewController, UIPopoverPresentationControllerDel
                             HideButton.isHidden = true
                             resetButton.isHidden = true
                             setLanguageButtonsByCurrent()
+                            didSetupLanguageButtons = true
                         }
                     }
                 }
@@ -334,24 +501,50 @@ class DetailViewController: UIViewController, UIPopoverPresentationControllerDel
     
     func AdditonalStyleEffects(){
         self.showHideKeyboard.layer.cornerRadius = 5
-        self.itemValue.layer.cornerRadius = 5
+        self.itemValue.layer.cornerRadius = 15
         self.resetButton.layer.cornerRadius = 5
     }
     
     func updateColor(_ color: UIColor) {
-        if let valueField = self.itemValue {
-            if let item: ConfigItem = self.configItem {
-                valueField.backgroundColor = color
-                item.value = color
+        
+        let isKeyboardOn = self.showHideKeyboard.title(for: self.showHideKeyboard.state) == wrapWithLocale(TITLE_HIDE_KEYBOARD)
+        if(isKeyboardOn) {
+            TapRecognize(color)
+                DispatchQueue.main.asyncAfter(deadline: .now() + DURATION_OF_KEYBOARD_ANIMATION, execute: {
+                    self.updateColor(color)
+            })
+        }
+        else {
+            if let valueField = self.itemValue {
+                if let item: ConfigItem = self.configItem {
+                    valueField.backgroundColor = color
+                    item.value = color
+                }
             }
+            reloadMasterSelectedRow()
+        }
+        
+    }
+    
+    func closeAndOpenKeyboard() {
+        //let frame = CGRect(x: 0, y: 0, width: 100, height: 100)
+        //let textField = UITextField(frame: frame)
+        //textField.becomeFirstResponder()
+        if(ToggleKeyboard.isFirstResponder) {
+            ToggleKeyboard.resignFirstResponder()
+            ToggleKeyboard.becomeFirstResponder()
         }
     }
     
     func textViewShouldBeginEditing(_ textView: UITextView) -> Bool {
+//        if (keyboardIsAnimating){
+//            //26.6.2021 for solving visible keys and template race
+//            return false
+//        }
         if(textView == itemValue){
             if(didNowPerformShowHideKeyboard == false){
                 let title = wrapWithLocale(TITLE_HIDE_KEYBOARD)
-                UIView.transition(with: self.showHideKeyboard, duration: 0.3, options: [.transitionFlipFromTop ], animations: {self.showHideKeyboard.setTitle(title, for:UIControlState() )},
+                UIView.transition(with: self.showHideKeyboard, duration: DURATION_OF_KEYBOARD_ANIMATION, options: [.transitionFlipFromTop ], animations: {self.showHideKeyboard.setTitle(title, for:UIControl.State() )},
                     completion:nil)
             }
             ifEqualAllValuesDisplayEmptyString(textView)
@@ -360,21 +553,43 @@ class DetailViewController: UIViewController, UIPopoverPresentationControllerDel
         return true
     }
     func textViewDidEndEditing(_ textView: UITextView){
-    
-        if let detail: ConfigItem = self.configItem {
-            if let valueField = self.itemValue {
-                
-                if(valueField.text.isEmptyOrWhiteSpace && configItem?.key == KEY_ISSIE_KEYBOARD_VISIBLE_KEYS)
-                {
-                    detail.value = ALL_VISIBLE_KEYS as AnyObject?;
+        self.itemValue!.resignFirstResponder()
+        self.ToggleKeyboard.resignFirstResponder()
+        keyboardIsAnimating = true //26.6.2021 for solving visible keys and template race
+        DispatchQueue.main.asyncAfter(deadline: .now() + DURATION_OF_KEYBOARD_ANIMATION, execute: {
+                    if let detail: ConfigItem = self.configItem {
+                if let valueField = self.itemValue {
+                    
+                    if(valueField.text.isEmptyOrWhiteSpace && self.configItem?.key == KEY_ISSIE_KEYBOARD_VISIBLE_KEYS)
+                    {
+                        detail.value = self.ALL_VISIBLE_KEYS as AnyObject?;
+                    }
+                    else
+                    {
+                        detail.value = valueField.text as AnyObject?
+                       //handleVisibleKeysSaveBug(newValue: "yyy")
+                    }
                 }
-                else
-                {
-                    detail.value = valueField.text as AnyObject?
-                }
+                        self.keyboardIsAnimating = false
             }
-        }
+        })
+        
+//        if let detail: ConfigItem = self.configItem {
+//            if let valueField = self.itemValue {
+//                
+//                if(valueField.text.isEmptyOrWhiteSpace && configItem?.key == KEY_ISSIE_KEYBOARD_VISIBLE_KEYS)
+//                {
+//                    detail.value = ALL_VISIBLE_KEYS as AnyObject?;
+//                }
+//                else
+//                {
+//                    detail.value = valueField.text as AnyObject?
+//                   //handleVisibleKeysSaveBug(newValue: "yyy")
+//                }
+//            }
+//        }
     }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.configureView()
@@ -387,20 +602,20 @@ class DetailViewController: UIViewController, UIPopoverPresentationControllerDel
         if(isTypeKeysScenario()){
             itemValue.becomeFirstResponder()
         }
-         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(notification:)), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
+         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(notification:)), name: UIResponder.keyboardWillHideNotification, object: nil)
     }
     
     override func viewWillDisappear(_ animated: Bool) {
-        NotificationCenter.default.removeObserver(self, name: NSNotification.Name.UIKeyboardWillHide, object: nil)
+        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillHideNotification, object: nil)
     }
     
-    func keyboardWillHide(notification:NSNotification)
+    @objc func keyboardWillHide(notification:NSNotification)
     {
         let title = wrapWithLocale(TITLE_SHOW_KEYBOARD)
         if (showHideKeyboard.currentTitle != title){
             UIView.transition(with: showHideKeyboard, duration: 0.3,
                 options: [.transitionFlipFromTop ], animations:
-                {self.showHideKeyboard.setTitle(title, for:UIControlState() )},completion:nil)
+                {self.showHideKeyboard.setTitle(title, for:UIControl.State() )},completion:nil)
         }
     }
 
@@ -419,7 +634,7 @@ class DetailViewController: UIViewController, UIPopoverPresentationControllerDel
         super.didReceiveMemoryWarning()
     }
     
-    func displayColor(_ sender:UIButton){
+    @objc func displayColor(_ sender:UIButton){
         var r:CGFloat = 0,g:CGFloat = 0,b:CGFloat = 0
         var a:CGFloat = 0
         var h:CGFloat = 0,s:CGFloat = 0,l:CGFloat = 0
@@ -432,13 +647,28 @@ class DetailViewController: UIViewController, UIPopoverPresentationControllerDel
                 print("\(colorText)")*/
                 
                 self.updateColor(color)
-
             }
         }
         //updateCurrentKeyByColor(color)
         UIView.transition(with: sender, duration: 0.3, options: [.transitionFlipFromTop ], animations: nil,
             completion:nil
         )
+        //moved reloadMasterSelectedRow from here, 27.9.2020 todo, clean these comments when stable
+        
+    }
+    
+    func reloadMasterSelectedRow(){
+        let viewControllersInSplit = self.splitViewController?.viewControllers
+        let navController = viewControllersInSplit?.first as? UINavigationController
+        let masterView = navController?.topViewController as? MasterViewController
+        if(masterView != nil) {
+            masterView?.reloadSelectedCell()
+        }
+        else {
+            let iphonePortraitMasterView = navController?.viewControllers[0] as? MasterViewController
+            iphonePortraitMasterView!.reloadSelectedCell()
+        }
+        
     }
     
     func initColorRainbow(){
@@ -478,7 +708,7 @@ class DetailViewController: UIViewController, UIPopoverPresentationControllerDel
                 view.addSubview(aButton)
             }
             
-            aButton.addTarget(self, action: #selector(DetailViewController.displayColor(_:)), for: UIControlEvents.touchUpInside)
+            aButton.addTarget(self, action: #selector(DetailViewController.displayColor(_:)), for: UIControl.Event.touchUpInside)
         }
     }
     
@@ -499,7 +729,7 @@ class DetailViewController: UIViewController, UIPopoverPresentationControllerDel
                 view.addSubview(aButton)
             }
             
-            aButton.addTarget(self, action: #selector(DetailViewController.displayColor(_:)), for: UIControlEvents.touchUpInside)
+            aButton.addTarget(self, action: #selector(DetailViewController.displayColor(_:)), for: UIControl.Event.touchUpInside)
         }
         return myButtonFrame.origin.y
     }
@@ -521,12 +751,12 @@ class DetailViewController: UIViewController, UIPopoverPresentationControllerDel
             
             if let view = self.scrollView{
                 view.addSubview(aButton)
-                UIView.animate(withDuration: 0.15, delay: (Double(i)+Double(iterationNumber))*0.07, options: UIViewAnimationOptions.allowUserInteraction, animations: {
+                UIView.animate(withDuration: 0.15, delay: (Double(i)+Double(iterationNumber))*0.07, options: UIView.AnimationOptions.allowUserInteraction, animations: {
                         aButton.alpha = 1.0
                     }, completion: nil)
             }
             
-            aButton.addTarget(self, action: #selector(DetailViewController.displayColor(_:)), for: UIControlEvents.touchUpInside)
+            aButton.addTarget(self, action: #selector(DetailViewController.displayColor(_:)), for: UIControl.Event.touchUpInside)
         }
         var frameWithUpdatedY = buttonFrame
 
@@ -557,7 +787,7 @@ class DetailViewController: UIViewController, UIPopoverPresentationControllerDel
                 view.addSubview(aButton)
             }
             
-            aButton.addTarget(self, action: #selector(DetailViewController.displayColor(_:)), for: UIControlEvents.touchUpInside)
+            aButton.addTarget(self, action: #selector(DetailViewController.displayColor(_:)), for: UIControl.Event.touchUpInside)
             i = i + 2
         }
         
@@ -579,7 +809,7 @@ class DetailViewController: UIViewController, UIPopoverPresentationControllerDel
                 view.addSubview(aButton)
             }
             
-            aButton.addTarget(self, action: #selector(DetailViewController.displayColor(_:)), for: UIControlEvents.touchUpInside)
+            aButton.addTarget(self, action: #selector(DetailViewController.displayColor(_:)), for: UIControl.Event.touchUpInside)
         }
     }
     func ifEqualAllValuesDisplayEmptyString(_ textView:UITextView!){
@@ -591,10 +821,10 @@ class DetailViewController: UIViewController, UIPopoverPresentationControllerDel
         var cString:String = hex.trimmingCharacters(in: (NSCharacterSet.whitespacesAndNewlines as NSCharacterSet) as CharacterSet).uppercased()
         
         if (cString.hasPrefix("#")) {
-            cString = cString.substring(from: cString.characters.index(cString.startIndex, offsetBy: 1))
+            cString = cString.substring(from: cString.index(cString.startIndex, offsetBy: 1))
         }
         
-        if (cString.characters.count != 6) {
+        if (cString.count != 6) {
             return UIColor.gray
         }
         
@@ -608,4 +838,107 @@ class DetailViewController: UIViewController, UIPopoverPresentationControllerDel
             alpha: CGFloat(1.0)
         )
     }
+    
+    func resetVisibleKeys(){
+        let UserSettings = UserDefaults(suiteName: MasterViewController.groupName)!
+        UserSettings.set("", forKey: "ISSIE_KEYBOARD_VISIBLE_KEYS")
+        //UserSettings.synchronize()//23.9.2020 I try to remove synchronize and see if all works
+    }
+    
+    static func handleVisibleKeysSaveBug(){
+        let UserSettings = UserDefaults(suiteName: MasterViewController.groupName)!
+        //let irrelevantKey = "iSSIE_KEYBOARD_CONFIGURATION_NAME"
+        let dummyColor = "1.0000,0.0000,1.0000,1.0000"
+        let keyForWorkaroundArray = [KEY_ISSIE_KEYBOARD_CHARSET1_KEYS_COLOR, KEY_ISSIE_KEYBOARD_CHARSET1_TEXT_COLOR,KEY_ISSIE_KEYBOARD_CHARSET2_KEYS_COLOR, KEY_ISSIE_KEYBOARD_CHARSET2_TEXT_COLOR, KEY_ISSIE_KEYBOARD_CHARSET3_KEYS_COLOR, KEY_ISSIE_KEYBOARD_CHARSET3_TEXT_COLOR]
+        
+        keyForWorkaroundArray.forEach {
+            let keyForWorkaround = $0
+            if let originalColor = UserSettings.string(forKey: keyForWorkaround) {
+                UserSettings.set(dummyColor, forKey: keyForWorkaround)
+                //UserSettings.synchronize()//23.9.2020 I try to remove synchronize and see if all works
+                UserSettings.set(originalColor, forKey: keyForWorkaround)
+                //UserSettings.synchronize()//23.9.2020 I try to remove synchronize and see if all works
+            }
+        }
+        
+//        UIView.transition(with: self.itemValue, duration: 0.3, options: [.transitionFlipFromTop ], animations: {
+//        },
+//                          completion:nil
+//        )
+    }
+    
+    func showAlertMessage(){
+        
+        var title = ""
+        var description = ""
+        
+        if(wrapWithLocale(TITLE_ENABLE_MIDDLE) == configItem?.title) {
+            if (UserDefaults(suiteName: MasterViewController.groupName)!.string(forKey:KEY_ISSIE_KEYBOARD_ROW_OR_COLUMN) == "By Rows"){
+                title = wrapWithLocale(TITLE_PLEASE_SET_COL_MODE)
+                description = wrapWithLocale(TITLE_PLEASE_SET_COL_MODE_DESC)
+            } else {
+                return
+            }
+        }
+        
+        else if(wrapWithLocale(TITLE_COLS_VS_ROWS) == configItem?.title) {
+            
+            if(DetailViewController.isTwoColorsKeyboard()){
+                title = wrapWithLocale(TITLE_PLEASE_ENABLE_MIDDLE)
+                description = wrapWithLocale(TITLE_PLEASE_ENABLE_MIDDLE_DESC)
+            }
+            else {
+                return
+            }
+        } else {
+            return
+        }
+        self.RowColPicker.isEnabled = false
+        
+        let alertView = UIAlertController(title: title, message: description, preferredStyle: UIAlertController.Style.alert)
+        alertView.addAction(UIAlertAction(title: wrapWithLocale(TITLE_OK), style: UIAlertAction.Style.default, handler: nil))
+        present(alertView, animated: true, completion: nil)
+    }
+    
+    static func isCurrentlyOnRows()->Bool{
+        return (UserDefaults(suiteName: MasterViewController.groupName)!.string(forKey:KEY_ISSIE_KEYBOARD_ROW_OR_COLUMN) == "By Rows")
+    }
+    
+    static func isTwoColorsKeyboard()->Bool{
+        let stringMiddleColor = UserDefaults(suiteName: MasterViewController.groupName)!.string(forKey:KEY_ISSIE_KEYBOARD_CHARSET2_KEYS_COLOR)
+        let currentMidColorAlpha = UIColor(string: stringMiddleColor!).cgColor.alpha
+        return (currentMidColorAlpha == 0)
+    }
+    
+    static func isSections()->Bool{
+        let currentRowOrColumnValue = UserDefaults(suiteName: MasterViewController.groupName)!.string(forKey:KEY_ISSIE_KEYBOARD_ROW_OR_COLUMN)
+        
+            return (currentRowOrColumnValue == "By Sections")
+    }
+    
+    static func switchMiddleState(){
+        let UserSettings = UserDefaults(suiteName: MasterViewController.groupName)!
+        let stringMiddleColor = UserSettings.string(forKey:KEY_ISSIE_KEYBOARD_CHARSET2_KEYS_COLOR)
+        let middleColor = UIColor(string: stringMiddleColor!)
+        var r:CGFloat = 0,g:CGFloat = 0,b:CGFloat = 0
+        var a:CGFloat = 0
+        
+        let currentMidColorAlpha = middleColor.cgColor.alpha
+        
+        if (middleColor.getRed(&r, green: &g, blue: &b, alpha: &a)){
+            let disableMiddleColor = UIColor.init(red: r, green: g, blue: b, alpha: 0.0)
+            let enableMiddleColor = UIColor.init(red: r, green: g, blue: b, alpha: 1.0)
+            
+            let newColorStringValue = (currentMidColorAlpha == 0) ? enableMiddleColor.stringValue: disableMiddleColor.stringValue
+            
+            UserSettings.set(newColorStringValue, forKey:KEY_ISSIE_KEYBOARD_CHARSET2_KEYS_COLOR)
+            //UserSettings.synchronize()//23.9.2020 I try to remove synchronize and see if all works
+            
+        }
+    }
+}
+
+// Helper function inserted by Swift 4.2 migrator.
+fileprivate func convertFromNSAttributedStringKey(_ input: NSAttributedString.Key) -> String {
+	return input.rawValue
 }
