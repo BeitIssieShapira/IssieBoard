@@ -29,11 +29,11 @@ class EditConfigViewController: UIViewController {
         else {
             switch rawValue!{
             case "תבנית מוכנה 1 - ברירת מחדל" :
-                return "Predefined Keyboard 1 - Default"
+                return wrapWithLocale("PredefinedKeyboard1")
             case "תבנית מוכנה 2":
-                return "Predefined Keyboard 2"
+                return wrapWithLocale("PredefinedKeyboard2")
             case "תבנית מוכנה 3":
-                return "Predefined Keyboard 3"
+                return wrapWithLocale("PredefinedKeyboard3")
             default:
                 return rawValue!
             }
@@ -42,7 +42,7 @@ class EditConfigViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.textField.becomeFirstResponder()
+        //self.textField.becomeFirstResponder()
         
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         managedObjectContext = appDelegate.managedObjectContext
@@ -53,8 +53,16 @@ class EditConfigViewController: UIViewController {
             self.title = titleString
             self.loadKeyboardButton.isHidden = false
             setPreviousConfigForCancelationCase()
-            updateCurrentDeviceStateByCurrentConfigSet()
             
+            self.updateCurrentDeviceStateByCurrentConfigSet()//<<<
+//            UIView.transition(with: self.view, duration: 1.0, options: [.transitionFlipFromTop ], animations: {
+//                self.updateCurrentDeviceStateByCurrentConfigSet()//<<<
+//            }, completion: nil)
+//                completion:{(finished:Bool)->() in _ =
+//                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.5, execute: {
+//                        self.textField.becomeFirstResponder()
+//                })
+   // })
         } else{
             self.title = wrapWithLocale(TITLE_NEW_KEYBOARD)
             self.loadKeyboardButton.isHidden = true
@@ -63,20 +71,45 @@ class EditConfigViewController: UIViewController {
         // Do any additional setup after loading the view.
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        //1.7.21 moved here from didLoad in order to solve race
+        //keyboard should display only after the updateCurrentDeviceStateByCurrentConfigSet was finished
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5, execute: {
+                                self.textField.becomeFirstResponder()
+                        })
+    }
+    
     override func viewWillDisappear(_ animated: Bool) {
+        self.textField.resignFirstResponder() //1.7.21 added here to solve race
         if(rollbackRequired){
             configSet = prevConfigSet
-            updateCurrentDeviceStateByCurrentConfigSet()
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.6, execute: {
+                self.updateCurrentDeviceStateByCurrentConfigSet()
+            })
+            //updateCurrentDeviceStateByCurrentConfigSet()
         }
+//            else {
+//            let detailView = (self.navigationController?.viewControllers[0]  as? DetailViewController)
+//
+//            let viewControllersInSplit = detailView?.splitViewController?.viewControllers
+//            let navController = viewControllersInSplit?.first as? UINavigationController
+//            let masterView = navController?.topViewController as? MasterViewController
+//
+//            if(masterView != nil) {
+//                masterView?.tableView.load
+//           }
+//        }
     }
     
     @IBAction func loadButtonClicked(_ sender: UIButton) {
+        self.textField.resignFirstResponder() //1.7.21 added here to solve race
         rollbackRequired = false;
         configSet.setValue(self.textField.text, forKey: "configurationName")
         updateCurrentDeviceStateByCurrentConfigSet();
         updateCellDelegate.updateCheckedCell()
         let newTitle = wrapWithLocale(TITLE_KEYBOARD_LOADED)
-        UIView.transition(with: loadKeyboardButton, duration: 0.6, options: [.transitionFlipFromTop ], animations: {self.loadKeyboardButton.setTitle(newTitle, for:UIControlState() )},
+        UIView.transition(with: loadKeyboardButton, duration: 0.6, options: [.transitionFlipFromTop ], animations: {self.loadKeyboardButton.setTitle(newTitle, for:UIControl.State() )},
             completion:{(finished:Bool)->() in _ = self.navigationController?.popViewController(animated: true)
                 Thread.sleep(forTimeInterval: 1.2)
         })

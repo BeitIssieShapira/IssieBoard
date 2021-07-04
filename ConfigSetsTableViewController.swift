@@ -130,7 +130,7 @@ class ConfigSetsTableViewController: UITableViewController,NSFetchedResultsContr
         }
         return true
     }
-    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete{
             let configSet = self.configs[indexPath.row]
             self.managedObjectContext.delete(configSet)
@@ -153,6 +153,18 @@ class ConfigSetsTableViewController: UITableViewController,NSFetchedResultsContr
         self.tableView.deselectRow(at: indexPath, animated: true)
         let configSet = self.configs[indexPath.row]
         currentCell = tableView.cellForRow(at: indexPath)
+//        //<<<
+//        UIView.transition(with: self.view, duration: 0.3, options: [.transitionFlipFromTop ], animations: {
+//            self.performSegue(withIdentifier: "showEditScreen", sender: configSet)
+//
+//        },
+//            completion:nil
+//        )
+        //self.performSegue(withIdentifier: "showEditScreen", sender: configSet)
+        //1.7.2021 unwrapped from asyncAfter
+//        DispatchQueue.main.asyncAfter(deadline: .now() + 0.0, execute: {
+//            self.performSegue(withIdentifier: "showEditScreen", sender: configSet)
+//    })
         self.performSegue(withIdentifier: "showEditScreen", sender: configSet)
     }
     
@@ -172,10 +184,10 @@ class ConfigSetsTableViewController: UITableViewController,NSFetchedResultsContr
     
     func updateCheckedCell(){
         if(currentCell != nil){
-            currentCell.accessoryType = UITableViewCellAccessoryType.checkmark
+            currentCell.accessoryType = UITableViewCell.AccessoryType.checkmark
         }
         if(previousCell != nil){
-            previousCell.accessoryType = UITableViewCellAccessoryType.none
+            previousCell.accessoryType = UITableViewCell.AccessoryType.none
         }
         previousCell = currentCell
     }

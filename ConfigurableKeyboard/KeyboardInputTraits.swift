@@ -10,6 +10,6 @@ extension KeyboardViewController {
     
     func addInputTraitsObservers() {
         traitPollingTimer?.invalidate()
-        traitPollingTimer?.add(to: RunLoop.current, forMode: RunLoopMode.defaultRunLoopMode)
+        traitPollingTimer?.add(to: RunLoop.current, forMode: RunLoop.Mode.default)
     }
 }

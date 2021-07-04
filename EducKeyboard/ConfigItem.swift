@@ -1,3 +1,4 @@
+
 //
 //  ConfigItem.swift
 //  MasterDetailsHelloWorld
@@ -65,6 +66,7 @@ class ConfigItem {
             switch self.type{
             case .string,.language:
                 UserSettings.set(newValue, forKey: self.key)
+                UserSettings.set(newValue, forKey:"iSSIE_KEYBOARD_CONFIGURATION_NAME")//Try to solve the iOS12 visibileKeys bug
                 UserSettings.synchronize()
             case .color:
                 if let color = (newValue as! UIColor).stringValue {

@@ -119,6 +119,9 @@
 		B1F457C91AA23B040012BA73 /* ic_keyboard_return_48px-512.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "ic_keyboard_return_48px-512.png"; path = "../Resources/ic_keyboard_return_48px-512.png"; sourceTree = "<group>"; };
 		B1F457CB1AA25AA30012BA73 /* globe-512.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "globe-512.png"; path = "../Resources/globe-512.png"; sourceTree = "<group>"; };
 		B1F457CE1AA25F7D0012BA73 /* ic_keyboard_hide_48px-512.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "ic_keyboard_hide_48px-512.png"; path = "../Resources/ic_keyboard_hide_48px-512.png"; sourceTree = "<group>"; };
+		D511995F1EE49EA8009C329C /* ar */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ar; path = ar.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
+		D51199601EE49EA8009C329C /* ar */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ar; path = ar.lproj/Main.strings; sourceTree = "<group>"; };
+		D51199611EE4A1CD009C329C /* ar */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ar; path = ar.lproj/Localizable.strings; sourceTree = "<group>"; };
 		D567535A1E3E6EAD00E32811 /* DocumentationDefaultTemplates1.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = DocumentationDefaultTemplates1.plist; sourceTree = "<group>"; };
 		D56F4E0E1D160D8A00E91860 /* WelcomeScreenLogo-iPhoneLandscape.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "WelcomeScreenLogo-iPhoneLandscape.png"; path = "Images.xcassets/WelcomeScreenLogo.imageset/WelcomeScreenLogo-iPhoneLandscape.png"; sourceTree = "<group>"; };
 		D56F4E0F1D160D8A00E91860 /* WelcomeScreenLogo-iPhonePortrait.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "WelcomeScreenLogo-iPhonePortrait.png"; path = "Images.xcassets/WelcomeScreenLogo.imageset/WelcomeScreenLogo-iPhonePortrait.png"; sourceTree = "<group>"; };
@@ -338,7 +341,8 @@
 					B1B0373B1A9CD9540057C221 = {
 						CreatedOnToolsVersion = 6.1.1;
 						DevelopmentTeam = SKNJT9TD9G;
-						LastSwiftMigration = 0810;
+						LastSwiftMigration = 1000;
+						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
 							com.apple.ApplicationGroups.iOS = {
 								enabled = 0;
@@ -351,7 +355,7 @@
 					B1B037641A9CD9BC0057C221 = {
 						CreatedOnToolsVersion = 6.1.1;
 						DevelopmentTeam = SKNJT9TD9G;
-						LastSwiftMigration = 0810;
+						LastSwiftMigration = 1000;
 						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
 							com.apple.ApplicationGroups.iOS = {
@@ -369,9 +373,11 @@
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
+				English,
 				en,
 				Base,
 				he,
+				ar,
 			);
 			mainGroup = B1B037331A9CD9540057C221;
 			productRefGroup = B1B0373D1A9CD9540057C221 /* Products */;
@@ -476,6 +482,7 @@
 				15D854FA1AF56858003703F1 /* Base */,
 				D5FBA35D1C90D4710065A96E /* en */,
 				D5FBA35E1C90D4800065A96E /* he */,
+				D51199601EE49EA8009C329C /* ar */,
 			);
 			name = Main.storyboard;
 			path = ..;
@@ -485,6 +492,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				B1B0374B1A9CD9540057C221 /* Base */,
+				D511995F1EE49EA8009C329C /* ar */,
 			);
 			name = LaunchScreen.xib;
 			sourceTree = "<group>";
@@ -494,8 +502,10 @@
 			children = (
 				D5FBA3601C9421E00065A96E /* he */,
 				D5FBA3621C9421EF0065A96E /* en */,
+				D51199611EE4A1CD009C329C /* ar */,
 			);
 			name = Localizable.strings;
+			path = ..;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -521,7 +531,7 @@
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: beitissie.apple@gmail.com (8BJKF76BVR)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -571,7 +581,7 @@
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: beitissie.apple@gmail.com (8BJKF76BVR)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = YES;
 				ENABLE_NS_ASSERTIONS = NO;
@@ -599,16 +609,22 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = IssieBoard.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: beitissie.apple@gmail.com (8BJKF76BVR)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 008;
 				DEVELOPMENT_TEAM = SKNJT9TD9G;
 				INFOPLIST_FILE = EducKeyboard/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				MARKETING_VERSION = 1.3.2;
 				"MTL_ENABLE_DEBUG_INFO[arch=*]" = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = com.issieshapiro.Issieboard;
+				PRODUCT_MODULE_NAME = "$(PRODUCT_NAME:c99extidentifier)";
 				PRODUCT_NAME = IssieBoard;
 				PROVISIONING_PROFILE = "";
-				SWIFT_VERSION = 3.0;
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				SWIFT_SWIFT3_OBJC_INFERENCE = On;
+				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -618,15 +634,21 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = IssieBoard.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: beitissie.apple@gmail.com (8BJKF76BVR)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 008;
 				DEVELOPMENT_TEAM = SKNJT9TD9G;
 				INFOPLIST_FILE = EducKeyboard/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				MARKETING_VERSION = 1.3.2;
 				PRODUCT_BUNDLE_IDENTIFIER = com.issieshapiro.Issieboard;
+				PRODUCT_MODULE_NAME = "$(PRODUCT_NAME:c99extidentifier)";
 				PRODUCT_NAME = IssieBoard;
 				PROVISIONING_PROFILE = "";
-				SWIFT_VERSION = 3.0;
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				SWIFT_SWIFT3_OBJC_INFERENCE = On;
+				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
@@ -637,6 +659,7 @@
 				CODE_SIGN_ENTITLEMENTS = IssieBoard.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CURRENT_PROJECT_VERSION = 008;
 				DEVELOPMENT_TEAM = SKNJT9TD9G;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
@@ -644,11 +667,14 @@
 				);
 				INFOPLIST_FILE = ConfigurableKeyboard/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				MARKETING_VERSION = 1.3.2;
 				PRODUCT_BUNDLE_IDENTIFIER = com.issieshapiro.Issieboard.ConfigurableKeyboard;
+				PRODUCT_MODULE_NAME = "$(PRODUCT_NAME:c99extidentifier)";
 				PRODUCT_NAME = IssieBoard;
 				PROVISIONING_PROFILE = "";
 				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 3.0;
+				SWIFT_SWIFT3_OBJC_INFERENCE = On;
+				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -657,16 +683,20 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = IssieBoard.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: beitissie.apple@gmail.com (8BJKF76BVR)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CURRENT_PROJECT_VERSION = 008;
 				DEVELOPMENT_TEAM = SKNJT9TD9G;
 				INFOPLIST_FILE = ConfigurableKeyboard/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				MARKETING_VERSION = 1.3.2;
 				PRODUCT_BUNDLE_IDENTIFIER = com.issieshapiro.Issieboard.ConfigurableKeyboard;
+				PRODUCT_MODULE_NAME = "$(PRODUCT_NAME:c99extidentifier)";
 				PRODUCT_NAME = IssieBoard;
 				PROVISIONING_PROFILE = "";
 				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 3.0;
+				SWIFT_SWIFT3_OBJC_INFERENCE = On;
+				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;

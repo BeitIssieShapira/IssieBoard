@@ -1,0 +1,34 @@
+﻿
+"Main"      		 = "اعدادات رئيسية";
+
+"KeyboardBackground"   =  "خلفية لوحة المفاتيح";
+
+"KeysColor"       	= "لون المفاتيح";
+"TextColor" 		= "لون النص";
+
+"VisibleKeys"         = "مفاتيح مرئية";
+"Columns_Rows"         = "أسطر-أعمدة";
+"SpecialKeys"         =  "مفاتيح خاصة";
+
+
+"SpecialKeysDefinition"   = "إعدادات المفاتيح الخاصة";
+"UpperRight"      = "يمين-للأعلى";
+"Middle"              = "وسط";
+"LowerLeft"          = "يسار-للأسفل";
+
+"Templates"        = "قوالب";
+"TemplatesSelection"  = "اختيار قالب معد مسبقا";
+
+"AdditionalDefinitions"     = "اعدادات اضافية";
+"SpaceKeyColor" = "لون مفتاح الفراغ";
+"DeleteKeyColor"   = "لون مفتاح المسح";
+"EnterKeyColor"     = "لون مفتاح الإدخال";
+"OtherKeysColor"    = "لون المفاتيح الاضافية";
+
+"RainbowColors"      = "ألوان الطيف";
+"ClassicColors"      = "ألوان كلاسيكية";
+"BlackAndWhite"      = "أسود أبيض";
+"SaveAndLoadCustomTemplates" = "قالب جديد";
+"NewKeyboard" = "لوحة مفاتيح جديدة";
+"ResetToDefaultKeyboard" = "إعادة ضبط الخيارات للوحة المفاتيح الافتراضية";
+"Reset" = "إعادة ضبط الخيارات";
