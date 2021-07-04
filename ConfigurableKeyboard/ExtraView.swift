@@ -13,6 +13,7 @@ class ExtraView: UIView {
         self.solidColorMode = solidColorMode
         
         super.init(frame: CGRect.zero)
+        self.backgroundColor = UIColor.green
     }
     
     required init?(coder aDecoder: NSCoder) {

@@ -13,8 +13,8 @@
       "scale" : "3x"
     },
     {
-      "idiom" : "iphone",
       "filename" : "WelcomeScreenLogo-iPhonePortrait.png",
+      "idiom" : "iphone",
       "scale" : "1x"
     },
     {
@@ -26,8 +26,8 @@
       "scale" : "3x"
     },
     {
-      "idiom" : "ipad",
       "filename" : "WelcomeScreenLogo.png",
+      "idiom" : "ipad",
       "scale" : "1x"
     },
     {
@@ -36,7 +36,7 @@
     }
   ],
   "info" : {
-    "version" : 1,
-    "author" : "xcode"
+    "author" : "xcode",
+    "version" : 1
   }
 }

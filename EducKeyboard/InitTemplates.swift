@@ -17,7 +17,7 @@ class InitTemplates: NSObject {
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         let managedObjectContext = appDelegate.managedObjectContext
 
-        for index in 1...3 {
+        for index in [1,2,3] {
         let bundlePath = Bundle.main.path(forResource: "DocumentationDefaultTemplates" + String(index), ofType: "plist")
         let templateDictionary1 = NSMutableDictionary(contentsOfFile: bundlePath!)
         
@@ -42,13 +42,14 @@ class InitTemplates: NSObject {
                 }
             }
         }
+            do{
+                try managedObjectContext.save()
+                UserSettings.synchronize()
+            }catch let error as NSError{
+                print("could not save configurtion set \(error.description)")
+            }
         }
-        do{
-            try managedObjectContext.save()
-            UserSettings.synchronize()
-        }catch let error as NSError{
-            print("could not save configurtion set \(error.description)")
-        }
+        
         
     }
 

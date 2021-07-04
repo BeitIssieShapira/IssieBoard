@@ -6,13 +6,13 @@
 "TextColor" 		= "צבע הטקסט";
 
 "VisibleKeys"         = "מקשים נראים";
-"Columns_Rows"         = "שורות-עמודות";
-"SpecialKeys"         =  "מקשים מיוחדים";
+"Columns_Rows"         = "שורות-אזורים";
+"SpecialKeys"         =  "בחירת מקשים";
 
-"SpecialKeysDefinition"   = "הגדרות מקשים מיוחדים";
-"UpperRight"      = "ימינה-למעלה";
+"SpecialKeysDefinition"   = "סימון מקשים";
+"UpperRight"      = "ימין-למעלה";
 "Middle"              = "אמצע";
-"LowerLeft"          = "שמאלה-למטה";
+"LowerLeft"          = "שמאל-למטה";
 
 "Templates"        = "תבניות";
 "TemplatesSelection"  = "בחירת תבנית מוגדרת מראש";
@@ -37,6 +37,32 @@
 "HideKeyboard" = "הסתר מקלדת";
 "Configurations" = "הגדרות";
 "Languages" = "שפות";
+"KeysOrder" = "סדר המקשים";
 "EN" = "אנגלית";
 "HE"  = "עברית";
-"BOTH" = "מקלדת משולבת - עברית ואנגלית";
+"AR"  = "ערבית";
+"BOTH" = "עברית-אנגלית";
+"AR_EN" = "ערבית-אנגלית";
+"AR_HE" = "עברית-ערבית";
+
+"EnableMiddle" = "צביעה ב-3 או 2 איזורים";
+"RightLeft" = "ימין/שמאל";
+"RightMiddleLeft" = "ימין/אמצע/שמאל";
+"PleaseEnableMiddle" = "יש להפעיל קודם את האזור האמצעי";
+"PleaseEnableMiddleDesc"  = "על מנת לעבור למצב שורות, וכך להגדיר מקלדת עם 3 שורות ב-3 צבעים, הגדר קודם 3 אזורים ב-׳צביעה ב-3 או 2 איזורים׳";
+"PleaseSetToColumns"  = "יש לעבור קודם למצב עמודות";
+"PleaseSetToColumnsDesc"= "על מנת לעבור למקלדת ב-2 צבעים, יש לבחור מצב עמודות ב-׳שורות/עמודות׳";
+"OK" = "OK";
+
+
+"KeysOrder" = "סדר המקשים";
+"KeysOrderDesc" = "מה סדר המקשים שנרצה על המקלדת?";
+"OrderStandard" = "רגיל";
+"OrderABC" = "א-ב";
+
+"InfoVisibleKeys" = "בחירת המקשים היחידים שיופיעו";
+"InfoSpecialKeys" = "בחירת מקשים מסוימים בצבע שונה";
+"InfoRowsCols" = "הגדרת צבעים לפי שורות המקלדת: למעלה - אמצע - למטה, או לפי אזורים :ימין - אמצע - שמאל /  ימין - שמאל";
+
+
+"infoLink" = "http://www.beitissie.org.il/tech/issieboard-%D7%9E%D7%94%D7%99%D7%95%D7%9D-%D7%92%D7%9D-%D7%91%D7%90%D7%A0%D7%92%D7%9C%D7%99%D7%AA/";

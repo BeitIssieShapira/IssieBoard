@@ -31,12 +31,15 @@ extension UIColor {
         let greenf = ((rgba as NSString).substring(from: 7) as NSString).substring(to: 6)
         let bluef = ((rgba as NSString).substring(from: 14) as NSString).substring(to: 6)
         let alphaf = ((rgba as NSString).substring(from: 21) as NSString).substring(to: 6)
-        
-        let red:   CGFloat = CGFloat(NumberFormatter().number(from: redf)!)
+
+        /*let red:   CGFloat = CGFloat(NumberFormatter().number(from: redf)!)
         let green: CGFloat = CGFloat(NumberFormatter().number(from: greenf)!)
         let blue:  CGFloat = CGFloat(NumberFormatter().number(from: bluef)!)
-        let alpha: CGFloat = CGFloat(NumberFormatter().number(from: alphaf)!)
-        
+        let alpha: CGFloat = CGFloat(NumberFormatter().number(from: alphaf)!)*/
+        let red:   CGFloat = CGFloat((redf as NSString).floatValue)
+        let green: CGFloat = CGFloat((greenf as NSString).floatValue)
+        let blue:  CGFloat = CGFloat((bluef as NSString).floatValue)
+        let alpha: CGFloat = CGFloat((alphaf as NSString).floatValue)
         self.init(red:red, green:green, blue:blue, alpha:alpha)
     }
 
@@ -71,5 +74,16 @@ extension UIColor {
             }
             return nil
         }
+    }
+    
+    func invertColor()->UIColor{
+        var green:CGFloat = 0
+        var red:CGFloat = 0
+        var blue:CGFloat = 0
+        var alpha:CGFloat = 0
+        
+        let _ = [self.getRed(&red, green: &green, blue: &blue, alpha: &alpha)]
+        return UIColor(red: 1-red, green: 1-green, blue: 1-blue, alpha: 1.0)
+        
     }
 }

@@ -1,0 +1,91 @@
+
+/* Class = "UIButton"; normalTitle = "Hebrew + English"; ObjectID = "2mr-G8-MBz"; */
+"2mr-G8-MBz.normalTitle" = "Hebrew + English";
+
+/* Class = "UILabel"; text = "Hebrew + English"; ObjectID = "3s7-Rh-A6p"; */
+"3s7-Rh-A6p.text" = "Hebrew + English";
+
+/* Class = "UITableViewController"; title = "Master"; ObjectID = "7bK-jq-Zjz"; */
+"7bK-jq-Zjz.title" = "الشاشة الرئيسية";
+
+/* Class = "UISegmentedControl"; AVK-5P-wQY.segmentTitles[0] = "حسب الأسطر"; ObjectID = "AVK-5P-wQY"; */
+"AVK-5P-wQY.segmentTitles[0]" = "حسب الأسطر";
+
+/* Class = "UISegmentedControl"; AVK-5P-wQY.segmentTitles[1] = "حسب المناطق"; ObjectID = "AVK-5P-wQY"; */
+"AVK-5P-wQY.segmentTitles[1]" = "حسب المناطق";
+
+/* Class = "UILabel"; text = "Title"; ObjectID = "Arm-wq-HPj"; */
+"Arm-wq-HPj.text" = "عنوان";
+
+/* Class = "UIButton"; normalTitle = "הסתר מקלדת"; ObjectID = "Gz7-qv-Bvy"; */
+"Gz7-qv-Bvy.normalTitle" = "إخفاء لوحة المفاتيح";
+
+/* Class = "UIViewController"; title = "Detail"; ObjectID = "JEX-9P-axG"; */
+"JEX-9P-axG.title" = "تفاصيل";
+
+/* Class = "UINavigationController"; title = "Master"; ObjectID = "RMx-3f-FxP"; */
+"RMx-3f-FxP.title" = "شاشة رئيسية";
+
+/* Class = "UINavigationItem"; title = "Configurations"; ObjectID = "Zdf-7t-Un8"; */
+"Zdf-7t-Un8.title" = "إعدادات";
+
+/* Class = "UIButton"; normalTitle = "הצג מקלדת"; ObjectID = "dCr-Tu-9MV"; */
+"dCr-Tu-9MV.normalTitle" = "أظهر لوحة المفاتيح";
+
+/* Class = "UINavigationItem"; title = "Detail"; ObjectID = "mOI-FS-AaM"; */
+"mOI-FS-AaM.title" = "تفاصيل";
+
+
+
+/* Class = "UINavigationItem"; title = "Root View Controller"; ObjectID = "BI1-DO-bVb"; */
+"BI1-DO-bVb.title" = "Root View Controller";
+
+/* Class = "UIButton"; normalTitle = "show keyboard"; ObjectID = "GWd-my-H0q"; */
+"GWd-my-H0q.normalTitle" = "أظهر لوحة المفاتيح";
+
+/* Class = "UIButton"; selectedTitle = "English"; ObjectID = "OyU-QH-6jY"; */
+"OyU-QH-6jY.selectedTitle" = "English";
+
+/* Class = "UILabel"; text = "English"; ObjectID = "QOr-w7-qsl"; */
+"QOr-w7-qsl.text" = "English";
+
+/* Class = "UIBarButtonItem"; title = "Configuration"; ObjectID = "RA4-Je-I6T"; */
+"RA4-Je-I6T.title" = "Configuration";
+
+
+/* Class = "UIButton"; normalTitle = "Hebrew - עברית"; ObjectID = "UxF-Zf-TYW"; */
+"UxF-Zf-TYW.normalTitle" = "Hebrew - עברית";
+
+/* Class = "UINavigationItem"; title = "Title"; ObjectID = "UxM-mr-0HM"; */
+"UxM-mr-0HM.title" = "Title";
+
+/* Class = "UITableViewSection"; headerTitle = "Select Keyboard Language"; ObjectID = "YZT-iZ-3JJ"; */
+"YZT-iZ-3JJ.headerTitle" = "Select Keyboard Language";
+
+/* Class = "UINavigationItem"; title = "Configurations"; ObjectID = "Zdf-7t-Un8"; */
+"Zdf-7t-Un8.title" = "إعدادات";
+
+/* Class = "UILabel"; text = "English"; ObjectID = "cgi-Ge-FhS"; */
+"cgi-Ge-FhS.text" = "English";
+
+
+/* Class = "UILabel"; text = "Hebrew"; ObjectID = "f7d-ZB-dYB"; */
+"f7d-ZB-dYB.text" = "Hebrew";
+
+/* Class = "UITextField"; placeholder = "Enter a name for this keyboard"; ObjectID = "ipJ-uE-7yJ"; */
+"ipJ-uE-7yJ.placeholder" = "ادخل إسم للوحة المفاتيح";
+
+/* Class = "UIButton"; normalTitle = "Load this keyboard"; ObjectID = "lCL-uJ-1KT"; */
+"lCL-uJ-1KT.normalTitle" = "حمل لوحة المفاتيح الحالية";
+
+/* Class = "UINavigationItem"; title = "Detail"; ObjectID = "mOI-FS-AaM"; */
+"mOI-FS-AaM.title" = "Detail";
+
+/* Class = "UILabel"; text = "עברית + אנגלית"; ObjectID = "qL2-1K-4Bs"; */
+"qL2-1K-4Bs.text" = "עברית + אנגלית";
+
+/* Class = "UILabel"; text = "עברית"; ObjectID = "uWs-FS-FQF"; */
+"uWs-FS-FQF.text" = "עברית";
+
+/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "z1U-Qo-dL0"; */
+"z1U-Qo-dL0.normalTitle" = "Button";
